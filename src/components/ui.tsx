@@ -353,3 +353,25 @@ export function ScreenHeader({ title, onBack, action, ornament = true }: { title
     </View>
   );
 }
+
+/**
+ * Header for reading screens (answer): one top row with ב״ה small at the top-right and the back control
+ * at the top-left, and a small centered wordmark + ornament between them (the home header, scaled down).
+ */
+export function BrandHeader({ onBack }: { onBack: () => void }) {
+  const theme = useTheme();
+  return (
+    <View style={{ paddingTop: 6, alignItems: 'center', minHeight: 44 }}>
+      <BH />
+      <View style={{ position: 'absolute', end: 0, top: -4 }}>
+        <CircleBtn icon="chevBack" label="חזרה" onPress={onBack} />
+      </View>
+      <Txt w="disp" size={18} lh={1.3} ls={theme.wmLetterSpacing} color={theme.colors.wmInk}>
+        אִיבַּעְיָא לְהוּ
+      </Txt>
+      <View style={{ marginTop: 1 }}>
+        <Ornament width={130} />
+      </View>
+    </View>
+  );
+}

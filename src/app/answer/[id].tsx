@@ -5,7 +5,7 @@ import { Share, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Icon, type IconName } from '@/components/icon';
-import { Btn, Glass, Screen, ScreenHeader, Tag, Txt, frameStyle, glassStyle } from '@/components/ui';
+import { barGlassStyle, BrandHeader, Btn, Glass, Screen, Tag, Txt, frameStyle } from '@/components/ui';
 import { getQA, readingMinutes, type QA } from '@/data/qa';
 import { TEXT_SCALE_MAX, TEXT_SCALE_MIN, useAppState, useTheme } from '@/state/app-state';
 
@@ -18,7 +18,7 @@ export default function AnswerScreen() {
   if (!q) {
     return (
       <Screen tabBar={false}>
-        <ScreenHeader onBack={back} />
+        <BrandHeader onBack={back} />
         <Txt size={15} color={c.ink3} align="center" style={{ marginTop: 40 }}>
           התשובה לא נמצאה.
         </Txt>
@@ -75,9 +75,9 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
   return (
     <View style={{ flex: 1 }}>
       <Screen tabBar>
-        <ScreenHeader onBack={onBack} />
+        <BrandHeader onBack={onBack} />
 
-        <View style={{ flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap', gap: 6, marginTop: 6 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap', gap: 6, marginTop: 18 }}>
           {q.topics.map((t) => (
             <Btn key={t} label={`נושא: ${t}`} onPress={() => router.push({ pathname: '/topic/[name]', params: { name: t } })} hitSlop={12}>
               <Tag label={t} />
@@ -106,7 +106,7 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
       <View
         accessibilityRole="toolbar"
         style={[
-          glassStyle(theme),
+          barGlassStyle(theme),
           {
             position: 'absolute',
             bottom: 20 + insets.bottom,
