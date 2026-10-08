@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { useId, type ReactNode } from 'react';
 import {
   Platform,
   Pressable,
@@ -83,6 +83,8 @@ export function Backdrop() {
     [width + 40 - 130, height + 60 - 100, 260, 200],
   ];
   const SIG = 70;
+  // Gradient ids must be unique per instance: stacked screens keep their (hidden) SVGs in the document.
+  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '');
   return (
     <View style={[StyleSheet.absoluteFill, { backgroundColor: theme.colors.bg }]} pointerEvents="none">
       <Svg width={width} height={height}>
@@ -91,7 +93,7 @@ export function Backdrop() {
             const R = w / 2 + 2 * SIG;
             const [c, o] = theme.blobs[i];
             return (
-              <RadialGradient key={i} id={`b${i}`} cx="50%" cy="50%" r="50%">
+              <RadialGradient key={i} id={`${uid}b${i}`} cx="50%" cy="50%" r="50%">
                 <Stop offset={0} stopColor={c} stopOpacity={o * 0.95} />
                 <Stop offset={(w / 2 - SIG) / R} stopColor={c} stopOpacity={o * 0.8} />
                 <Stop offset={(w / 2) / R} stopColor={c} stopOpacity={o * 0.5} />
@@ -102,7 +104,7 @@ export function Backdrop() {
           })}
         </Defs>
         {boxes.map(([cx, cy, w, h], i) => (
-          <Ellipse key={i} cx={cx} cy={cy} rx={w / 2 + 2 * SIG} ry={h / 2 + 2 * SIG} fill={`url(#b${i})`} />
+          <Ellipse key={i} cx={cx} cy={cy} rx={w / 2 + 2 * SIG} ry={h / 2 + 2 * SIG} fill={`url(#${uid}b${i})`} />
         ))}
       </Svg>
     </View>
