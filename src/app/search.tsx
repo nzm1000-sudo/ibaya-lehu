@@ -34,7 +34,7 @@ export default function SearchScreen() {
           value={query}
           onChangeText={setQuery}
           autoFocus
-          placeholder="כתוב את השאלה שלך"
+          placeholder="כתבו או אמרו את השאלה"
           placeholderTextColor={c.ink2}
           returnKeyType="search"
           accessibilityLabel="שאלה לחיפוש"
@@ -97,7 +97,7 @@ function NotFound({ query }: { query: string }) {
   return (
     <View style={{ marginTop: 28, alignItems: 'center' }}>
       <Txt w="disp" size={22} lh={1.3} align="center" accessibilityRole="header">
-        לא מצאתי תשובה
+        לא מצאתם תשובה?
       </Txt>
       <Txt w="300" size={14} lh={1.55} color={c.ink3} align="center" style={{ marginTop: 6, maxWidth: 300 }}>
         אפשר לשלוח את השאלה כמו שהיא. נשתדל להוסיף עליה תשובה.
@@ -116,14 +116,14 @@ function NotFound({ query }: { query: string }) {
         ) : (
           <>
             <Txt w="500" size={12} ls={0.4} color={c.acc} align="center">
-              השאלה שלך
+              השאלה שלכם
             </Txt>
             <TextInput
               value={text}
               onChangeText={setText}
               multiline
               accessibilityLabel="נוסח השאלה לשליחה"
-              placeholder="נסח את השאלה במילים שלך"
+              placeholder="נסחו את השאלה במילים שלכם"
               placeholderTextColor={c.ink2}
               style={{
                 marginTop: 10,

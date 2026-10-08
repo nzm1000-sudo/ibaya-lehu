@@ -49,7 +49,7 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
       const voices = await Speech.getAvailableVoicesAsync();
       voice = voices.find((v) => v.language?.toLowerCase().startsWith('he'))?.identifier;
     } catch {}
-    const parts = [q.question, q.answer, q.applies_when && `מתאים לך אם: ${q.applies_when}`, q.not_when && `פחות מתאים אם: ${q.not_when}`];
+    const parts = [q.question, q.answer, q.applies_when && `מתאים לכם אם: ${q.applies_when}`, q.not_when && `פחות מתאים אם: ${q.not_when}`];
     setSpeaking(true);
     Speech.speak(parts.filter(Boolean).join('. '), {
       language: 'he-IL',
@@ -64,8 +64,8 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
   const share = async () => {
     try {
       await Share.share(
-        { title: 'שלח בעדינות', message: `${q.question}\n\n${q.answer}\n\nאִיבַּעְיָא לְהוּ` },
-        { dialogTitle: 'שלח בעדינות', subject: q.question },
+        { title: 'שלחו בעדינות', message: `${q.question}\n\n${q.answer}\n\nאִיבַּעְיָא לְהוּ` },
+        { dialogTitle: 'שלחו בעדינות', subject: q.question },
       );
     } catch {}
   };
@@ -98,7 +98,7 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
           </Txt>
         </Glass>
 
-        {q.applies_when ? <FitBox title="מתאים לך אם" body={q.applies_when} icon="check" /> : null}
+        {q.applies_when ? <FitBox title="מתאים לכם אם" body={q.applies_when} icon="check" /> : null}
         {q.not_when ? <FitBox title="פחות מתאים אם" body={q.not_when} icon="close" /> : null}
       </Screen>
 
@@ -119,8 +119,8 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
             gap: 2,
           },
         ]}>
-        <BarBtn icon={saved ? 'bookmarkFilled' : 'bookmark'} label={saved ? 'שמור' : 'שמירה'} a11y={saved ? 'הסרה מהשמורים' : 'שמירת התשובה'} on={saved} onPress={() => toggleSaved(q.id)} />
-        <BarBtn icon="share" label="שליחה" a11y="שלח בעדינות" onPress={share} />
+        <BarBtn icon={saved ? 'bookmarkFilled' : 'bookmark'} label={saved ? 'נשמר' : 'שמירה'} a11y={saved ? 'הסרה מהשמורים' : 'שמירת התשובה'} on={saved} onPress={() => toggleSaved(q.id)} />
+        <BarBtn icon="share" label="שליחה" a11y="שלחו בעדינות" onPress={share} />
         <BarBtn icon="textSmaller" label="הקטנה" a11y="הקטנת הטקסט" disabled={textScale <= TEXT_SCALE_MIN} onPress={() => bumpTextScale(-1)} />
         <BarBtn icon="textLarger" label="הגדלה" a11y="הגדלת הטקסט" disabled={textScale >= TEXT_SCALE_MAX} onPress={() => bumpTextScale(1)} />
         {readAloud && <BarBtn icon={speaking ? 'stop' : 'speaker'} label={speaking ? 'עצירה' : 'הקראה'} a11y={speaking ? 'עצירת ההקראה' : 'הקראת התשובה'} on={speaking} onPress={speak} />}

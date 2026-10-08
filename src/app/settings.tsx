@@ -37,7 +37,7 @@ export default function SettingsScreen() {
           </Btn>
         </View>
         <Txt w="300" size={16} lh={1.7} scaled color={c.ink3} align="center" style={{ marginTop: 10 }}>
-          כך ייראו התשובות: טקסט נוח לקריאה, בקצב שלך.
+          כך ייראו התשובות: טקסט נוח לקריאה, בקצב שלכם.
         </Txt>
       </Glass>
 

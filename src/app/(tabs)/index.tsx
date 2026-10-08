@@ -112,7 +112,7 @@ export default function Home() {
           {greeting(now.getHours())}
         </Txt>
         <Txt size={21} lh={1.3} ls={-0.2} style={{ marginTop: 2 }} align="center" accessibilityRole="header">
-          על מה תרצה לחשוב היום?
+          מה תרצו לשאול היום?
         </Txt>
       </View>
 
@@ -130,7 +130,7 @@ export default function Home() {
           }}>
           <Icon name="search" size={18} color={c.ink2} />
           <Txt w="300" size={15} color={c.ink2} style={{ flex: 1 }} numberOfLines={1}>
-            כתוב או אמור את השאלה שלך
+            כתבו או אמרו את השאלה
           </Txt>
           <View
             style={{
@@ -190,7 +190,7 @@ export default function Home() {
         ))}
       </View>
 
-      <SectionHeader title="שאלות בשבילך" action={{ label: 'הכול', onPress: () => router.push('/search') }} />
+      <SectionHeader title="שאלות בשבילכם" action={{ label: 'הכול', onPress: () => router.push('/search') }} />
       <Glass style={{ borderRadius: 18, paddingHorizontal: 14 }}>
         {picks.map((q, i) => (
           <Btn

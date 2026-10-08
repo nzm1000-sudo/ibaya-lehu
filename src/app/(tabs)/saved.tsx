@@ -25,7 +25,7 @@ export default function SavedScreen() {
         <View style={{ alignItems: 'center', marginTop: 48, gap: 10 }}>
           <Icon name="bookmark" size={28} color={c.metalIcon} strokeWidth={1.3} />
           <Txt w="500" size={16} align="center">
-            עוד לא שמרת תשובות
+            עוד לא שמרתם תשובות
           </Txt>
           <Txt w="300" size={14} lh={1.55} color={c.ink3} align="center" style={{ maxWidth: 280 }}>
             בדף של כל תשובה אפשר לשמור אותה, והיא תחכה כאן.
