@@ -1,13 +1,15 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import * as Speech from 'expo-speech';
-import { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { useEffect, useMemo, useState } from 'react';
+import { Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Icon, type IconName } from '@/components/icon';
 import { FeedbackRow } from '@/components/feedback';
 import { ShareSheet } from '@/components/share-sheet';
+import { Sheet } from '@/components/sheet';
 import { barGlassStyle, BrandHeader, Btn, Glass, Screen, Tag, Txt, frameStyle } from '@/components/ui';
+import { segmentGlossary, type GlossaryItem } from '@/data/glossary';
 import { getQA, readingMinutes, similarBucket, type QA } from '@/data/qa';
 import { TEXT_SCALE_MAX, TEXT_SCALE_MIN, useAppState, useTheme } from '@/state/app-state';
 import { S } from '@/constants/strings';
@@ -34,7 +36,7 @@ export default function AnswerScreen() {
 function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
   const theme = useTheme();
   const c = theme.colors;
-  const { isSaved, toggleSaved, readAloud, textScale, bumpTextScale } = useAppState();
+  const { isSaved, toggleSaved, readAloud, textScale, bumpTextScale, preview } = useAppState();
   const saved = isSaved(q.id);
   const insets = useSafeAreaInsets();
   const [speaking, setSpeaking] = useState(false);
@@ -65,6 +67,8 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
   };
 
   const [shareOpen, setShareOpen] = useState(false);
+  const [term, setTerm] = useState<GlossaryItem | undefined>();
+  const segments = useMemo(() => segmentGlossary(q.answer, preview), [q.answer, preview]);
   // Records flagged sensitive (abuse, violence) never offer sharing. The public data has no such flag yet.
   const canShare = !q.sensitive;
 
@@ -101,7 +105,20 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
 
         <Glass style={{ marginTop: 18, borderRadius: 20, paddingVertical: 20, paddingHorizontal: 20 }}>
           <Txt w="400" size={16} lh={1.75} scaled color={c.ink3} selectable>
-            {q.answer}
+            {segments.map((sg, i) =>
+              sg.item ? (
+                <Text
+                  key={i}
+                  accessibilityRole="button"
+                  accessibilityLabel={S.glossary.termA11y(sg.text)}
+                  onPress={() => setTerm(sg.item)}
+                  style={{ textDecorationLine: 'underline', textDecorationStyle: 'dotted', textDecorationColor: c.metal }}>
+                  {sg.text}
+                </Text>
+              ) : (
+                sg.text
+              ),
+            )}
           </Txt>
         </Glass>
 
@@ -134,6 +151,14 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
         <BarBtn icon="textLarger" label={S.answer.larger} a11y={S.answer.largerA11y} disabled={textScale >= TEXT_SCALE_MAX} onPress={() => bumpTextScale(1)} />
         {readAloud && <BarBtn icon={speaking ? 'stop' : 'speaker'} label={speaking ? S.answer.stop : S.answer.read} a11y={speaking ? S.answer.stopA11y : S.answer.readA11y} on={speaking} onPress={speak} />}
       </View>
+      <Sheet visible={!!term} onClose={() => setTerm(undefined)} title={term?.term ?? ''}>
+        <Txt size={16} lh={1.65} align="center">
+          {term?.definition}
+        </Txt>
+        <Txt w="300" size={12.5} lh={1.5} color={c.ink2} align="center" style={{ marginTop: 12 }}>
+          {term && !term.approved ? `${S.glossary.note} ${S.glossary.draft}` : S.glossary.note}
+        </Txt>
+      </Sheet>
       {canShare && <ShareSheet q={q} visible={shareOpen} onClose={() => setShareOpen(false)} />}
     </View>
   );

@@ -5,6 +5,7 @@ Reads  /mnt/project-files/qa-app/prod/edited/*.jsonl  (override with --src)
 Writes assets/data/qa.json         (full public set; git-ignored for now)
        assets/data/qa.sample.json  (first N ready records; committed for development)
        assets/data/similar.json    ("לא רק אתם": coarse bucket per public id, see similar_buckets)
+       assets/data/curated/glossary.candidates.json  (how many public answers use each candidate term)
 
 PRIVACY: the source corpus contains client names and recording metadata. Only the
 whitelisted PUBLIC_FIELDS below are ever written. Never add source, source_quotes,
@@ -132,6 +133,29 @@ def similar_buckets(recs):
     return out, sizes, pairs
 
 
+# ---------- glossary: frequent Hebrew / Aramaic / professional terms in the answers ----------
+
+# Seed lexicon of terms a general reader may not know. Counts decide which get a draft definition in
+# assets/data/curated/glossary.json (editors approve each one).
+GLOSSARY_SEED = (
+    "השתדלות|ביטחון|שלום בית|טראומה|פוסט טראומה|יצר הרע|עין הרע|זיווג|שידוך|כיבוד הורים|מניפולציה|אגו|"
+    "אינטואיציה|מחשבות טורדניות|הפרעה טורדנית|ריצוי|מנגנוני הגנה|מנגנון הגנה|דחיית סיפוקים|כתובה|"
+    "טהרת המשפחה|מקווה|מעשר|כרת|עולם הבא|פסיכוסומטיקה|צניעות|התקף חרדה|פרדיגמה|יראת שמיים|לשון הרע|"
+    "פוסק|גט|סגולה|חרם|השגחה|ייסורים|גזירה|תיקון|קדושה|מידות|עבודת המידות|תסביך|דינמיקה|אסרטיביות|"
+    "תלותיות|נרקיסיזם|ויסות רגשי|הסתר פנים|בעל תשובה|חזר בתשובה|מסירות נפש|שמירת נגיעה|גיור|חומרה|קולא"
+).split("|")
+PREFIXES = ("", "ה", "ו", "ב", "ל", "מ", "ש", "כ", "וה", "שה", "מה", "בה", "לה", "וב", "ול", "ומ", "וש")
+
+
+def glossary_counts(answers):
+    out = {}
+    for term in GLOSSARY_SEED:
+        alts = "|".join(re.escape(p + term) for p in PREFIXES)
+        rx = re.compile(r"(?<![א-ת])(?:" + alts + r")(?![א-ת])")
+        out[term] = sum(1 for a in answers if rx.search(a))
+    return dict(sorted(out.items(), key=lambda kv: -kv[1]))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", default="/mnt/project-files/qa-app/prod/edited")
@@ -189,6 +213,12 @@ def main():
     with open(os.path.join(out_dir, "similar.json"), "w", encoding="utf-8") as fh:
         json.dump(dict(sorted(similar.items())), fh, ensure_ascii=False, indent=0)
 
+    gloss = glossary_counts([r["answer"] for r in ready])
+    os.makedirs(os.path.join(out_dir, "curated"), exist_ok=True)
+    with open(os.path.join(out_dir, "curated", "glossary.candidates.json"), "w", encoding="utf-8") as fh:
+        json.dump({"_about": "answers (of the public set) that use each candidate term; see GLOSSARY_SEED", "counts": gloss},
+                  fh, ensure_ascii=False, indent=1)
+
     topics = Counter(t for r in ready for t in r["topics"])
     print(f"files: {len(files)}")
     print("status: " + ", ".join(f"{k}={v}" for k, v in status.most_common()))
@@ -196,6 +226,7 @@ def main():
     print(f"sample: {min(args.sample, len(ready))}")
     print(f"similar: {len(asked)} asked questions, {pairs} near-duplicate pairs; buckets: "
           + ", ".join(f"{k}={sizes[k]}" for k in ("none", "few", "tens", "hundreds")))
+    print("glossary: " + ", ".join(f"{k} {v}" for k, v in list(gloss.items())[:15]))
     print("topics: " + ", ".join(f"{k} {v}" for k, v in topics.most_common()))
 
 

@@ -103,6 +103,24 @@ def sheet_seasons(qa, out):
     write(out, "seasons.md", lines)
 
 
+def sheet_glossary(qa, out):
+    d = load("glossary.json")
+    if not d:
+        return
+    counts = (load("glossary.candidates.json") or {}).get("counts", {})
+    lines = [HEADER.format(title="סקירה: מילון בלחיצה", about=d["_about"], file="glossary.json")]
+    lines.append("> ההגדרות נכתבו בעריכה בשפה פשוטה וניטרלית. הן מוצגות עם ההערה \"הסבר קצר של עורכי האפליקציה. אינו חלק מהתשובה.\"\n")
+    for i, it in enumerate(d["items"], 1):
+        rx = re.compile(r"(?<![א-ת])(?:[והבלמשכ]|וה|שה|מה|בה|לה)?" + re.escape(it["term"]) + r"(?![א-ת])")
+        ex = next((r for r in qa.values() if rx.search(r["answer"])), None)
+        lines.append(f"## {i}. {it['term']} ({status(it)})\n")
+        lines.append(f"**הגדרה:** {it['definition']}\n")
+        lines.append(f"**למה נבחר:** מופיע ב־{counts.get(it['term'], '?')} תשובות" + (f"; לא מסומן לפני: {', '.join(it['not_followed_by'])}" if it.get("not_followed_by") else "") + "\n")
+        if ex:
+            lines.append(f"דוגמה: {q_line(qa, ex['id'])} (`{ex['id']}`)\n")
+    write(out, "glossary.md", lines)
+
+
 def write(out, name, lines):
     os.makedirs(out, exist_ok=True)
     with open(os.path.join(out, name), "w", encoding="utf-8") as fh:
@@ -110,7 +128,7 @@ def write(out, name, lines):
     print("wrote", os.path.join(out, name))
 
 
-SHEETS = [sheet_hard_now, sheet_seasons]
+SHEETS = [sheet_hard_now, sheet_seasons, sheet_glossary]
 
 
 def main():
