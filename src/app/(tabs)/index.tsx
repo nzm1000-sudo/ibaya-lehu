@@ -1,10 +1,10 @@
 import { router } from 'expo-router';
 import { useMemo } from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, useWindowDimensions, View } from 'react-native';
 
-import { Icon, topicIcon } from '@/components/icon';
-import { BH, Btn, CircleBtn, Glass, Ornament, Screen, SectionHeader, Tag, TextLink, Txt, frameStyle } from '@/components/ui';
-import { dailyQuestion, forYou, readingMinutes, TOPICS } from '@/data/qa';
+import { Icon, topicIcon, type IconName } from '@/components/icon';
+import { BH, Btn, CircleBtn, Glass, GUTTER, Ornament, Screen, SectionHeader, Tag, TextLink, Txt, frameStyle } from '@/components/ui';
+import { dailyQuestion, forYou, readingMinutes, TOPICS, type TopicCount } from '@/data/qa';
 import { useAppState, useTheme } from '@/state/app-state';
 import { rgba } from '@/theme/themes';
 
@@ -15,6 +15,70 @@ function greeting(h: number) {
   return 'לילה טוב';
 }
 
+/* ---------- topic pills: six pills in two centered rows of three ---------- */
+
+const PILL_GAP = 6;
+const PILL_MARGIN = 3; // room for the outer rule of the double frame
+const MORE = 'more' as const;
+type PillItem = TopicCount | typeof MORE;
+
+/** Rough pill width (icon + gap + padding + border + text at 13.5px), deliberately on the wide side. */
+function pillWidth(name: string) {
+  return 15 + 5 + 22 + 2 + name.length * 7.3 + 2 * PILL_MARGIN;
+}
+
+function rowWidth(row: PillItem[]) {
+  return row.reduce((w, t) => w + pillWidth(t === MORE ? 'עוד' : t.name), 0) + PILL_GAP * (row.length - 1);
+}
+
+/** Balance the pills over two rows (longest with shortest); if a row still overflows, show five + "עוד". */
+function topicRows(top: TopicCount[], avail: number): PillItem[][] {
+  const byLen = [...top].sort((a, b) => b.name.length - a.name.length);
+  const keep = (t: TopicCount) => top.indexOf(t);
+  const split = (items: PillItem[]) => {
+    const a: PillItem[] = [];
+    const b: PillItem[] = [];
+    items.forEach((t, i) => ([0, 3, 4].includes(i) ? a : b).push(t));
+    const order = (r: PillItem[]) => r.sort((x, y) => (x === MORE ? 1 : y === MORE ? -1 : keep(x) - keep(y)));
+    return [order(a), order(b)];
+  };
+  const six = split(byLen);
+  if (six.every((r) => rowWidth(r) <= avail)) return six;
+  const five = top.slice(0, 5).sort((a, b) => b.name.length - a.name.length);
+  return split([...five, MORE]);
+}
+
+function TopicPill({ name, icon, label, onPress }: { name: string; icon: IconName; label: string; onPress: () => void }) {
+  const theme = useTheme();
+  const c = theme.colors;
+  return (
+    <Btn
+      label={label}
+      onPress={onPress}
+      style={[
+        frameStyle(theme, 4),
+        {
+          margin: PILL_MARGIN,
+          height: 34,
+          minWidth: 44,
+          flexShrink: 1,
+          paddingStart: 11,
+          paddingEnd: 11,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 5,
+          backgroundColor: c.pillBg,
+        },
+      ]}>
+      <Icon name={icon} size={15} color={c.metalIcon} strokeWidth={1.6} />
+      <Txt size={13.5} numberOfLines={1} style={{ flexShrink: 1 }}>
+        {name}
+      </Txt>
+    </Btn>
+  );
+}
+
 export default function Home() {
   const theme = useTheme();
   const c = theme.colors;
@@ -22,7 +86,8 @@ export default function Home() {
   const now = new Date();
   const daily = dailyQuestion(now);
   const picks = useMemo(() => forYou(saved), [saved]);
-  const top = TOPICS.filter((t) => t.name !== 'אחר').slice(0, 6);
+  const { width } = useWindowDimensions();
+  const pillRows = useMemo(() => topicRows(TOPICS.filter((t) => t.name !== 'אחר').slice(0, 6), Math.min(width, 560) - 2 * GUTTER), [width]);
 
   const micGradient = `linear-gradient(150deg, ${c.mic1}, ${c.mic2})`;
 
@@ -105,29 +170,23 @@ export default function Home() {
       </Glass>
 
       <SectionHeader title="נושאים" action={{ label: 'כל הנושאים', onPress: () => router.navigate('/topics') }} />
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 8 }}>
-        {top.map((t) => (
-          <Btn
-            key={t.name}
-            label={`${t.name}, ${t.count} שאלות`}
-            onPress={() => router.push({ pathname: '/topic/[name]', params: { name: t.name } })}
-            style={[
-              frameStyle(theme, 4),
-              {
-                margin: 3,
-                height: 34,
-                minWidth: 44,
-                paddingStart: 14,
-                paddingEnd: 13,
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: 6,
-                backgroundColor: c.pillBg,
-              },
-            ]}>
-            <Icon name={topicIcon(t.name)} size={15} color={c.metalIcon} strokeWidth={1.6} />
-            <Txt size={13.5}>{t.name}</Txt>
-          </Btn>
+      <View style={{ alignItems: 'center', gap: 6 }}>
+        {pillRows.map((row, r) => (
+          <View key={r} style={{ flexDirection: 'row', justifyContent: 'center', gap: PILL_GAP, maxWidth: '100%' }}>
+            {row.map((t) =>
+              t === MORE ? (
+                <TopicPill key="more" name="עוד" icon="grid" label="כל הנושאים" onPress={() => router.navigate('/topics')} />
+              ) : (
+                <TopicPill
+                  key={t.name}
+                  name={t.name}
+                  icon={topicIcon(t.name)}
+                  label={`${t.name}, ${t.count} שאלות`}
+                  onPress={() => router.push({ pathname: '/topic/[name]', params: { name: t.name } })}
+                />
+              ),
+            )}
+          </View>
         ))}
       </View>
 
