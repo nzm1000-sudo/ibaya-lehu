@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ibaya-lehu",
+    "name": "אִיבַּעְיָא לְהוּ",
     "slug": "ibaya-lehu",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -31,6 +31,13 @@
           "backgroundColor": "#208AEF",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
+        }
+      ],
+      [
+        "expo-localization",
+        {
+          "supportsRTL": true,
+          "forcesRTL": true
         }
       ]
     ],
