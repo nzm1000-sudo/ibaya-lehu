@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { Switch, Text, View } from 'react-native';
 
+import { HelpEntryCard } from '@/components/help-entry';
 import { Icon, topicIcon } from '@/components/icon';
 import { Btn, Glass, Screen, ScreenHeader, SectionHeader, Txt, frameStyle } from '@/components/ui';
 import { TEXT_SCALE_MAX, TEXT_SCALE_MIN, useAppState, useTheme, type ThemeChoice } from '@/state/app-state';
@@ -59,6 +60,9 @@ export default function SettingsScreen() {
       </Glass>
 
       <DailySection />
+
+      <SectionHeader title={S.help.title} />
+      <HelpEntryCard />
 
       {EDITOR_MODE && (
         <>

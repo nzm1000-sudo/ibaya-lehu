@@ -1,7 +1,7 @@
 import { S } from '@/constants/strings';
 
 export type HelpLine = {
-  key: keyof typeof S.hardNow.lines;
+  key: keyof typeof S.help.lines;
   /** What a tap opens: a phone call or a web page. */
   url: string;
   /** Shown big on the row: the number, or empty for a web chat. */

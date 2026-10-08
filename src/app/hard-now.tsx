@@ -1,17 +1,16 @@
 import { router } from 'expo-router';
-import { Linking, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Icon } from '@/components/icon';
-import { Btn, Glass, Screen, ScreenHeader, Tag, TextLink, Txt, frameStyle } from '@/components/ui';
+import { Btn, Screen, ScreenHeader, Tag, TextLink, Txt, frameStyle } from '@/components/ui';
 import { S } from '@/constants/strings';
 import { hardNowAnswers } from '@/data/curated';
-import { HELP_LINES, type HelpLine } from '@/data/help-lines';
 import { dayKey } from '@/data/qa';
 import { now } from '@/lib/editor';
 import { useSpeech } from '@/lib/speech';
 import { useAppState, useTheme } from '@/state/app-state';
 
-/** A quiet screen: help lines first, then up to three short calming answers. No search, no long lists. */
+/** A quiet screen: up to three short calming answers, and one small link to "קווי סיוע". No search, no long lists. */
 export default function HardNowScreen() {
   const theme = useTheme();
   const c = theme.colors;
@@ -23,23 +22,9 @@ export default function HardNowScreen() {
     <Screen tabBar={false}>
       <ScreenHeader title={S.hardNow.title} onBack={() => (router.canGoBack() ? router.back() : router.replace('/'))} />
 
-      <Glass style={{ marginTop: 18, borderRadius: 20, paddingTop: 16, paddingHorizontal: 16, paddingBottom: 12 }}>
-        <Txt w="500" size={15} align="center" accessibilityRole="header">
-          {S.hardNow.helpTitle}
-        </Txt>
-        <View style={{ marginTop: 8 }}>
-          {HELP_LINES.map((l, i) => (
-            <LineRow key={l.key} line={l} first={i === 0} />
-          ))}
-        </View>
-        <Txt w="300" size={12.5} lh={1.5} color={c.ink2} align="center" style={{ marginTop: 8 }}>
-          {S.hardNow.helpNote}
-        </Txt>
-      </Glass>
-
       {items.length ? (
         <>
-          <Txt w="500" size={15} align="center" accessibilityRole="header" style={{ marginTop: 28, marginBottom: 12 }}>
+          <Txt w="500" size={15} align="center" accessibilityRole="header" style={{ marginTop: 18, marginBottom: 12 }}>
             {S.hardNow.readTitle}
           </Txt>
           <View style={{ gap: 14 }}>
@@ -77,34 +62,10 @@ export default function HardNowScreen() {
           </View>
         </>
       ) : null}
-    </Screen>
-  );
-}
 
-function LineRow({ line, first }: { line: HelpLine; first: boolean }) {
-  const c = useTheme().colors;
-  const t = S.hardNow.lines[line.key];
-  const isCall = line.url.startsWith('tel:');
-  return (
-    <Btn
-      label={isCall ? S.hardNow.callA11y(t.name, line.number) : S.hardNow.chatA11y(t.name)}
-      accessibilityRole="link"
-      onPress={() => Linking.openURL(line.url).catch(() => {})}
-      style={{ flexDirection: 'row', alignItems: 'center', gap: 12, minHeight: 54, paddingVertical: 6, borderTopWidth: first ? 0 : 1, borderTopColor: c.divider }}>
-      <View style={{ flex: 1, minWidth: 0 }}>
-        <Txt w="500" size={15}>
-          {t.name}
-        </Txt>
-        <Txt w="300" size={12.5} lh={1.45} color={c.ink2}>
-          {t.desc}
-        </Txt>
+      <View style={{ alignItems: 'center', marginTop: 24 }}>
+        <TextLink label={S.hardNow.helpLink} size={13} icon="phone" onPress={() => router.push('/help')} />
       </View>
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-        <Txt w="500" size={17} color={c.acc} style={{ fontVariant: ['tabular-nums'] }}>
-          {isCall ? line.number : S.hardNow.chat}
-        </Txt>
-        <Icon name={isCall ? 'phone' : 'chat'} size={18} color={c.acc} />
-      </View>
-    </Btn>
+    </Screen>
   );
 }

@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
 import { View } from 'react-native';
 
+import { HelpEntryCard } from '@/components/help-entry';
 import { Icon, topicIcon } from '@/components/icon';
 import { Btn, frameStyle, Glass, Screen, ScreenHeader, Txt } from '@/components/ui';
 import { ALL, TOPICS } from '@/data/qa';
@@ -30,6 +31,8 @@ export default function TopicsScreen() {
           <Icon name="chevForward" size={16} color={c.ink2} />
         </View>
       </Btn>
+
+      <HelpEntryCard style={{ marginBottom: 14 }} />
 
       <Glass style={{ borderRadius: 18, paddingHorizontal: 14 }}>
         {TOPICS.map((t, i) => (

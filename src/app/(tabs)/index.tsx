@@ -155,16 +155,29 @@ export default function Home() {
         </Glass>
       </Btn>
 
-      <Btn
-        label={S.hardNow.entry}
-        accessibilityHint={S.hardNow.entryHint}
-        onPress={() => router.push('/hard-now')}
-        style={{ alignSelf: 'center', marginTop: 10, minHeight: 36, paddingHorizontal: 12, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-        <Icon name="leaf" size={14} color={c.ink2} />
-        <Txt size={13} color={c.ink2} style={{ textDecorationLine: 'underline', textDecorationColor: rgba(c.ink2, 0.35) }}>
-          {S.hardNow.entry}
-        </Txt>
-      </Btn>
+      <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
+        <Btn
+          label={S.hardNow.entry}
+          accessibilityHint={S.hardNow.entryHint}
+          onPress={() => router.push('/hard-now')}
+          style={{ minHeight: 36, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+          <Icon name="leaf" size={14} color={c.ink2} />
+          <Txt size={13} color={c.ink2} style={{ textDecorationLine: 'underline', textDecorationColor: rgba(c.ink2, 0.35) }}>
+            {S.hardNow.entry}
+          </Txt>
+        </Btn>
+        <View style={{ width: 3, height: 3, borderRadius: 2, backgroundColor: c.metal }} />
+        <Btn
+          label={S.help.entry}
+          accessibilityHint={S.help.entryHint}
+          onPress={() => router.push('/help')}
+          style={{ minHeight: 36, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+          <Icon name="phone" size={14} color={c.ink2} />
+          <Txt size={13} color={c.ink2} style={{ textDecorationLine: 'underline', textDecorationColor: rgba(c.ink2, 0.35) }}>
+            {S.help.entry}
+          </Txt>
+        </Btn>
+      </View>
 
       <Glass style={{ marginTop: 14, borderRadius: 20, paddingTop: 18, paddingHorizontal: 18, paddingBottom: 8, alignItems: 'center' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
