@@ -7,6 +7,7 @@ import { I18nManager, Platform, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { onDailyTapped, rescheduleDaily } from '@/lib/notify';
+import { startQuestionSync } from '@/lib/questions';
 import { AppStateProvider, useAppState } from '@/state/app-state';
 import { FONT_MAP } from '@/theme/fonts';
 
@@ -32,6 +33,8 @@ function Root() {
   useEffect(() => {
     if (ready) rescheduleDaily(daily).catch(() => {});
   }, [ready, daily]);
+  // "לא מצאתם תשובה?": send questions that are still waiting (start, foreground, back online).
+  useEffect(() => startQuestionSync(), []);
   useEffect(() => onDailyTapped((id) => router.push({ pathname: '/answer/[id]', params: { id } })), []);
 
   const navTheme = useMemo(() => {

@@ -3,6 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { useColorScheme } from 'react-native';
 
 import { EDITOR_MODE } from '@/lib/editor';
+import { adoptLegacy, submitQuestion, type SubmitResult } from '@/lib/questions';
 import type { DailySettings } from '@/lib/notify';
 import { DEFAULT_DARK, DEFAULT_LIGHT, THEME_BY_ID, type Theme, type ThemeId } from '@/theme/themes';
 
@@ -19,6 +20,7 @@ type Persisted = {
   textScale: number;
   readAloud: boolean;
   saved: string[];
+  /** Legacy: questions kept only on the device by older versions; moved into the send queue on load. */
   pending: PendingQuestion[];
   /** Editors only: show curated items that are not yet approved ("תצוגת טיוטה"). */
   previewDrafts: boolean;
@@ -51,8 +53,8 @@ type Ctx = Persisted & {
   toggleRead: (path: string, id: string) => void;
   isSaved: (id: string) => boolean;
   toggleSaved: (id: string) => void;
-  /** Stores an unanswered question locally. */
-  submitQuestion: (text: string) => Promise<void>;
+  /** Sends an unanswered question (text only), or queues it until there is a connection. */
+  submitQuestion: (text: string, honeypot?: string) => Promise<SubmitResult>;
 };
 
 const AppStateContext = createContext<Ctx | null>(null);
@@ -76,7 +78,11 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let alive = true;
-    readStore().then((s) => {
+    readStore().then(async (s) => {
+      if (s.pending?.length) {
+        await adoptLegacy(s.pending);
+        s.pending = [];
+      }
       if (!alive) return;
       setState((prev) => ({ ...prev, ...s, daily: { ...prev.daily, ...s.daily }, textScale: clamp(s.textScale ?? prev.textScale) }));
       setReady(true);
@@ -128,10 +134,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
         update((s) => ({
           saved: s.saved.includes(qid) ? s.saved.filter((x) => x !== qid) : [qid, ...s.saved],
         })),
-      submitQuestion: async (text) => {
-        // TODO(backend): send the question to the review backend once it exists; until then it stays on the device.
-        update((s) => ({ pending: [{ text, createdAt: new Date().toISOString() }, ...s.pending] }));
-      },
+      submitQuestion,
     };
   }, [state, ready, scheme, update]);
 
