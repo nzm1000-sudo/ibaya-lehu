@@ -2,6 +2,7 @@
 """Build the app's Q&A data from the edited production corpus.
 
 Reads  /mnt/project-files/qa-app/prod/edited/*.jsonl  (override with --src)
+       /mnt/project-files/qa-app/prod/raw/*.jsonl     (every extracted question, any status; --raw)
 Writes assets/data/qa.json         (full public set; git-ignored for now)
        assets/data/qa.sample.json  (first N ready records; committed for development)
        assets/data/similar.json    ("לא רק אתם": coarse bucket per public id, see similar_buckets)
@@ -23,11 +24,18 @@ import re
 import sys
 from collections import Counter, defaultdict
 
-PUBLIC_FIELDS = ("id", "question", "answer", "topics", "applies_when", "not_when", "faith", "source_kind")
+PUBLIC_FIELDS = ("id", "question", "answer", "topics", "applies_when", "not_when", "faith", "source_kind", "sensitive")
+# A record is "sensitive" (no sharing, never in notifications, hard-now or seasons) when its sensitivity is
+# one of these or it carries safety_flag. Only the boolean is public, never the category.
+SENSITIVE_KINDS = {"medical", "mental_health", "abuse_risk", "legal"}
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def clean(rec):
+def is_sensitive(rec):
+    return rec.get("sensitivity") in SENSITIVE_KINDS or bool(rec.get("safety_flag"))
+
+
+def clean(rec, also_sensitive=False):
     out = {k: rec.get(k) for k in PUBLIC_FIELDS}
     out["question"] = (out["question"] or "").strip()
     out["answer"] = (out["answer"] or "").strip()
@@ -36,6 +44,7 @@ def clean(rec):
     out["not_when"] = (out["not_when"] or "").strip() or None
     out["faith"] = bool(out["faith"])
     out["source_kind"] = out["source_kind"] or None
+    out["sensitive"] = is_sensitive(rec) or also_sensitive
     assert set(out) == set(PUBLIC_FIELDS)
     return out
 
@@ -53,11 +62,19 @@ STOP = set(
     ).translate(FINALS).split()
 )
 
-# Validated on random samples of pairs (see README): below these values most "similar" pairs were
-# different questions on the same subject; at or above them about 9 in 10 were the same question.
-SIM_JACCARD = 0.25
+# Calibrated on samples of 30 pairs per threshold (review/not-alone-calibration.md): at 0.40 about
+# 3 in 4 pairs were the same question, at 0.45 about 5 in 6; below that most were neighbouring
+# questions on the same subject.
 SIM_COSINE = 0.45
+SIM_MIN_SHARED = 2  # and at least two shared content words (short questions otherwise match on one word)
 SIM_MIN = 3  # never show a bucket for fewer than 3 askers (small clusters could identify someone)
+STOP_SIM = STOP | set(
+    (
+        "באמת משהו דבר דברים הרבה פעם פעמים תמיד הזמן זמן כלל אחד אחת שום ממש בכלל איתו איתה איתי אליו אליה "
+        "אליי עליו עליה עלינו אצלי אצלו לנו אותנו שלכם יכול יכולה יכולים רוצה רוצים מישהו מישהי עדיף נראה "
+        "עכשיו שוב לעצמי עצמו עצמה שזה שהוא שהיא שאני ואני כאן שם פה בו בה בהם"
+    ).translate(FINALS).split()
+)
 
 
 def stems(text):
@@ -76,6 +93,37 @@ def stems(text):
     return out
 
 
+def sim_tokens(text):
+    """Normalized Hebrew tokens in order: no niqqud, no final letters, up to two prefix letters
+    (ו ה ב ל מ ש כ) and one plural / feminine / 1st-person ending folded, stopwords removed."""
+    t = NIQQUD.sub("", text).translate(FINALS)
+    t = re.sub("[\"'׳״]", "", t)
+    out = []
+    for w in re.split(r"[^א-ת0-9]+", t):
+        if len(w) < 2 or w in STOP_SIM:
+            continue
+        for _ in range(2):
+            if len(w) >= 4 and w[0] in "והבלמשכ":
+                w = w[1:]
+            else:
+                break
+        for suf in ("ים", "ות", "תי", "ה", "ת", "י"):
+            if len(w) - len(suf) >= 3 and w.endswith(suf):
+                w = w[: -len(suf)]
+                break
+        if len(w) >= 2 and w not in STOP_SIM:
+            out.append(w)
+    return out
+
+
+def sim_features(text):
+    """Token unigrams plus adjacent-token bigrams (bigrams reward the same phrasing, not just the same subject)."""
+    t = sim_tokens(text)
+    c = Counter(t)
+    c.update(a + "_" + b for a, b in zip(t, t[1:]))
+    return c
+
+
 def bucket(n):
     if n < SIM_MIN:
         return None
@@ -86,49 +134,42 @@ def bucket(n):
     return "hundreds"
 
 
-def similar_buckets(recs):
-    """recs: list of (public_id_or_None, question, recording_id) over every asked question in the corpus.
+def similar_buckets(shipped, raw):
+    """shipped: (public id, question, recording_id) of each public answer.
+    raw: (question, recording_id) of EVERY extracted question in the corpus (any status).
 
-    Two questions are near-duplicates when both their stem-set Jaccard and TF-IDF cosine pass the
-    thresholds. An answer's count is the number of DISTINCT recordings among itself and its
-    near-duplicates (one person asking twice counts once). Only coarse buckets leave this function.
+    TF-IDF (sublinear tf, smoothed idf over the raw corpus) cosine of unigram + bigram features.
+    An answer's count is the number of DISTINCT recordings among its own and those of the raw questions
+    with cosine >= SIM_COSINE and >= SIM_MIN_SHARED shared words (one person asking twice counts once).
+    Only coarse buckets leave this function; never counts or recording ids.
     """
-    toks = [stems(q) for _, q, _ in recs]
-    n = len(recs)
-    df = Counter(w for t in toks for w in t)
-    idf = {w: math.log(n / c) for w, c in df.items()}
-    vecs = []
-    for t in toks:
-        norm = math.sqrt(sum(idf[w] ** 2 for w in t)) or 1.0
-        vecs.append({w: idf[w] / norm for w in t})
+    docs = [sim_features(q) for q, _ in raw]
+    n = len(docs)
+    df = Counter(w for d in docs for w in d)
+    unseen = math.log(1 + n) + 1
+
+    def vec(c):
+        v = {w: (1 + math.log(k)) * (math.log((1 + n) / (1 + df[w])) + 1 if w in df else unseen) for w, k in c.items()}
+        norm = math.sqrt(sum(x * x for x in v.values())) or 1.0
+        return {w: x / norm for w, x in v.items()}
+
     inv = defaultdict(list)
-    for i, t in enumerate(toks):
-        for w in t:
-            inv[w].append(i)
-    common = max(50, n // 10)  # words in >10% of questions do not nominate candidates
-    neighbours = defaultdict(set)
-    pairs = 0
-    for i, t in enumerate(toks):
+    for j, d in enumerate(docs):
+        for w, x in vec(d).items():
+            inv[w].append((j, x))
+    out, sizes, pairs = {}, Counter(), 0
+    for pid, q, rec in shipped:
+        f = sim_features(q)
+        words = {w for w in f if "_" not in w}
         dot = Counter()
-        for w in t:
-            if df[w] > common:
-                continue
-            for j in inv[w]:
-                if j > i:
-                    dot[j] += vecs[i][w] * vecs[j][w]
+        for w, x in vec(f).items():
+            for j, y in inv.get(w, ()):
+                dot[j] += x * y
+        askers = {rec}
         for j, cos in dot.items():
-            if cos < SIM_COSINE:
-                continue
-            jac = len(t & toks[j]) / (len(t | toks[j]) or 1)
-            if jac >= SIM_JACCARD:
+            if cos >= SIM_COSINE and raw[j][1] != rec and len(words & docs[j].keys()) >= SIM_MIN_SHARED:
                 pairs += 1
-                neighbours[i].add(j)
-                neighbours[j].add(i)
-    out, sizes = {}, Counter()
-    for i, (pid, _, rec) in enumerate(recs):
-        if not pid:
-            continue
-        askers = {rec} | {recs[j][2] for j in neighbours[i]}
+                askers.add(raw[j][1])
         b = bucket(len(askers))
         sizes[b or "none"] += 1
         if b:
@@ -232,6 +273,7 @@ def check_other_side(path, recording_of):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", default="/mnt/project-files/qa-app/prod/edited")
+    ap.add_argument("--raw", default="/mnt/project-files/qa-app/prod/raw")
     ap.add_argument("--sample", type=int, default=300)
     args = ap.parse_args()
 
@@ -239,11 +281,33 @@ def main():
     if not files:
         sys.exit(f"no .jsonl files in {args.src}")
 
+    # Every extracted question (any status) for "לא רק אתם", plus the raw record's own sensitivity /
+    # safety_flag (OR-ed with the edited record's, to be safe). Recording ids never leave this script.
+    raw_asked = []
+    raw_sensitive = set()
+    raw_files = sorted(glob.glob(os.path.join(args.raw, "*.jsonl")))
+    for fn in raw_files:
+        with open(fn, encoding="utf-8") as fh:
+            for line in fh:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    rec = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                q = (rec.get("question") or "").strip()
+                if not q:
+                    continue
+                raw_asked.append((q, (rec.get("source") or {}).get("recording_id") or f"?{rec.get('id')}"))
+                if is_sensitive(rec):
+                    raw_sensitive.add(rec.get("id"))
+
     status = Counter()
     seen_q, seen_id = set(), set()
     dupes = bad = 0
     ready = []
-    asked = []  # (public id or None, question, recording_id) for the similarity counts; never written out
+    shipped = []  # (public id, question, recording_id) for the similarity counts; never written out
     recording_of = {}  # public id -> recording_id; used only for checks, never written out
     for fn in files:
         with open(fn, encoding="utf-8") as fh:
@@ -257,24 +321,20 @@ def main():
                     bad += 1
                     continue
                 status[rec.get("status")] += 1
-                if rec.get("status") not in ("ready", "rav_review"):
+                if rec.get("status") != "ready":
                     continue
                 rid = (rec.get("source") or {}).get("recording_id") or f"?{rec.get('id')}"
-                if rec.get("status") != "ready":
-                    asked.append((None, (rec.get("question") or "").strip(), rid))
-                    continue
-                r = clean(rec)
+                r = clean(rec, rec.get("id") in raw_sensitive)
                 if not r["id"] or not r["question"] or not r["answer"]:
                     bad += 1
                     continue
                 if r["question"] in seen_q or r["id"] in seen_id:
                     dupes += 1
-                    asked.append((None, r["question"], rid))  # the same question asked again still counts
                     continue
                 seen_q.add(r["question"])
                 seen_id.add(r["id"])
                 ready.append(r)
-                asked.append((r["id"], r["question"], rid))
+                shipped.append((r["id"], r["question"], rid))
                 recording_of[r["id"]] = rid
 
     out_dir = os.path.join(ROOT, "assets", "data")
@@ -284,7 +344,7 @@ def main():
     with open(os.path.join(out_dir, "qa.sample.json"), "w", encoding="utf-8") as fh:
         json.dump(ready[: args.sample], fh, ensure_ascii=False, indent=1)
 
-    similar, sizes, pairs = similar_buckets(asked)
+    similar, sizes, pairs = similar_buckets(shipped, raw_asked)
     with open(os.path.join(out_dir, "similar.json"), "w", encoding="utf-8") as fh:
         json.dump(dict(sorted(similar.items())), fh, ensure_ascii=False, indent=0)
 
@@ -306,7 +366,8 @@ def main():
     print("status: " + ", ".join(f"{k}={v}" for k, v in status.most_common()))
     print(f"ready kept: {len(ready)}  duplicate questions dropped: {dupes}  malformed: {bad}")
     print(f"sample: {min(args.sample, len(ready))}")
-    print(f"similar: {len(asked)} asked questions, {pairs} near-duplicate pairs; buckets: "
+    print(f"sensitive: {sum(r['sensitive'] for r in ready)} of {len(ready)} public records")
+    print(f"similar: {len(raw_asked)} raw questions ({len(raw_files)} files), {pairs} near-duplicate pairs; buckets: "
           + ", ".join(f"{k}={sizes[k]}" for k in ("none", "few", "tens", "hundreds")))
     print("glossary: " + ", ".join(f"{k} {v}" for k, v in list(gloss.items())[:15]))
     print(f"other side: {len(cands)} candidate pairs; curated pairs dropped (same recording): {dropped}")

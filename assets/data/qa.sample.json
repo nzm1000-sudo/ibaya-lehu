@@ -11,7 +11,8 @@
   "applies_when": "הורה לילד בריא שחושש מחיידקים ומקפיד על היגיינה מופרזת",
   "not_when": "כשיש הוראה רפואית מפורשת להקפדה מיוחדת (למשל ילד עם מערכת חיסון מוחלשת); אין בדברים כדי לוותר על היגיינה בסיסית כמו שטיפת ידיים",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "000c-02",
@@ -24,7 +25,8 @@
   "applies_when": "הורה שדאגתו לילדים התרחבה מעבר לזהירות סבירה",
   "not_when": "כשיש סכנה ממשית ומוכחת",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "000c-03",
@@ -37,7 +39,8 @@
   "applies_when": "מי שיש לה ניסיון תעסוקתי ואינה בלחץ כלכלי מיידי",
   "not_when": "מי שלא עבדה שנים ארוכות, שעליה לדבריו קודם כל להיכנס לעבודה",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-04",
@@ -50,7 +53,8 @@
   "applies_when": "אחרי תקופת עבודה ארוכה, כשאין לחץ כלכלי חמור",
   "not_when": "מי שנמצא במצוקה כלכלית או שמתמשך זמן רב בלי לעשות דבר",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-05",
@@ -63,7 +67,8 @@
   "applies_when": "כשאדם חש אשמה או עצב שאינם תואמים את מה שעשה בפועל",
   "not_when": "כשהקושי באמת תואם את המציאות, ואז הכאב מוצדק וצריך לתרגם אותו לעשייה",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "000c-06",
@@ -76,7 +81,8 @@
   "applies_when": "כששוקלים מעבר בין עבודות ואין לחץ כלכלי חריף",
   "not_when": "מי שנושא בהתחייבויות כלכליות כבדות, שלו לדבריו עדיף לחפש מתוך עבודה",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-07",
@@ -90,7 +96,8 @@
   "applies_when": "כשהאדם עצמו רוצה לעבוד ומחפש, והשאלות מגבירות לחץ ואשמה",
   "not_when": "כשאדם באמת נמנע ממעשה לאורך זמן, ואז שאלת הסביבה היא דאגה מוצדקת",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-08",
@@ -102,7 +109,8 @@
   "applies_when": "אישה שמחפשת קשר רציני ומתייאשת מהאפליקציות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-09",
@@ -114,7 +122,8 @@
   "applies_when": "מי שמחפשת קשר רציני ותוהה היכן להכיר",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-10",
@@ -127,7 +136,8 @@
   "applies_when": "בשלבי היכרות ראשונים, בעיקר דרך אפליקציות",
   "not_when": "אחרי כמה פגישות, אז צריך להתמקד באחד",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-11",
@@ -140,7 +150,8 @@
   "applies_when": "כשדעות הסביבה מערערות החלטה שאדם כבר גיבש",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-12",
@@ -153,7 +164,8 @@
   "applies_when": "בתחילת קשר עם בן זוג שנפגע בעבר",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-13",
@@ -167,7 +179,8 @@
   "applies_when": "אדם הסובל מאגרנות ומנסה להבין את מקורה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "000c-14",
@@ -180,7 +193,8 @@
   "applies_when": "מי שמתקשה לוותר על חפצים מתוך חשש למחסור עתידי",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "000c-15",
@@ -193,7 +207,8 @@
   "applies_when": "מי שמזהה אצלו אגרנות ומהסס להתחיל לפנות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "000c-16",
@@ -206,7 +221,8 @@
   "applies_when": "מי שמסתירה את מצב ביתה מבן זוג חדש",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "000c-17",
@@ -219,7 +235,8 @@
   "applies_when": "מי שמייחס את כל קשייו לאבחנה אחת",
   "not_when": "כשיש הנחיה רפואית מקצועית מפורשת לגבי האבחנה והטיפול",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "000c-18",
@@ -232,7 +249,8 @@
   "applies_when": "כשהבירור הרפואי אינו מסביר כאבים חוזרים",
   "not_when": "כשיש ממצא רפואי שמסביר את הכאבים, או כשהבירור הרפואי טרם הושלם - אין בדברים תחליף לבירור רפואי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "000c-20",
@@ -246,7 +264,8 @@
   "applies_when": "מי שבלחץ כלכלי ואינו בטוח שהתואר ישמש אותו",
   "not_when": "מי שהתואר הכרחי לקידומו המקצועי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-21",
@@ -259,7 +278,8 @@
   "applies_when": "מי שבוחר תחום לימודים או קריירה בתחומי טכנולוגיה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-22",
@@ -272,7 +292,8 @@
   "applies_when": "מי שאיבד עבודה בתחום מצטמצם ומחכה רק לאותו תחום",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-23",
@@ -285,7 +306,8 @@
   "applies_when": "כשהדחף לפרנס נשאר בגבולות בריאים ומקדם את המשפחה",
   "not_when": "כשהטראומה משתקת את האדם",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-24",
@@ -298,7 +320,8 @@
   "applies_when": "זוגות נשואים שמתלבטים בניהול הכספים המשותף",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "000c-25",
@@ -311,7 +334,8 @@
   "applies_when": "כשנפטר סב של אחד מבני הזוג",
   "not_when": "כשמדובר באבל על קרוב מדרגה ראשונה, שלא נדון כאן",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-26",
@@ -323,7 +347,8 @@
   "applies_when": "אחרי ניתוח בריאטרי, בתקופת עצירה במשקל",
   "not_when": "כשיש הנחיה אחרת מהצוות הרפואי, או כשעצירת המשקל ממושכת ויש לברר אותה עם הצוות",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "000c-27",
@@ -337,7 +362,8 @@
   "applies_when": "משפחה שחיה בצפיפות ויש לה אפשרות כלכלית לעבור",
   "not_when": "כשהמעבר אינו אפשרי כלכלית",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-28",
@@ -350,7 +376,8 @@
   "applies_when": "הורה לנער שמזלזל בלימודים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-29",
@@ -363,7 +390,8 @@
   "applies_when": "הורים שנאבקים בשימוש של ילדיהם בטלפון",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-30",
@@ -375,7 +403,8 @@
   "applies_when": "הורים שרוצים להשפיע על הרגלי הילדים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-31",
@@ -387,7 +416,8 @@
   "applies_when": "הורה שמתחרט אחרי שכעס או צעק על ילדיו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-32",
@@ -400,7 +430,8 @@
   "applies_when": "הורים שצעקה הפכה אצלם לכלי חינוך שגרתי",
   "not_when": "במצב של סכנה מיידית",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "000c-33",
@@ -413,7 +444,8 @@
   "applies_when": "הורים שמבקשים לחנך בלי צעקות",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-34",
@@ -426,7 +458,8 @@
   "applies_when": "ילדים בגיל שבו הם מסוגלים לדאוג לעצמם",
   "not_when": "ילדים קטנים, שעבורם ההורים עושים הכול",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "000c-35",
@@ -438,7 +471,8 @@
   "applies_when": "הורים שצעקה היא דרך התקשורת העיקרית שלהם עם ילדיהם",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0059-01",
@@ -451,7 +485,8 @@
   "applies_when": "מי שרוצה להתחזק בתפילה ומתקשה לקום",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0059-02",
@@ -463,7 +498,8 @@
   "applies_when": "מי שמתחזק ותוהה על השכר בעולם הזה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0059-03",
@@ -476,7 +512,8 @@
   "applies_when": "מי שמתלבט אם להתפלל כשאינו מבין את המילים",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0059-04",
@@ -489,7 +526,8 @@
   "applies_when": "מי שמתחיל לשמור שבת ומתקשה בשעמום",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0059-05",
@@ -501,7 +539,8 @@
   "applies_when": "מי שמתחזק בשמירת שבת ומתמודד עם שעמום ובדידות בה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0059-06",
@@ -514,7 +553,8 @@
   "applies_when": "זוג שעומד לקחת משכנתה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0252-01",
@@ -527,7 +567,8 @@
   "applies_when": "כשאדם נמצא במצב מתמשך של קושי ונוטה לדבר עליו בשלילה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0252-02",
@@ -541,7 +582,8 @@
   "applies_when": "כשהפוגע לא ביקש סליחה והפגיעה הייתה חמורה (קללות, השפלה, לשון הרע)",
   "not_when": "כשהפוגע ביקש סליחה כראוי, ובמיוחד אם ביקש שלוש פעמים",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0252-03",
@@ -554,7 +596,8 @@
   "applies_when": "כשאדם קיבל עצות סותרות מגורמים שונים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0252-04",
@@ -568,7 +611,8 @@
   "applies_when": "כשאדם מוטרד מחלום ושוקל לפעול לפיו",
   "not_when": "כשבחלום יש בקשה מפורשת וברורה מהנפטר",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0252-05",
@@ -581,7 +625,8 @@
   "applies_when": "כשאדם מרגיש אשמה או בלבול בגלל ספקות באמונה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0252-06",
@@ -595,7 +640,8 @@
   "applies_when": "כשאדם נוטה ללחץ ולשליטה במצבים שאינם בידיו",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0252-07",
@@ -608,7 +654,8 @@
   "applies_when": "בסכסוך משפחתי על כסף או ירושה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0252-08",
@@ -622,7 +669,8 @@
   "applies_when": "כשאדם עוזר לאחרים ומרגיש מנוצל או לא מוערך",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0252-09",
@@ -636,7 +684,8 @@
   "applies_when": "כשההורה נפגע מילדיו והוא בדרך כלל הורה טוב ואוהב",
   "not_when": "כשמדובר בהורה פוגעני",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0252-10",
@@ -649,7 +698,8 @@
   "applies_when": "כשאחד מבני הזוג השפיל את השני ואחר כך מצפה שהשני יתנהג כרגיל",
   "not_when": "כשהפגיעה של הצד השני נבעה מזלזול אמיתי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0252-11",
@@ -663,7 +713,8 @@
   "applies_when": "בסכסוך כספי, במיוחד בתוך המשפחה, כשהמאבק מחריף",
   "not_when": "כשמדובר בזכויות חיוניות (מזונות, דיור, חוב שמסכן פרנסה) שבהן יש לפנות לייעוץ משפטי",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-01",
@@ -675,7 +726,8 @@
   "applies_when": "כשבוחנים מיזם של תיירות מרפא ויש גורם שמביא ציוד וצוות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-02",
@@ -688,7 +740,8 @@
   "applies_when": "כשבונים תוכנית ליווי ליזמים או לצעירים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-03",
@@ -700,7 +753,8 @@
   "applies_when": "בחממות, בצוותי פיתוח או בתוכניות ליווי",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-04",
@@ -713,7 +767,8 @@
   "applies_when": "כשמקימים גוף שמלווה יזמים ומחפש קיימות כלכלית",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-05",
@@ -726,7 +781,8 @@
   "applies_when": null,
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-06",
@@ -738,7 +794,8 @@
   "applies_when": "בתוכניות ליווי ארוכות טווח ליזמים או לעובדים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-07",
@@ -751,7 +808,8 @@
   "applies_when": "כשאיש ציבור מכהן היה מעורב ביצירת קשר עסקי",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "02be-08",
@@ -764,7 +822,8 @@
   "applies_when": "כשאדם עובד מול גורמים יריבים בארגון או ברשות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-09",
@@ -777,7 +836,8 @@
   "applies_when": "לפני השקעה בציוד יקר לעסק שירות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-10",
@@ -790,7 +850,8 @@
   "applies_when": "בשלב ההקמה של עסק משותף, כשצד אחד מביא ציוד והצד השני מפעיל",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-11",
@@ -804,7 +865,8 @@
   "applies_when": "כשמלמדים תורה בהתנדבות של זמן ויש עלויות",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-12",
@@ -818,7 +880,8 @@
   "applies_when": "כשבני הזוג תחת לחץ כלכלי והבנייה תגביר אותו",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-13",
@@ -832,7 +895,8 @@
   "applies_when": "כשאחד מבני הזוג בקשר רציני מהסס ומשדר את ההיסוס",
   "not_when": "כשיש ספק מהותי בקשר עצמו",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-14",
@@ -845,7 +909,8 @@
   "applies_when": "כשהורה מחפש דרך לחזק ביטחון עצמי של ילד צעיר",
   "not_when": "כשחוסר הביטחון מלווה בחרדה, הימנעות או פגיעה בתפקוד, שאז יש לפנות לאיש מקצוע",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "02be-15",
@@ -858,7 +923,8 @@
   "applies_when": "כשהילד מתפקד טוב, אין מצב דחוף, ויש טיפול אחר שנמצא בתהליך בליווי רופא",
   "not_when": "במצב חירום, כשיש הפסקות נשימה בשינה (דום נשימה), עייפות או ירידה בתפקוד, או כשהרופא המטפל ממליץ על ניתוח",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-01",
@@ -870,7 +936,8 @@
   "applies_when": "כשחוסר ההקשבה נובע ממצב שאינו בשליטת בן הזוג, כמו תשישות או בעיה רפואית",
   "not_when": "כשבן הזוג רגוע, בריא וישן, ובכל זאת אינו מקשיב",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-02",
@@ -883,7 +950,8 @@
   "applies_when": "בשלב ההיכרות או לפני החתונה, כשבן הזוג פנוי ובריא ובכל זאת אינו קשוב",
   "not_when": "כשחוסר ההקשבה נובע מקושי אמיתי כמו מופנמות, אוטיזם או תשישות",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-03",
@@ -895,7 +963,8 @@
   "applies_when": "כשיש קושי מתמשך בהירדמות",
   "not_when": "כשיש אבחנה רפואית שדורשת טיפול ייעודי; ההמלצה אינה מחליפה טיפול רפואי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-04",
@@ -909,7 +978,8 @@
   "applies_when": "כשאדם כבר מוצה את הבירור הרפואי ונמצא במאבק אובססיבי בבעיה",
   "not_when": "כשטרם נעשה בירור רפואי",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-05",
@@ -922,7 +992,8 @@
   "applies_when": "כשאדם חווה התעוררות עם חוסר יכולת לזוז ותחושת נוכחות",
   "not_when": "כשיש תסמינים נוספים שמחייבים בירור רפואי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-06",
@@ -935,7 +1006,8 @@
   "applies_when": "כשאותו מכשול חוזר שוב ושוב בנקודה קבועה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-07",
@@ -949,7 +1021,8 @@
   "applies_when": "בקשר שני כשלבן הזוג ילדים מנישואים קודמים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-08",
@@ -962,7 +1035,8 @@
   "applies_when": "כשאם מתלבטת אם להמשיך להניק פעוט",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-09",
@@ -974,7 +1048,8 @@
   "applies_when": "כשרוצים להפחית הנקות לילה אצל פעוט שכבר אוכל מזון רגיל",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-12",
@@ -987,7 +1062,8 @@
   "applies_when": "בתחילת דרכו של עסק שירות קטן, כשיש אפשרות לעבוד מהבית",
   "not_when": "כשהעסק כבר מלא בלקוחות",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-13",
@@ -1001,7 +1077,8 @@
   "applies_when": "כשבדיקות מקיפות שללו ממצא גופני",
   "not_when": "כל עוד לא הושלם בירור רפואי מלא",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-15",
@@ -1014,7 +1091,8 @@
   "applies_when": "כשנער עם אבחנה שואף למסלול שההורים חוששים ממנו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-16",
@@ -1028,7 +1106,8 @@
   "applies_when": "כשבן הזוג רחוק מהבית לתקופה מוגבלת מסיבות פרנסה, ויש התחייבויות כלכליות כבדות",
   "not_when": "כשיש למשפחה מקור פרנסה חלופי סביר",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-17",
@@ -1041,7 +1120,8 @@
   "applies_when": "כשאדם מתמודד עם חוויה קשה ומבקש פשר",
   "not_when": "כשמדובר באסון כבד שבו, לדבריו, יש מקרים שהם רעים כולם",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-18",
@@ -1055,7 +1135,8 @@
   "applies_when": "כשאדם מתלבט אם לעזוב מצב שאינו טוב לו",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-19",
@@ -1069,7 +1150,8 @@
   "applies_when": "כשאדם מרגיש שכל ניסיון לצאת ממצב רע נחסם",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-20",
@@ -1083,7 +1165,8 @@
   "applies_when": "כשהורה נמצא במתח ובלחץ מתמשך סביב נישואי ילדו",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-21",
@@ -1096,7 +1179,8 @@
   "applies_when": "כשאדם מבקש שפע ומצהיר על כוונותיו",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-22",
@@ -1109,7 +1193,8 @@
   "applies_when": "כשמבקשים לציין יום פטירה של הורה, גם אם לא צוין שנים",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-23",
@@ -1122,7 +1207,8 @@
   "applies_when": "כשמדובר בטיפול קוסמטי שהסיכון הרפואי שלו סביר, והדבר מפריע לאישה עצמה",
   "not_when": "כשיש סימנים להפרעה בדימוי הגוף, שבה דבר אינו מספק",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-24",
@@ -1135,7 +1221,8 @@
   "applies_when": "בפגישות היכרות כשהבחורה בתהליך התחזקות דתית",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-25",
@@ -1148,7 +1235,8 @@
   "applies_when": null,
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-26",
@@ -1162,7 +1250,8 @@
   "applies_when": "בשידוך או בהיכרות בין אנשים שבנייני בית שומר מצוות חשוב להם",
   "not_when": "כשהצדדים אינם מבקשים בית שומר מצוות",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-27",
@@ -1175,7 +1264,8 @@
   "applies_when": "כשבוחנים בן זוג בהיכרות",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-28",
@@ -1188,7 +1278,8 @@
   "applies_when": "כשמחפשים בן זוג ונוטים לרשימת דרישות שסותרות זו את זו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-29",
@@ -1201,7 +1292,8 @@
   "applies_when": "כשמשווים בין בן זוג יציב ושקט לבין בן זוג מרשים שמעורר התלהבות מיידית",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-30",
@@ -1215,7 +1307,8 @@
   "applies_when": "כשאדם חוזר ודוחה בני זוג מתאימים שמעוניינים בו",
   "not_when": "כשיש סיבה עניינית ומהותית לדחייה",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-31",
@@ -1228,7 +1321,8 @@
   "applies_when": "כשמתקדמים לתפקיד ניהולי ויש מתחים עם עמיתים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-32",
@@ -1241,7 +1335,8 @@
   "applies_when": "במגע עם אנשים, בעבודה או בייעוץ, כשהקושי שלהם נראה קטן בעינינו",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-33",
@@ -1254,7 +1349,8 @@
   "applies_when": "כשיש תסמינים גופניים חוזרים שאין להם הסבר רפואי ברור",
   "not_when": "במקום טיפול רפואי; יש להמשיך את הבירור הרפואי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-34",
@@ -1267,7 +1363,8 @@
   "applies_when": "כשאדם עמוס בדאגות ואין לו מסגרת טיפולית",
   "not_when": "כשיש מצוקה נפשית קשה שדורשת טיפול מקצועי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-36",
@@ -1280,7 +1377,8 @@
   "applies_when": "כשאדם פורש או עובר מתפקיד תובעני לתפקיד רגוע",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-37",
@@ -1293,7 +1391,8 @@
   "applies_when": "כשאדם חושש ממחלה תורשתית במשפחה",
   "not_when": "כשיש תסמינים מתקדמים שמחייבים בירור דחוף",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-38",
@@ -1306,7 +1405,8 @@
   "applies_when": "כשמחשבות טורדניות עולות בזמן תפילה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-39",
@@ -1318,7 +1418,8 @@
   "applies_when": "כשבן זוג חוזר להיות זמין אחרי תקופה ארוכה של היעדרות בשל עבודה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-40",
@@ -1331,7 +1432,8 @@
   "applies_when": "כשחשדות עולים בלי בסיס עובדתי",
   "not_when": "כשיש ראיות ממשיות לבגידה",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-101",
@@ -1343,7 +1445,8 @@
   "applies_when": "כשרוצים לשקם קרבה בזוגיות שהתקררה, ובמיוחד כשיש טענות הדדיות מהעבר",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-102",
@@ -1355,7 +1458,8 @@
   "applies_when": "כשבן הזוג רוצה לחמם מחדש קשר זוגי שהתרחק",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-103",
@@ -1368,7 +1472,8 @@
   "applies_when": "כשאדם עבר לתפקיד בכיר בארגון גדול ומרגיש ירידה בעצמאות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-104",
@@ -1381,7 +1486,8 @@
   "applies_when": "כשאדם התקדם לתפקיד בכיר ומודד את עצמו לפי כמות המאמץ",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-105",
@@ -1395,7 +1501,8 @@
   "applies_when": "כשבן הזוג דוחה כל הערה ומפרש אותה כקנאה",
   "not_when": "כשיש סכנה ממשית או פגיעה, שאז נדרש טיפול אחר",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-106",
@@ -1409,7 +1516,8 @@
   "applies_when": "כשאדם הצליח מהר כלכלית ומתנהל מתוך תחושת ביטחון מוחלט",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-107",
@@ -1422,7 +1530,8 @@
   "applies_when": "כשיש מתח בין ההורים והבנות מושפעות ממנו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-108",
@@ -1436,7 +1545,8 @@
   "applies_when": "כשהבת בוגרת והבחור אינו אדם רע אלא נראה לא מתאים",
   "not_when": "כשיש סכנה ממשית, אז לדבריו צריך לפחות לומר את הדברים לבת",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-109",
@@ -1449,7 +1559,8 @@
   "applies_when": "כשאישה שוקלת להינשא לגבר צעיר ממנה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-110",
@@ -1463,7 +1574,8 @@
   "applies_when": "כשבני זוג שוקלים נישואים למרות פערים ניכרים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-111",
@@ -1477,7 +1589,8 @@
   "applies_when": "כשאין אירוע פגיעה ממשי ביחסים, אלא זלזול מתמשך",
   "not_when": "כשיש פגיעה או סכסוך אמיתי בעבר",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-112",
@@ -1491,7 +1604,8 @@
   "applies_when": "כשאדם עמוס בטיפול באחרים ואינו מקדיש זמן לעצמו",
   "not_when": "כשמדובר בדיכאון קליני שדורש טיפול מקצועי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-113",
@@ -1504,7 +1618,8 @@
   "applies_when": "כשבן הזוג פסיבי ואין סימן לשינוי באופיו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-115",
@@ -1519,7 +1634,8 @@
   "applies_when": "כשבן הזוג לשעבר אינו אמין בתשלומים ומשתמש ברכוש המשותף כדי ללחוץ",
   "not_when": "כשבן הזוג לשעבר משלם בקביעות ומסודר",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-116",
@@ -1532,7 +1648,8 @@
   "applies_when": "כשאישה גרושה או פנויה מתחילה קשר חדש",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-117",
@@ -1546,7 +1663,8 @@
   "applies_when": "אחרי נפילה בקשר אסור, כשאדם נתקע בשאלת האשמה",
   "not_when": "כשמדובר בהטרדה או בניצול של יחסי מרות (למשל ממונה בעבודה); אז האחריות אינה של הנפגעת ויש לפנות לגורמים המוסמכים",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-118",
@@ -1560,7 +1678,8 @@
   "applies_when": "אחרי חוויה של ניצול רגשי בידי אדם מוכר ואמין",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-119",
@@ -1573,7 +1692,8 @@
   "applies_when": "כשיש קשר רגשי או פנייה בין ממונה לעובדת",
   "not_when": "כשמדובר בהטרדה, שאז יש לפנות לגורמים המוסמכים",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-120",
@@ -1586,7 +1706,8 @@
   "applies_when": "בתחילת קריירה מקצועית, כשהמקום אינו מציע מסלול קידום ברור",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-121",
@@ -1599,7 +1720,8 @@
   "applies_when": "כשאדם מתלבט לגבי קידום ומה באמת חשוב לו בו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-122",
@@ -1612,7 +1734,8 @@
   "applies_when": "כשאדם מקבל הזדמנות לקידום מהיר או עובר למקום חדש",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-123",
@@ -1625,7 +1748,8 @@
   "applies_when": "כשאדם שוקל מעבר לתפקיד או לחברה חדשה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-124",
@@ -1639,7 +1763,8 @@
   "applies_when": "אחרי פרידה מקשר ארוך שלא הוביל לנישואים",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-125",
@@ -1651,7 +1776,8 @@
   "applies_when": "כשילדה נכנסת לגיל ההתבגרות וההורה חושש מהשפעות חיצוניות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-126",
@@ -1664,7 +1790,8 @@
   "applies_when": "כשנערה מגיבה בכעס ובהתפרצויות שאינן ברמה קיצונית",
   "not_when": "כשיש סימני סיכון נפשי ממשי או מצוקה חמורה; אז יש לפנות לאנשי מקצוע",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-127",
@@ -1678,7 +1805,8 @@
   "applies_when": "כשנער או נערה נחשפו לתכנים קשים והתנהגותם השתנתה",
   "not_when": "כשיש סימני מצוקה חמורה, דיכאון, פגיעה עצמית או מחשבות אובדניות; אז יש לפנות לאנשי מקצוע בבריאות הנפש",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-201",
@@ -1692,7 +1820,8 @@
   "applies_when": "כשיש שחיקה אמיתית אבל הפרנסה של הבית תלויה בעבודה הנוכחית",
   "not_when": "כשאין תלות כלכלית בעבודה, אז לדבריו הולכים לפי הנפש",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-202",
@@ -1705,7 +1834,8 @@
   "applies_when": "כשמדובר בנערה שבאופייה מוחצנת, וההימנעות נראית כדפוס של נוחות ולא כפחד אמיתי",
   "not_when": "כשיש אבחנה מקצועית של חרדה או פחד שנובע מאירוע אמיתי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-203",
@@ -1718,7 +1848,8 @@
   "applies_when": "כשילד או נער מזלזל בלימודים בטענה שהידע זמין ממילא",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-204",
@@ -1732,7 +1863,8 @@
   "applies_when": "כשמשפחה דתית ונערה מבקשת לעבור למסגרת חילונית",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-205",
@@ -1746,7 +1878,8 @@
   "applies_when": "כשהרופאים ממליצים על ניתוח ואין גורם רפואי שממליץ להימנע ממנו, והכאב משתק את החיים",
   "not_when": "כשיש גורם רפואי שממליץ שלא לנתח",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-206",
@@ -1760,7 +1893,8 @@
   "applies_when": "בתחילת קשר עם בן זוג שמקפיד מאוד על ניקיון וסדר",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-207",
@@ -1773,7 +1907,8 @@
   "applies_when": "בשלבי היכרות ראשונים, כשהרגש רץ לפני הבדיקה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-208",
@@ -1787,7 +1922,8 @@
   "applies_when": "כשילד בוגר מצליח ומתפתח במקום מגוריו בחו״ל",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-209",
@@ -1800,7 +1936,8 @@
   "applies_when": "כשילד מבין ויודע את המילים, ובדיקות הדיבור והפה תקינות, והקושי הוא בהוצאה החוצה",
   "not_when": "כשיש קושי נוירולוגי או התפתחותי מאובחן",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-210",
@@ -1813,7 +1950,8 @@
   "applies_when": "כשהורה בונה תרחיש עתידי קודר מקושי נוכחי של הילד",
   "not_when": "כשהחשש נשען על דפוס שחוזר במציאות",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-211",
@@ -1827,7 +1965,8 @@
   "applies_when": "כשפחד של ילד נשען על אירוע אמיתי שקרה בסביבתו או במדינה",
   "not_when": "כשהפחד דמיוני לחלוטין ואינו נשען על מציאות, אז לדבריו מנמיכים את הווליום",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-212",
@@ -1840,7 +1979,8 @@
   "applies_when": "כשהבעל אדם טוב אבל פסיבי, והאישה דומיננטית ותופסת את כל המרחב",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-213",
@@ -1852,7 +1992,8 @@
   "applies_when": "כשהבעל סגור ומדבר מעט, אבל אין סימנים לבעיה אחרת בקשר",
   "not_when": "כשיש סימנים ממשיים לניתוק או לבעיה אחרת",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-215",
@@ -1865,7 +2006,8 @@
   "applies_when": "כשיש שחיקה ממושכת ומועד יציאה טבעי באופק",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-216",
@@ -1879,7 +2021,8 @@
   "applies_when": "כשיש חלום בתחום אמנותי או בידורי ואין עדיין פרנסה יציבה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-217",
@@ -1893,7 +2036,8 @@
   "applies_when": "כשאדם ממהר להגשים חלום על חשבון מה שהוא עושה עכשיו",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-218",
@@ -1907,7 +2051,8 @@
   "applies_when": "כשהעיסוק ברצון עתידי פוגע בתפקוד בהווה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-219",
@@ -1921,7 +2066,8 @@
   "applies_when": "כשאדם רוצה לקצר דרך ולהגיע להישג בבת אחת",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-220",
@@ -1935,7 +2081,8 @@
   "applies_when": "כשהשוואה לאחרים גורמת לתסכול ולשיתוק",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-221",
@@ -1948,7 +2095,8 @@
   "applies_when": "כשאדם נושא זיכרונות של כישלון שמכתיבים את הציפיות שלו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-222",
@@ -1962,7 +2110,8 @@
   "applies_when": "כשאדם מבוסס נתקע שוב ושוב בשלבי ההיכרות הראשונים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-223",
@@ -1977,7 +2126,8 @@
   "applies_when": "כשבן הזוג אינו מצליח להציב גבול מול משפחתו והקשר פוגע בכבוד העצמי",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-224",
@@ -1991,7 +2141,8 @@
   "applies_when": "כשמשפחת בן הזוג מתנגדת בלי אירוע ממשי שמסביר את ההתנגדות",
   "not_when": "כשאכן היה אירוע פוגע ממשי מצד בת הזוג",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-225",
@@ -2004,7 +2155,8 @@
   "applies_when": "בהיכרות עם בת זוג דומיננטית שעברה שינוי חיים משמעותי",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-226",
@@ -2017,7 +2169,8 @@
   "applies_when": "בשלבי ההיכרות, לפני התחייבות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-227",
@@ -2030,7 +2183,8 @@
   "applies_when": "כשמזמינים או מבצעים משהו יקר או בטיחותי על סמך מידע מאחרים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-228",
@@ -2043,7 +2197,8 @@
   "applies_when": "כשמשפחה נכנסת ויוצאת מהמינוס והתזרים החודשי לא מחזיק",
   "not_when": "כשהתזרים מאפשר את ההחזר הגבוה בלי מינוס",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "0a4d-229",
@@ -2056,7 +2211,8 @@
   "applies_when": "כשמשתמשים בטיפול תרופתי לירידה במשקל",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-10",
@@ -2070,7 +2226,8 @@
   "applies_when": "פרידה בעקבות בגידה לפני נישואין, לפני שיש ילדים",
   "not_when": "כשכבר יש ילדים (הרב אמר שאז אין לו תשובה פשוטה)",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-11",
@@ -2084,7 +2241,8 @@
   "applies_when": "כשבן משפחה בוגר מכור או מסתבך שוב ושוב והמשפחה מממנת אותו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0a4d-14",
@@ -2098,7 +2256,8 @@
   "applies_when": "צעיר שהוריו חוששים מיוזמה עסקית שלו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0cb4-01",
@@ -2111,7 +2270,8 @@
   "applies_when": "כשהצעת הפשרה קרובה לסכום הנתבע וחוסכת זמן משמעותי",
   "not_when": "כשהפשרה רחוקה מאוד ממה שמגיע",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "0cb4-02",
@@ -2124,7 +2284,8 @@
   "applies_when": "עובד שמתנכלים לו ויש לו גוף חיצוני להיעזר בו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "1e07-01",
@@ -2136,7 +2297,8 @@
   "applies_when": "ילד צעיר שחוזר לבד ברגל וחוצה כבישים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "1e07-02",
@@ -2148,7 +2310,8 @@
   "applies_when": "ילד שמתפקד חברתית בבית הספר אך נמנע מלארח בבית מתוך בושה",
   "not_when": "כשאין הסבר כזה, ויש הסתגרות כללית",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "1e07-03",
@@ -2162,7 +2325,8 @@
   "applies_when": "בית שבו התנהגות של אחד ההורים משתפרת",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "1e07-04",
@@ -2174,7 +2338,8 @@
   "applies_when": "אדם שמתפלל על צורך סביר ומפקפק אם מותר לקוות",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "1e07-05",
@@ -2188,7 +2353,8 @@
   "applies_when": "מחלוקת בין אחים אחרי פטירת הורה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "1e07-06",
@@ -2202,7 +2368,8 @@
   "applies_when": "סכסוך ירושה מול קרובים שאינם אחים",
   "not_when": "סכסוך בין אחים עצמם",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "160e-01",
@@ -2215,7 +2382,8 @@
   "applies_when": "בן זוג חורג מול ילד בוגר של בת הזוג שהתנהג בפגיעה ויצא מהבית",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "160e-02",
@@ -2229,7 +2397,8 @@
   "applies_when": "משפחה מעורבת שבה יש מתח בין בן הזוג לילד של בת הזוג",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "160e-03",
@@ -2243,7 +2412,8 @@
   "applies_when": "מתח בין בת הזוג לבין חמותה סביב אירוח וחגים",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "160e-04",
@@ -2257,7 +2427,8 @@
   "applies_when": "בעל נכס מסחרי שיש בו סכסוך בין שוכרים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "160e-05",
@@ -2270,7 +2441,8 @@
   "applies_when": "אדם עם עסק ומשפחה שמתפתה להיכנס למאבקי כוח מקומיים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-01",
@@ -2284,7 +2456,8 @@
   "applies_when": "כשאדם צעיר שוקל לפתוח עסק עצמאי בתחום המזון בלי ניסיון או הון גדול",
   "not_when": "כשהאדם בדק את השוק לעומק ויש לו מימון וניסיון",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-02",
@@ -2298,7 +2471,8 @@
   "applies_when": "כשאדם צעיר בוחר מקצוע או מסלול לימודים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-03",
@@ -2311,7 +2485,8 @@
   "applies_when": "כשאדם שוקל מסלול לימודים במקצוע שהבינה המלאכותית מחליפה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-04",
@@ -2325,7 +2500,8 @@
   "applies_when": "כשאדם שכיר שוקל להיות עצמאי בתחום מקצועי-טכני",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-05",
@@ -2338,7 +2514,8 @@
   "applies_when": "כשאדם רוצה לפתח הבנה כלכלית לקראת העתיד",
   "not_when": "כשמדובר בהחלטת השקעה בפועל",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-06",
@@ -2351,7 +2528,8 @@
   "applies_when": "כשאדם מתחיל ללמוד תחום חדש באופן עצמאי",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-07",
@@ -2365,7 +2543,8 @@
   "applies_when": "כשאדם מתמודד עם פרידה אחרי קשר של ריבים חוזרים",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-08",
@@ -2378,7 +2557,8 @@
   "applies_when": "כשבוחנים קשר זוגי ושוקלים אם להמשיך בו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-09",
@@ -2391,7 +2571,8 @@
   "applies_when": "כשאחד מבני הזוג סובל מקנאה או מחשדות חוזרים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-10",
@@ -2404,7 +2585,8 @@
   "applies_when": "כשבן זוג מבקש גבול סביר לגבי שהייה ממושכת ואינטימית עם חברים מהמין השני",
   "not_when": "כשמדובר בקנאה על מבט, הודעה או מפגש תמים",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-11",
@@ -2417,7 +2599,8 @@
   "applies_when": "כשבן זוג נוטה להגביל את בת זוגו מתוך קנאה",
   "not_when": "כשמדובר בגבול סביר ומוסכם על שניהם",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-12",
@@ -2431,7 +2614,8 @@
   "applies_when": "כשבני זוג בתחילת קשר שוקלים להתחייב אחרי תקופת היכרות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-13",
@@ -2444,7 +2628,8 @@
   "applies_when": "כשאדם אחרי פרידה ממשיך לפגוש את בת הזוג לשעבר באופן שגרתי",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-14",
@@ -2458,7 +2643,8 @@
   "applies_when": "כשבני זוג נמצאים בקונפליקט עמוק ומתמשך ושוקלים גירושין",
   "not_when": "כשהקשיים נקודתיים ויש בסיס לתיקון",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-15",
@@ -2472,7 +2658,8 @@
   "applies_when": "כשאישה בשנות השלושים רוצה משפחה אך אינה יוצאת לפגישות",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "25e7-16",
@@ -2485,7 +2672,8 @@
   "applies_when": "כשאדם רוצה זוגיות אך כמעט אינו נפגש בפועל",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-17",
@@ -2499,7 +2687,8 @@
   "applies_when": "כשאדם בסביבה הקרובה טוען לידיעת העתיד ומשתמש בכך כדי להשפיע",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-18",
@@ -2513,7 +2702,8 @@
   "applies_when": "כשאישה פנויה מכירה גבר שנפרד מאשתו אך טרם קיבל גט",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-20",
@@ -2526,7 +2716,8 @@
   "applies_when": "כשמכירים בן זוג שעבר לאחרונה טראומה או פרידה קשה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-21",
@@ -2539,7 +2730,8 @@
   "applies_when": "כשבן זוג חדש מביע מחויבות כלפי משפחתו הקודמת בתחילת קשר",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-22",
@@ -2552,7 +2744,8 @@
   "applies_when": "כשאישה בתחילת קשר רוצה להעמיק את החיבור הרגשי",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-23",
@@ -2565,7 +2758,8 @@
   "applies_when": "כשאחד מבני הזוג רוצה עצמאות בלי ליצור מאבק כוח",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-24",
@@ -2578,7 +2772,8 @@
   "applies_when": "כשבן זוג חושש מהשפעה של חבר או חברה על בת זוגו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-25",
@@ -2591,7 +2786,8 @@
   "applies_when": "כשבני זוג מחפשים דרכים פשוטות לחזק את הקשר הרגשי",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-27",
@@ -2604,7 +2800,8 @@
   "applies_when": "כשבן זוג מאשים בבגידה על בסיס קלוש ובמקביל מתנהג בחשאיות",
   "not_when": "כשיש להאשמה בסיס ממשי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "25e7-28",
@@ -2618,7 +2815,8 @@
   "applies_when": "כשבן זוג נעדר מהבית לאורך זמן, אינו נאמן ומקיים התנהלות הרסנית",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "25e7-29",
@@ -2632,7 +2830,8 @@
   "applies_when": "כשבן משפחה שקוע רגשית במשבר הזוגי של אח או אחות",
   "not_when": "כשיש סכנה ממשית שמחייבת פעולה",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b007-1",
@@ -2645,7 +2844,8 @@
   "applies_when": "לפני פגישה עסקית ראשונה, במיוחד עם אדם שהקשר איתו נוצר באופן אקראי",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-2",
@@ -2657,7 +2857,8 @@
   "applies_when": "כשפגישות עסקיות חוזרות על עצמן בלי תוצאה ונגררות לשיחות חברתיות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-3",
@@ -2670,7 +2871,8 @@
   "applies_when": "כשאדם רגיל להרשים בפגישות עסקיות ומגלה שהשיטה כבר לא מביאה עסקאות",
   "not_when": "כשמדובר בקבוצות או בתרבויות עסקיות שבהן הנראות והכוח עדיין חשובים מאוד",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-4",
@@ -2682,7 +2884,8 @@
   "applies_when": "כשאדם מציג תדמית חזקה אבל בפועל זקוק לשיתוף פעולה מהצד השני",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-5",
@@ -2695,7 +2898,8 @@
   "applies_when": "כשאדם בתפקיד ציבורי או מקצועי מרגיש שההקפדה על תדמית ועל כבוד מתישה אותו",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-6",
@@ -2708,7 +2912,8 @@
   "applies_when": "כשאדם מתלבט אם לוותר על הצגת עוצמה ולעבור לשיחה עסקית ישירה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-7",
@@ -2720,7 +2925,8 @@
   "applies_when": "כשיש כבר היכרות אישית חמה ורוצים להפוך אותה לשיתוף פעולה עסקי",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-8",
@@ -2733,7 +2939,8 @@
   "applies_when": "כשאדם שנכשל בעבירה מרגיש שאינו ראוי לקיים מצוות",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-9",
@@ -2746,7 +2953,8 @@
   "applies_when": "כשאדם בלי מסגרת תעסוקתית קבועה מרגיש שהימים שלו מתבזבזים",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-10",
@@ -2760,7 +2968,8 @@
   "applies_when": "כשאדם חושש שקביעת עיתים לתורה תפגע בעסק שלו",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-11",
@@ -2774,7 +2983,8 @@
   "applies_when": "כשאדם בגיל מבוגר יחסית מתקשה למצוא זוג בגלל רשימת דרישות ארוכה",
   "not_when": "כשיש בעיה מהותית ביראת שמיים או בתקשורת עם המועמדת",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-12",
@@ -2788,7 +2998,8 @@
   "applies_when": "כשאדם פעיל ופתוח בתחומים אחרים בחייו אבל סגור ובררן בתחום הזוגי",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-13",
@@ -2802,7 +3013,8 @@
   "applies_when": "כשאדם מתמודד עם קושי במציאת זוג או בפרנסה ומרגיש שהאמונה שלו נחלשת",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-14",
@@ -2816,7 +3028,8 @@
   "applies_when": "כשאדם בתהליך היכרויות מגלה שרשימת הדרישות שלו מונעת ממנו להתקדם",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-15",
@@ -2829,7 +3042,8 @@
   "applies_when": "כשאדם מבוגר יחסית שואל מדוע הוא וחבריו מתקשים להינשא",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-16",
@@ -2843,7 +3057,8 @@
   "applies_when": "כשאדם מרבה לצפות ברשתות ומרגיש חוסר סיפוק במה שיש לו או בבן הזוג",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b007-17",
@@ -2856,7 +3071,8 @@
   "applies_when": "כשיש הצעה מקבילה אמיתית ממשקיע אחר",
   "not_when": "כשאין באמת פגישה או הצעה מקבילה, כי אז זו הטעיה",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-1",
@@ -2869,7 +3085,8 @@
   "applies_when": "אדם דתי-מסורתי שמחפש בן זוג ומתלבט באיזו רמה דתית",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-2",
@@ -2882,7 +3099,8 @@
   "applies_when": "ילד שעסוק כל הזמן בחשש שלא יהיה אוכל",
   "not_when": "הפרעת אכילה מאובחנת שדורשת טיפול מקצועי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b008-3",
@@ -2895,7 +3113,8 @@
   "applies_when": "הורים גרושים כשהצד השני מערים קשיים שבסוף מתבטלים",
   "not_when": "מצב של סכנה או איומים ממשיים, שדורש גורמים מוסמכים",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b008-4",
@@ -2908,7 +3127,8 @@
   "applies_when": "הורה גרוש כשההורה השני מעביר מסרים או ביקורת דרך הילד",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-5",
@@ -2921,7 +3141,8 @@
   "applies_when": "הורה גרוש שמתקשה לפנות מקום לזוגיות חדשה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-6",
@@ -2934,7 +3155,8 @@
   "applies_when": "אדם שמחכה שהדברים יגיעו מעצמם",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-7",
@@ -2947,7 +3169,8 @@
   "applies_when": "ילד עם עודף משקל קל",
   "not_when": "השמנה משמעותית או בעיה רפואית שדורשת ליווי תזונתי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b008-8",
@@ -2960,7 +3183,8 @@
   "applies_when": "ילד שמבקש תוספת מתוך הרגל ולא מרעב",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-9",
@@ -2972,7 +3196,8 @@
   "applies_when": "ילד שמספר שמעליבים אותו בבית הספר",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-10",
@@ -2984,7 +3209,8 @@
   "applies_when": "פגישה או שיחה ראשונה באפליקציית היכרויות",
   "not_when": "מידע רפואי שמשפיע ישירות על ההחלטה להמשיך, כשהקשר כבר רציני",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-11",
@@ -2997,7 +3223,8 @@
   "applies_when": "קשר ארוך ויציב שבו אחד הצדדים מהסס להתחייב",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-12",
@@ -3010,7 +3237,8 @@
   "applies_when": "ילד שפיתח פחדים לאחרונה, בלי אירוע טראומטי חריג",
   "not_when": "פחדים קשים ומתמשכים או אחרי טראומה, שדורשים אבחון",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b008-13",
@@ -3022,7 +3250,8 @@
   "applies_when": "מתבגר או צעיר עם קשיי קשב שמתקשה לעמוד בפיתויים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b008-14",
@@ -3035,7 +3264,8 @@
   "applies_when": "צעיר תפקודי ויעיל שמתקשה רק בקימה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b008-15",
@@ -3048,7 +3278,8 @@
   "applies_when": "מתבגרת עם חרדה סביב מחלות של אחרים",
   "not_when": "חרדה שפוגעת בשינה ובתפקוד לאורך זמן, שדורשת טיפול מקצועי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b008-16",
@@ -3062,7 +3293,8 @@
   "applies_when": "הורה שבנו הבוגר התחזק ונכנס ללימוד תורה מלא",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-17",
@@ -3075,7 +3307,8 @@
   "applies_when": "מתבגרת שמתקשה חברתית בלי חרם גלוי",
   "not_when": "חרם או בריונות, שמחייבים התערבות של בית הספר",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b008-18",
@@ -3088,7 +3321,8 @@
   "applies_when": "בעלת דירה שמתלבטת בין שיפוץ יקר לבין מעבר",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-19",
@@ -3101,7 +3335,8 @@
   "applies_when": "הורים שמתכננים לארח זוג צעיר במגורים קבועים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-20",
@@ -3114,7 +3349,8 @@
   "applies_when": "אדם שחווה חוסר שקט אחרי תקופה ארוכה של משברים",
   "not_when": "חרדה או דיכאון שפוגעים בתפקוד",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b008-21",
@@ -3127,7 +3363,8 @@
   "applies_when": "הורה גרוש שדוחה זוגיות בגלל חשש מתגובת הילדים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-22",
@@ -3141,7 +3378,8 @@
   "applies_when": "אדם שמתלבט בזוגיות חדשה בגלל דעת המשפחה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-23",
@@ -3155,7 +3393,8 @@
   "applies_when": "אדם שמקבל עזרה קבועה מקרוב משפחה ומתבייש בכך",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-24",
@@ -3169,7 +3408,8 @@
   "applies_when": "צעיר שמקבל הצעת עבודה מהורי בן או בת הזוג לפני נישואים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-25",
@@ -3182,7 +3422,8 @@
   "applies_when": "אדם בוגר עם התפרצויות כעס מילוליות ללא אלימות",
   "not_when": "כשיש אלימות או איומים",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b008-26",
@@ -3195,7 +3436,8 @@
   "applies_when": "הורה שמנסה לשכנע ילד בוגר להפסיק לכעוס בטענה שיש לו הכול",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-27",
@@ -3208,7 +3450,8 @@
   "applies_when": "אב וילד בוגר עם קשר מרוחק, כשהבן רגיש",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-28",
@@ -3221,7 +3464,8 @@
   "applies_when": "בן זוג שחוזר על אותן הערות במשך שנים בלי שינוי",
   "not_when": "חשש ממשי לסכנה או להתמכרות שדורשים טיפול",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-29",
@@ -3234,7 +3478,8 @@
   "applies_when": "בן זוג שחושד בבגידה על סמך שיחות או רשתות חברתיות",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-30",
@@ -3248,7 +3493,8 @@
   "applies_when": "זוג שבו אחד מעד בעבר והקשר כיום יציב",
   "not_when": "בגידות חוזרות או התנהגות פוגענית מתמשכת",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-31",
@@ -3260,7 +3506,8 @@
   "applies_when": "בן זוג שמבלה עם חברה שלא נראית לבת הזוג",
   "not_when": "התמכרות או חברה עבריינית שדורשות התערבות",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-32",
@@ -3273,7 +3520,8 @@
   "applies_when": "פרידה בלי סיבה גלויה אחרי קשר שהתקדם מהר",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-33",
@@ -3286,7 +3534,8 @@
   "applies_when": "בן זוג לשעבר שפונה לסירוגין בלי להתחייב",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-34",
@@ -3299,7 +3548,8 @@
   "applies_when": "פרידה ביוזמת גבר בקשר תקין סביב שיחה על נישואים",
   "not_when": "קשר רעיל או אלים",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-35",
@@ -3312,7 +3562,8 @@
   "applies_when": "אדם שמאשים את עצמו בפרידה כי חושב שהוחלף במישהו טוב יותר",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-36",
@@ -3326,7 +3577,8 @@
   "applies_when": "אדם שנשאר תקוע שנים בקשר שהסתיים",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b008-37",
@@ -3339,7 +3591,8 @@
   "applies_when": "אדם שמחפש אישור מיועצים רוחניים שהקשר יחזור",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-1",
@@ -3353,7 +3606,8 @@
   "applies_when": "מי שמחפשת זוגיות לבניית בית ונמשכה לבן זוג לא יציב",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-2",
@@ -3366,7 +3620,8 @@
   "applies_when": "מי ששואל על הקשר בין שמירת מצוות לבין תוצאות בחייו",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-3",
@@ -3380,7 +3635,8 @@
   "applies_when": "מי שמחפש קשר רציני ומתלבט עם מי להמשיך",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-4",
@@ -3394,7 +3650,8 @@
   "applies_when": "אישה שרוצה להתחתן ומתלבטת לגבי מגע בתחילת קשר",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-5",
@@ -3408,7 +3665,8 @@
   "applies_when": "אישה שמחפשת נישואים וחוששת להציב גבול פיזי",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-6",
@@ -3422,7 +3680,8 @@
   "applies_when": "מי שמחפש זוגיות זמן רב ונכנס למחזורים של ייאוש",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-7",
@@ -3436,7 +3695,8 @@
   "applies_when": "מי שמודד התאמה זוגית לפי עוצמת החיבור הראשוני",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-8",
@@ -3449,7 +3709,8 @@
   "applies_when": "מי שפוסלת בני זוג מתאימים כי אין משיכה מיידית",
   "not_when": "כשיש רתיעה ממשית או חוסר התאמה מהותי",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-9",
@@ -3463,7 +3724,8 @@
   "applies_when": "מי שנוטה להיקשר רגשית מהר בתחילת היכרות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-10",
@@ -3477,7 +3739,8 @@
   "applies_when": "מי שמתלבט כמה זמן להכיר לפני נישואים",
   "not_when": "כשיש סימני אזהרה ממשיים שדורשים בירור נוסף",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-11",
@@ -3491,7 +3754,8 @@
   "applies_when": "רווקה שחוששת שהבאת ילד לבד תסגור בפניה זוגיות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-12",
@@ -3504,7 +3768,8 @@
   "applies_when": "מי שמרגיש שהסביבה מחלישה את חייו הרוחניים",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-13",
@@ -3519,7 +3784,8 @@
   "applies_when": "הורים שמקפידים על סביבה רוחנית מסוימת וילדיהם נמשכים לבתים מתירניים",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-14",
@@ -3532,7 +3798,8 @@
   "applies_when": "הורים שמתלבטים לגבי סמארטפונים ומסכים לילדים",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b010-15",
@@ -3545,7 +3812,8 @@
   "applies_when": "מי שנפגע מהאשמת שווא או ששוקל לדבר רעות על אחר",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-16",
@@ -3558,7 +3826,8 @@
   "applies_when": "מי שפגע באחר ומקווה שהזמן או יום כיפור יכפרו",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-17",
@@ -3571,7 +3840,8 @@
   "applies_when": "מי שפגע באחר בשעת כעס ומצדיק זאת בכעס",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-18",
@@ -3585,7 +3855,8 @@
   "applies_when": "כשבן משפחה פגע בבן הזוג ולא התנצל",
   "not_when": "כשהפוגע ביקש סליחה בכנות",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-19",
@@ -3598,7 +3869,8 @@
   "applies_when": "כשבן הזוג נפגע מבן משפחה של הצד השני",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-20",
@@ -3611,7 +3883,8 @@
   "applies_when": "זוג בתהליך שיקום אחרי בגידה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-22",
@@ -3624,7 +3897,8 @@
   "applies_when": "בני זוג בתקופת מתח שבה כל צד רואה רק את הביקורת",
   "not_when": "כשיש התעללות מילולית מתמשכת",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-23",
@@ -3637,7 +3911,8 @@
   "applies_when": "בתחילת שנה, ובמיוחד כשיש מתח בבית",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-24",
@@ -3650,7 +3925,8 @@
   "applies_when": "מי שמרגיש מכור לטלפון ובטוח שאין ביכולתו לצמצם",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-25",
@@ -3662,7 +3938,8 @@
   "applies_when": "מי ששוקלת טיפולי החלקה כימיים לשיער",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b010-27",
@@ -3675,7 +3952,8 @@
   "applies_when": "הליך גירושים שבו צד אחד מאשים את השני בבגידה בלי ראיות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b010-28",
@@ -3689,7 +3967,8 @@
   "applies_when": "גירושים כשהרכוש המשותף מועט וכשהקשר פוגעני",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b010-29",
@@ -3703,7 +3982,8 @@
   "applies_when": "הורים בתחילת הליך גירושים בישראל",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": true
  },
  {
   "id": "b010-31",
@@ -3717,7 +3997,8 @@
   "applies_when": "הורה לילד בוגר שמאשים אותו שוב ושוב על מצבו",
   "not_when": "כשהילד במצוקה נפשית ממשית שדורשת התערבות",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b010-32",
@@ -3731,7 +4012,8 @@
   "applies_when": "מי שמרגיש מיואש מהשקעה תקועה וחובות",
   "not_when": "כשנדרשת החלטה פיננסית מיידית; אז יש להתייעץ עם איש מקצוע",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-1",
@@ -3744,7 +4026,8 @@
   "applies_when": "כשהרחבת עסק או קבלת מקום עבודה כרוכה בהוצאת אדם אחר שנפגע מכך",
   "not_when": "כשהמקום פנוי באמת ואיש אינו נפגע",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-2",
@@ -3757,7 +4040,8 @@
   "applies_when": "כשמייחסים פחד או קושי בשינה למזוזות שנבדקו ונמצאו כשרות",
   "not_when": "כשהמזוזות לא נבדקו או שיש ספק בכשרותן; כשהפחד חמור ומתמשך ודורש טיפול מקצועי",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-3",
@@ -3770,7 +4054,8 @@
   "applies_when": "מי שמבקש לתרום סכום גדול למצווה ומתלבט במה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-4",
@@ -3782,7 +4067,8 @@
   "applies_when": "מי שמתכנן הכנסת ספר תורה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-5",
@@ -3795,7 +4081,8 @@
   "applies_when": "אדם שמרוויח היטב ומרגיש דחף להרוויח ולבזבז עוד ועוד",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-6",
@@ -3808,7 +4095,8 @@
   "applies_when": "מי שמאמין שמחשבותיו יוצרות את המציאות ונבהל ממחשבה שלילית",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-7",
@@ -3820,7 +4108,8 @@
   "applies_when": "מי שמתעניין בשאלות של זמן, עתיד ואמונה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-8",
@@ -3833,7 +4122,8 @@
   "applies_when": "מי שנפגעת שוב ושוב מחברויות ומשקיעה בהן אנרגיה רבה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-9",
@@ -3847,7 +4137,8 @@
   "applies_when": "מי שנכנסה לקשר רגוע אחרי קשרים סוערים ותוהה על כך",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-10",
@@ -3860,7 +4151,8 @@
   "applies_when": "בני זוג שאחד מהם עסוק מאוד בעבודה",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-11",
@@ -3874,7 +4166,8 @@
   "applies_when": "מי שנפגע מאדם אחר, הגיב בהתפרצות ומרגיש שהוא צודק לגמרי",
   "not_when": "כשמדובר בפגיעה מתמשכת שמחייבת הגנה ממשית",
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-12",
@@ -3888,7 +4181,8 @@
   "applies_when": "מי שנפגע מעובד או שותף לשעבר ורוצה לסיים את הקשר בכבוד",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-13",
@@ -3902,7 +4196,8 @@
   "applies_when": "מי שמתמודד עם אדם שפוגע בו ושוקל איך להגיב לנפילתו",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-14",
@@ -3916,7 +4211,8 @@
   "applies_when": "מי שנמצא בתקופה טובה ונוטה לשתף את סביבתו בכל הצלחה",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-15",
@@ -3930,7 +4226,8 @@
   "applies_when": "בתחילת קשר זוגי, לפני התחייבות",
   "not_when": null,
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-16",
@@ -3944,7 +4241,8 @@
   "applies_when": "מי שמשתף ברשתות החברתיות תכנים של קניות ורכוש",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b019-17",
@@ -3957,7 +4255,8 @@
   "applies_when": "מי שזכה להצלחה ורוצה לשמור על רגישות כלפי אחרים",
   "not_when": null,
   "faith": true,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  },
  {
   "id": "b240-1",
@@ -3970,6 +4269,7 @@
   "applies_when": "בת זוג שעוקבת ובודקת את בן הזוג באופן קבוע מתוך חוסר אמון",
   "not_when": "כשיש הסכם מפורש בין בני הזוג על קו אדום מסוים",
   "faith": false,
-  "source_kind": "consultation"
+  "source_kind": "consultation",
+  "sensitive": false
  }
 ]

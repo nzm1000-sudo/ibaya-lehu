@@ -70,7 +70,7 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
   const [shareOpen, setShareOpen] = useState(false);
   const [term, setTerm] = useState<GlossaryItem | undefined>();
   const segments = useMemo(() => segmentGlossary(q.answer, preview), [q.answer, preview]);
-  // Records flagged sensitive (abuse, violence) never offer sharing. The public data has no such flag yet.
+  // Sensitive records (medical, mental health, abuse risk, legal) never offer sharing.
   const canShare = !q.sensitive;
 
   const minutes = readingMinutes(q);

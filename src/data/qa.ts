@@ -9,10 +9,10 @@ export type QA = {
   faith: boolean;
   source_kind: string | null;
   /**
-   * Abuse / violence records. Not in the public data yet (so no record is sensitive); when an approved
-   * flag is added, such records lose sharing and never appear in notifications.
+   * Medical, mental-health, abuse-risk or legal records, or any with a safety flag (see build-data.py).
+   * These offer no sharing and never appear in notifications, "קשה לי עכשיו" or seasonal picks.
    */
-  sensitive?: boolean;
+  sensitive: boolean;
 };
 
 function load(): QA[] {

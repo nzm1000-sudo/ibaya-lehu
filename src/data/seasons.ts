@@ -42,7 +42,10 @@ export function activeSeason(d: Date, preview: boolean): Season | undefined {
   return visible(SEASONS, preview).find((s) => inSeason(s, today));
 }
 
-/** Answers that fit the season: a mapped topic plus a keyword in the question, strongest matches first. */
+/**
+ * Answers that fit the season: a mapped topic plus a keyword in the question, strongest matches first.
+ * notifySafe also drops sensitive records.
+ */
 export function seasonCandidates(s: Season): QA[] {
   const scored = ALL.filter((q) => notifySafe(q) && q.topics.some((t) => s.topics.includes(t)))
     .map((q) => ({ q, score: s.keywords.filter((k) => q.question.includes(k)).length }))
