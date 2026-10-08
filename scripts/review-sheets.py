@@ -121,6 +121,23 @@ def sheet_glossary(qa, out):
     write(out, "glossary.md", lines)
 
 
+def sheet_paths(qa, out):
+    d = load("paths.json")
+    if not d:
+        return
+    lines = [HEADER.format(title="סקירה: מסלולים", about=d["_about"], file="paths.json")]
+    lines.append("> לאשר גם את סדר השלבים וגם את משפטי המעבר (הם טקסט עריכה, לא דברי הרב).\n")
+    for i, p in enumerate(d["items"], 1):
+        lines.append(f"## {i}. {p['title']} (`{p['key']}`, {status(p)})\n")
+        lines.append(f"_{p['subtitle']}_\n")
+        lines.append(f"**למה הסדר הזה:** {p['reason']}\n")
+        for j, st in enumerate(p["steps"], 1):
+            lines.append(f"{j}. משפט מעבר: \"{st['note']}\"  ")
+            lines.append(f"   שאלה: {q_line(qa, st['id'])} (`{st['id']}`)")
+        lines.append("")
+    write(out, "paths.md", lines)
+
+
 def write(out, name, lines):
     os.makedirs(out, exist_ok=True)
     with open(os.path.join(out, name), "w", encoding="utf-8") as fh:
@@ -128,7 +145,7 @@ def write(out, name, lines):
     print("wrote", os.path.join(out, name))
 
 
-SHEETS = [sheet_hard_now, sheet_seasons, sheet_glossary]
+SHEETS = [sheet_hard_now, sheet_seasons, sheet_glossary, sheet_paths]
 
 
 def main():

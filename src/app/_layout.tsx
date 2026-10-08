@@ -53,6 +53,8 @@ function Root() {
           <Stack.Screen name="topic/[name]" />
           <Stack.Screen name="settings" />
           <Stack.Screen name="hard-now" options={{ animation: 'fade' }} />
+          <Stack.Screen name="paths" />
+          <Stack.Screen name="path/[key]" />
         </Stack>
       </View>
     </ThemeProvider>

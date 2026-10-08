@@ -25,10 +25,12 @@ type Persisted = {
   /** Daily question by topic (local notifications). */
   daily: DailySettings;
   feedback: Record<string, Feedback>;
+  /** Life paths: answer ids marked "קראתי", per path key. */
+  pathsRead: Record<string, string[]>;
 };
 
 const KEY = 'ibaya.state.v1';
-const DEFAULTS: Persisted = { themeChoice: 'system', textScale: 1, readAloud: false, saved: [], pending: [], previewDrafts: false, daily: { enabled: false, topics: [], hour: 20 }, feedback: {} };
+const DEFAULTS: Persisted = { themeChoice: 'system', textScale: 1, readAloud: false, saved: [], pending: [], previewDrafts: false, daily: { enabled: false, topics: [], hour: 20 }, feedback: {}, pathsRead: {} };
 
 export const TEXT_SCALE_MIN = 0.85;
 export const TEXT_SCALE_MAX = 1.45;
@@ -46,6 +48,7 @@ type Ctx = Persisted & {
   setPreviewDrafts: (v: boolean) => void;
   setDaily: (patch: Partial<DailySettings>) => void;
   setFeedback: (id: string, f: Omit<Feedback, 'at'>) => void;
+  toggleRead: (path: string, id: string) => void;
   isSaved: (id: string) => boolean;
   toggleSaved: (id: string) => void;
   /** Stores an unanswered question locally. */
@@ -111,6 +114,11 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       preview: EDITOR_MODE && state.previewDrafts,
       setPreviewDrafts: (v) => update(() => ({ previewDrafts: v })),
       setDaily: (patch) => update((s) => ({ daily: { ...s.daily, ...patch } })),
+      toggleRead: (path, qid) =>
+        update((s) => {
+          const cur = s.pathsRead[path] ?? [];
+          return { pathsRead: { ...s.pathsRead, [path]: cur.includes(qid) ? cur.filter((x) => x !== qid) : [...cur, qid] } };
+        }),
       setFeedback: (fid, f) =>
         // TODO(backend): send anonymous aggregate counts only (answer id + verdict + reason, no device id,
         // no timestamps finer than a week) once the review backend exists. Until then it stays here.
