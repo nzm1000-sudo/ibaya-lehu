@@ -149,7 +149,18 @@ export default function Home() {
         </Glass>
       </Btn>
 
-      <Glass style={{ marginTop: 22, borderRadius: 20, paddingTop: 18, paddingHorizontal: 18, paddingBottom: 8, alignItems: 'center' }}>
+      <Btn
+        label={S.hardNow.entry}
+        accessibilityHint={S.hardNow.entryHint}
+        onPress={() => router.push('/hard-now')}
+        style={{ alignSelf: 'center', marginTop: 10, minHeight: 36, paddingHorizontal: 12, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+        <Icon name="leaf" size={14} color={c.ink2} />
+        <Txt size={13} color={c.ink2} style={{ textDecorationLine: 'underline', textDecorationColor: rgba(c.ink2, 0.35) }}>
+          {S.hardNow.entry}
+        </Txt>
+      </Btn>
+
+      <Glass style={{ marginTop: 14, borderRadius: 20, paddingTop: 18, paddingHorizontal: 18, paddingBottom: 8, alignItems: 'center' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
           <Txt w="500" size={12} ls={0.4} color={c.acc}>
             {S.home.daily}

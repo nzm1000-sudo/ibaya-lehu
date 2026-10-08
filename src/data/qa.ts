@@ -48,7 +48,7 @@ export function readingMinutes(q: QA): number {
   return Math.max(1, Math.round(words / 180));
 }
 
-function hash(s: string): number {
+export function hash(s: string): number {
   let h = 2166136261;
   for (let i = 0; i < s.length; i++) {
     h ^= s.charCodeAt(i);

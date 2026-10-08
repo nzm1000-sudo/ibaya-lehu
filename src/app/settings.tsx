@@ -6,11 +6,12 @@ import { Btn, Glass, Screen, ScreenHeader, SectionHeader, Txt, frameStyle } from
 import { TEXT_SCALE_MAX, TEXT_SCALE_MIN, useAppState, useTheme, type ThemeChoice } from '@/state/app-state';
 import { DEFAULT_DARK, DEFAULT_LIGHT, rgba, THEME_BY_ID, THEMES, type Theme } from '@/theme/themes';
 import { S } from '@/constants/strings';
+import { EDITOR_MODE } from '@/lib/editor';
 
 export default function SettingsScreen() {
   const theme = useTheme();
   const c = theme.colors;
-  const { themeChoice, setThemeChoice, textScale, bumpTextScale, readAloud, setReadAloud } = useAppState();
+  const { themeChoice, setThemeChoice, textScale, bumpTextScale, readAloud, setReadAloud, previewDrafts, setPreviewDrafts } = useAppState();
 
   return (
     <Screen tabBar={false}>
@@ -51,16 +52,40 @@ export default function SettingsScreen() {
             {S.settings.readAloudDesc}
           </Txt>
         </View>
-        <Switch
-          value={readAloud}
-          onValueChange={setReadAloud}
-          accessibilityLabel={S.settings.readAloud}
-          trackColor={{ false: rgba(c.ink, 0.18), true: c.acc }}
-          thumbColor={theme.scheme === 'dark' ? c.ink : '#FFFFFF'}
-          {...({ activeThumbColor: theme.scheme === 'dark' ? c.bg : '#FFFFFF' } as object)}
-        />
+        <Toggle value={readAloud} onValueChange={setReadAloud} label={S.settings.readAloud} />
       </Glass>
+
+      {EDITOR_MODE && (
+        <>
+          <SectionHeader title={S.settings.editorSection} />
+          <Glass style={{ borderRadius: 18, paddingHorizontal: 16, paddingVertical: 10, flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+            <Icon name="dots" size={19} color={c.metalIcon} />
+            <View style={{ flex: 1 }}>
+              <Txt size={15}>{S.settings.preview}</Txt>
+              <Txt w="300" size={12.5} lh={1.5} color={c.ink2}>
+                {S.settings.previewDesc}
+              </Txt>
+            </View>
+            <Toggle value={previewDrafts} onValueChange={setPreviewDrafts} label={S.settings.preview} />
+          </Glass>
+        </>
+      )}
     </Screen>
+  );
+}
+
+function Toggle({ value, onValueChange, label }: { value: boolean; onValueChange: (v: boolean) => void; label: string }) {
+  const theme = useTheme();
+  const c = theme.colors;
+  return (
+    <Switch
+      value={value}
+      onValueChange={onValueChange}
+      accessibilityLabel={label}
+      trackColor={{ false: rgba(c.ink, 0.18), true: c.acc }}
+      thumbColor={theme.scheme === 'dark' ? c.ink : '#FFFFFF'}
+      {...({ activeThumbColor: theme.scheme === 'dark' ? c.bg : '#FFFFFF' } as object)}
+    />
   );
 }
 

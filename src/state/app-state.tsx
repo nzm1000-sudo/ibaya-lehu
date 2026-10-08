@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
 
+import { EDITOR_MODE } from '@/lib/editor';
 import { DEFAULT_DARK, DEFAULT_LIGHT, THEME_BY_ID, type Theme, type ThemeId } from '@/theme/themes';
 
 export type ThemeChoice = 'system' | ThemeId;
@@ -14,10 +15,12 @@ type Persisted = {
   readAloud: boolean;
   saved: string[];
   pending: PendingQuestion[];
+  /** Editors only: show curated items that are not yet approved ("תצוגת טיוטה"). */
+  previewDrafts: boolean;
 };
 
 const KEY = 'ibaya.state.v1';
-const DEFAULTS: Persisted = { themeChoice: 'system', textScale: 1, readAloud: false, saved: [], pending: [] };
+const DEFAULTS: Persisted = { themeChoice: 'system', textScale: 1, readAloud: false, saved: [], pending: [], previewDrafts: false };
 
 export const TEXT_SCALE_MIN = 0.85;
 export const TEXT_SCALE_MAX = 1.45;
@@ -30,6 +33,9 @@ type Ctx = Persisted & {
   setTextScale: (s: number) => void;
   bumpTextScale: (dir: 1 | -1) => void;
   setReadAloud: (v: boolean) => void;
+  /** True when draft (unapproved) curated items may be shown. */
+  preview: boolean;
+  setPreviewDrafts: (v: boolean) => void;
   isSaved: (id: string) => boolean;
   toggleSaved: (id: string) => void;
   /** Stores an unanswered question locally. */
@@ -92,6 +98,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       setTextScale: (n) => update(() => ({ textScale: clamp(n) })),
       bumpTextScale: (dir) => update((s) => ({ textScale: clamp(s.textScale + dir * TEXT_SCALE_STEP) })),
       setReadAloud: (v) => update(() => ({ readAloud: v })),
+      preview: EDITOR_MODE && state.previewDrafts,
+      setPreviewDrafts: (v) => update(() => ({ previewDrafts: v })),
       isSaved: (qid) => saved.has(qid),
       toggleSaved: (qid) =>
         update((s) => ({

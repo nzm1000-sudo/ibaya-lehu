@@ -5,7 +5,7 @@ export type IconName =
   | 'search' | 'mic' | 'home' | 'grid' | 'bookmark' | 'bookmarkFilled' | 'chevBack' | 'chevForward'
   | 'arrow' | 'heart' | 'kids' | 'coin' | 'leaf' | 'fork' | 'star' | 'briefcase' | 'rings' | 'mirror'
   | 'fence' | 'houses' | 'wave' | 'candle' | 'dots' | 'house' | 'share' | 'speaker' | 'stop'
-  | 'gear' | 'check' | 'close' | 'send' | 'textSmaller' | 'textLarger';
+  | 'gear' | 'check' | 'close' | 'send' | 'textSmaller' | 'textLarger' | 'phone' | 'chat';
 
 type Props = { name: IconName; size?: number; color: string; strokeWidth?: number };
 
@@ -85,6 +85,10 @@ function render(name: IconName, p: Record<string, unknown>, color: string) {
       return <Path d="M20 4 3.5 11l6.5 2.5L12.5 20zM20 4l-10 9.5" {...p} />;
     case 'textSmaller':
       return <Path d="M4 18l4.5-11L13 18M5.6 14h5.8M15.5 12.5h5" {...p} />;
+    case 'phone':
+      return <Path d="M6.5 4h3l1.5 4-2 1.3a10 10 0 0 0 5.7 5.7l1.3-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 5 5.6 1.5 1.5 0 0 1 6.5 4z" {...p} />;
+    case 'chat':
+      return <Path d="M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-8l-4.5 3.5V16H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM8 9.5h8M8 12.5h5" {...p} />;
     case 'textLarger':
       return <Path d="M4 18l4.5-11L13 18M5.6 14h5.8M15.5 12.5h5M18 10v5" {...p} />;
   }
