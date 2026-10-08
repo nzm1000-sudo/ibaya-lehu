@@ -101,3 +101,30 @@ const SIMILAR = require('../../assets/data/similar.json') as Record<string, Simi
 export function similarBucket(id: string): SimilarBucket | undefined {
   return SIMILAR[id];
 }
+
+/* ---------- daily question by topic (notifications) ---------- */
+
+/** Never on a lock screen: grief topics and anything touching self-harm, abuse or violence. */
+const NOTIFY_BLOCKED_TOPICS = new Set(['אבל ומשבר']);
+const NOTIFY_BLOCKED_WORDS = /אובדנ|התאבד|פגיע|אלימ|התעלל|הטרד|מכה|מרביץ|הפלה|בגיד|בוגד|מוות|נפטר|סרטן|מחלה|מינית|התמכר/;
+
+export function notifySafe(q: QA): boolean {
+  return (
+    !q.sensitive &&
+    !q.topics.some((t) => NOTIFY_BLOCKED_TOPICS.has(t)) &&
+    !NOTIFY_BLOCKED_WORDS.test(q.question) &&
+    q.question.length <= 110
+  );
+}
+
+/** Topics the user may pick for the daily question. */
+export const DAILY_TOPICS = TOPICS.filter((t) => t.name !== 'אחר' && !NOTIFY_BLOCKED_TOPICS.has(t.name)).map((t) => t.name);
+
+/** Deterministic pick for a date: the topic rotates by day, the question is hashed from date + topic. */
+export function dailyForTopics(topics: string[], d: Date): QA | undefined {
+  if (!topics.length) return undefined;
+  const dayNo = Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
+  const topic = topics[dayNo % topics.length];
+  const pool = ALL.filter((q) => q.topics.includes(topic) && notifySafe(q));
+  return pool.length ? pool[hash(`topic:${topic}:${dayKey(d)}`) % pool.length] : undefined;
+}

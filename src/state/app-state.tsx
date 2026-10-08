@@ -3,6 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { useColorScheme } from 'react-native';
 
 import { EDITOR_MODE } from '@/lib/editor';
+import type { DailySettings } from '@/lib/notify';
 import { DEFAULT_DARK, DEFAULT_LIGHT, THEME_BY_ID, type Theme, type ThemeId } from '@/theme/themes';
 
 export type ThemeChoice = 'system' | ThemeId;
@@ -17,10 +18,12 @@ type Persisted = {
   pending: PendingQuestion[];
   /** Editors only: show curated items that are not yet approved ("תצוגת טיוטה"). */
   previewDrafts: boolean;
+  /** Daily question by topic (local notifications). */
+  daily: DailySettings;
 };
 
 const KEY = 'ibaya.state.v1';
-const DEFAULTS: Persisted = { themeChoice: 'system', textScale: 1, readAloud: false, saved: [], pending: [], previewDrafts: false };
+const DEFAULTS: Persisted = { themeChoice: 'system', textScale: 1, readAloud: false, saved: [], pending: [], previewDrafts: false, daily: { enabled: false, topics: [], hour: 20 } };
 
 export const TEXT_SCALE_MIN = 0.85;
 export const TEXT_SCALE_MAX = 1.45;
@@ -36,6 +39,7 @@ type Ctx = Persisted & {
   /** True when draft (unapproved) curated items may be shown. */
   preview: boolean;
   setPreviewDrafts: (v: boolean) => void;
+  setDaily: (patch: Partial<DailySettings>) => void;
   isSaved: (id: string) => boolean;
   toggleSaved: (id: string) => void;
   /** Stores an unanswered question locally. */
@@ -65,7 +69,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     let alive = true;
     readStore().then((s) => {
       if (!alive) return;
-      setState((prev) => ({ ...prev, ...s, textScale: clamp(s.textScale ?? prev.textScale) }));
+      setState((prev) => ({ ...prev, ...s, daily: { ...prev.daily, ...s.daily }, textScale: clamp(s.textScale ?? prev.textScale) }));
       setReady(true);
     });
     return () => {
@@ -100,6 +104,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       setReadAloud: (v) => update(() => ({ readAloud: v })),
       preview: EDITOR_MODE && state.previewDrafts,
       setPreviewDrafts: (v) => update(() => ({ previewDrafts: v })),
+      setDaily: (patch) => update((s) => ({ daily: { ...s.daily, ...patch } })),
       isSaved: (qid) => saved.has(qid),
       toggleSaved: (qid) =>
         update((s) => ({

@@ -1,12 +1,15 @@
 import { router } from 'expo-router';
+import { useState } from 'react';
 import { Switch, Text, View } from 'react-native';
 
-import { Icon } from '@/components/icon';
+import { Icon, topicIcon } from '@/components/icon';
 import { Btn, Glass, Screen, ScreenHeader, SectionHeader, Txt, frameStyle } from '@/components/ui';
 import { TEXT_SCALE_MAX, TEXT_SCALE_MIN, useAppState, useTheme, type ThemeChoice } from '@/state/app-state';
 import { DEFAULT_DARK, DEFAULT_LIGHT, rgba, THEME_BY_ID, THEMES, type Theme } from '@/theme/themes';
 import { S } from '@/constants/strings';
+import { DAILY_TOPICS } from '@/data/qa';
 import { EDITOR_MODE } from '@/lib/editor';
+import { NOTIFY_SUPPORTED, requestNotifyPermission } from '@/lib/notify';
 
 export default function SettingsScreen() {
   const theme = useTheme();
@@ -55,6 +58,8 @@ export default function SettingsScreen() {
         <Toggle value={readAloud} onValueChange={setReadAloud} label={S.settings.readAloud} />
       </Glass>
 
+      <DailySection />
+
       {EDITOR_MODE && (
         <>
           <SectionHeader title={S.settings.editorSection} />
@@ -71,6 +76,97 @@ export default function SettingsScreen() {
         </>
       )}
     </Screen>
+  );
+}
+
+function DailySection() {
+  const theme = useTheme();
+  const c = theme.colors;
+  const { daily, setDaily } = useAppState();
+  const [denied, setDenied] = useState(false);
+
+  const toggle = async (on: boolean) => {
+    if (on && NOTIFY_SUPPORTED) {
+      const ok = await requestNotifyPermission();
+      setDenied(!ok);
+      if (!ok) return;
+    }
+    setDaily({ enabled: on, topics: on && !daily.topics.length ? DAILY_TOPICS.slice(0, 1) : daily.topics });
+  };
+  const pickTopic = (t: string) => {
+    const has = daily.topics.includes(t);
+    if (has) setDaily({ topics: daily.topics.filter((x) => x !== t) });
+    else if (daily.topics.length < 3) setDaily({ topics: [...daily.topics, t] });
+  };
+  const hourBtn = (dir: 1 | -1) => setDaily({ hour: (daily.hour + dir + 24) % 24 });
+
+  return (
+    <>
+      <SectionHeader title={S.daily.section} />
+      <Glass style={{ borderRadius: 18, paddingHorizontal: 16, paddingVertical: 10 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+          <Icon name="bell" size={19} color={c.metalIcon} />
+          <View style={{ flex: 1 }}>
+            <Txt size={15}>{S.daily.toggle}</Txt>
+            <Txt w="300" size={12.5} lh={1.5} color={c.ink2}>
+              {S.daily.toggleDesc}
+            </Txt>
+          </View>
+          <Toggle value={daily.enabled} onValueChange={toggle} label={S.daily.toggle} />
+        </View>
+        {!NOTIFY_SUPPORTED || denied ? (
+          <Txt w="300" size={12.5} lh={1.5} color={c.ink2} align="center" style={{ marginTop: 8 }}>
+            {NOTIFY_SUPPORTED ? S.daily.denied : S.daily.webOnly}
+          </Txt>
+        ) : null}
+        {daily.enabled ? (
+          <View style={{ borderTopWidth: 1, borderTopColor: c.divider, marginTop: 10, paddingTop: 12 }}>
+            <Txt w="500" size={12.5} ls={0.3} color={c.acc} align="center">
+              {S.daily.topics}
+            </Txt>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 6, marginTop: 8 }}>
+              {DAILY_TOPICS.map((t) => {
+                const on = daily.topics.includes(t);
+                const full = !on && daily.topics.length >= 3;
+                return (
+                  <Btn
+                    key={t}
+                    label={S.daily.topicA11y(t, on)}
+                    accessibilityRole="checkbox"
+                    accessibilityState={{ checked: on, disabled: full }}
+                    disabled={full}
+                    onPress={() => pickTopic(t)}
+                    style={[
+                      frameStyle(theme, 4),
+                      { margin: 3, height: 34, paddingHorizontal: 11, flexDirection: 'row', alignItems: 'center', gap: 5, backgroundColor: on ? c.tagBg : c.pillBg, opacity: full ? 0.45 : 1 },
+                      !on && { borderColor: c.divider, outlineColor: 'transparent' },
+                    ]}>
+                    <Icon name={on ? 'check' : topicIcon(t)} size={14} color={on ? c.acc : c.metalIcon} />
+                    <Txt size={13.5} w={on ? '500' : '400'}>
+                      {t}
+                    </Txt>
+                  </Btn>
+                );
+              })}
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 14, marginTop: 14 }}>
+              <Txt size={14} color={c.ink2}>
+                {S.daily.hour}
+              </Txt>
+              <Btn label={S.daily.earlier} onPress={() => hourBtn(-1)} style={sizeBtn}>
+                <Icon name="minus" size={18} color={c.acc} />
+              </Btn>
+              <Txt w="500" size={17} style={{ minWidth: 56, textAlign: 'center', fontVariant: ['tabular-nums'] }}>
+                {S.daily.hourValue(daily.hour)}
+              </Txt>
+              <Btn label={S.daily.later} onPress={() => hourBtn(1)} style={sizeBtn}>
+                <Icon name="plus" size={18} color={c.acc} />
+              </Btn>
+            </View>
+          </View>
+        ) : null}
+      </Glass>
+    </>
   );
 }
 

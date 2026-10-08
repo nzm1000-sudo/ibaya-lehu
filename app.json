@@ -42,7 +42,8 @@
           "supportsRTL": true,
           "forcesRTL": true
         }
-      ]
+      ],
+      "expo-notifications"
     ],
     "experiments": {
       "typedRoutes": true,
