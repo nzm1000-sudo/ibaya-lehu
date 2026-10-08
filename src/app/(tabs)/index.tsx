@@ -4,7 +4,7 @@ import { Platform, useWindowDimensions, View } from 'react-native';
 
 import { Icon, topicIcon, type IconName } from '@/components/icon';
 import { BH, Btn, CircleBtn, Glass, GUTTER, Ornament, Screen, SectionHeader, Tag, TextLink, Txt, frameStyle } from '@/components/ui';
-import { QuestionList } from '@/components/question-list';
+import { ClayQuestions, QuestionList } from '@/components/question-list';
 import { activeSeason, seasonPicks } from '@/data/seasons';
 import { now as editorNow } from '@/lib/editor';
 import { dayKey, dailyQuestion, forYou, readingMinutes, TOPICS, type TopicCount } from '@/data/qa';
@@ -236,27 +236,7 @@ export default function Home() {
       </View>
 
       <SectionHeader title={S.home.forYou} action={{ label: S.home.all, onPress: () => router.push('/search') }} />
-      <Glass style={{ borderRadius: 18, paddingHorizontal: 14 }}>
-        {picks.map((q, i) => (
-          <Btn
-            key={q.id}
-            label={q.question}
-            onPress={() => router.push({ pathname: '/answer/[id]', params: { id: q.id } })}
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: 10,
-              minHeight: 50,
-              borderTopWidth: i ? 1 : 0,
-              borderTopColor: c.divider,
-            }}>
-            <Txt size={14.5} numberOfLines={1} style={{ flex: 1, minWidth: 0 }}>
-              {q.question}
-            </Txt>
-            <Tag label={q.topics[0] ?? ''} />
-          </Btn>
-        ))}
-      </Glass>
+      <ClayQuestions items={picks} />
     </Screen>
   );
 }

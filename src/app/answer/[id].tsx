@@ -5,7 +5,7 @@ import { Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Icon, type IconName } from '@/components/icon';
-import { QuestionList } from '@/components/question-list';
+import { ClayQuestions } from '@/components/question-list';
 import { ShareSheet } from '@/components/share-sheet';
 import { Sheet } from '@/components/sheet';
 import { barGlassStyle, BrandHeader, Btn, Glass, Screen, Tag, Txt, frameStyle } from '@/components/ui';
@@ -159,7 +159,7 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
             <Txt w="500" size={15} ls={0.1} align="center" accessibilityRole="header" style={{ marginBottom: 10 }}>
               {S.answer.moreLike}
             </Txt>
-            <QuestionList items={similarQs} showTopic={false} />
+            <ClayQuestions items={similarQs} showTopic={false} />
           </View>
         ) : null}
       </Screen>

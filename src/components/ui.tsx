@@ -164,6 +164,18 @@ export function frameStyle(theme: Theme, radius = 4): ViewStyle {
   };
 }
 
+/** Soft clay capsule (same material as the mic button): a gentle gradient, an inner light rim and a low shadow. */
+export function clayStyle(theme: Theme): ViewStyle {
+  const c = theme.colors;
+  const gradient = `linear-gradient(160deg, ${c.mic1}, ${c.mic2})`;
+  return {
+    borderRadius: 999,
+    backgroundColor: c.mic2,
+    boxShadow: `inset 1px 1.5px 2px ${c.micHi}, inset -1.5px -2px 4px ${rgba(c.acc, 0.12)}, 0 4px 10px ${rgba(c.acc, 0.1)}`,
+    ...(Platform.OS === 'web' ? ({ backgroundImage: gradient } as object) : ({ experimental_backgroundImage: gradient } as object)),
+  };
+}
+
 /* ---------- ornaments ---------- */
 
 const ORN_HALF = [
