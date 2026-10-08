@@ -1,10 +1,11 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import * as Speech from 'expo-speech';
 import { useEffect, useState } from 'react';
-import { Share, View } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Icon, type IconName } from '@/components/icon';
+import { ShareSheet } from '@/components/share-sheet';
 import { barGlassStyle, BrandHeader, Btn, Glass, Screen, Tag, Txt, frameStyle } from '@/components/ui';
 import { getQA, readingMinutes, similarBucket, type QA } from '@/data/qa';
 import { TEXT_SCALE_MAX, TEXT_SCALE_MIN, useAppState, useTheme } from '@/state/app-state';
@@ -62,14 +63,9 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
     });
   };
 
-  const share = async () => {
-    try {
-      await Share.share(
-        { title: S.share.title, message: `${q.question}\n\n${q.answer}\n\n${S.common.appName}` },
-        { dialogTitle: S.share.title, subject: q.question },
-      );
-    } catch {}
-  };
+  const [shareOpen, setShareOpen] = useState(false);
+  // Records flagged sensitive (abuse, violence) never offer sharing. The public data has no such flag yet.
+  const canShare = !q.sensitive;
 
   const minutes = readingMinutes(q);
   const similar = similarBucket(q.id);
@@ -130,11 +126,12 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
           },
         ]}>
         <BarBtn icon={saved ? 'bookmarkFilled' : 'bookmark'} label={saved ? S.answer.toolbarSaved : S.answer.toolbarSave} a11y={saved ? S.answer.unsaveA11y : S.answer.saveA11y} on={saved} onPress={() => toggleSaved(q.id)} />
-        <BarBtn icon="share" label={S.answer.share} a11y={S.answer.shareA11y} onPress={share} />
+        {canShare && <BarBtn icon="share" label={S.answer.share} a11y={S.answer.shareA11y} onPress={() => setShareOpen(true)} />}
         <BarBtn icon="textSmaller" label={S.answer.smaller} a11y={S.answer.smallerA11y} disabled={textScale <= TEXT_SCALE_MIN} onPress={() => bumpTextScale(-1)} />
         <BarBtn icon="textLarger" label={S.answer.larger} a11y={S.answer.largerA11y} disabled={textScale >= TEXT_SCALE_MAX} onPress={() => bumpTextScale(1)} />
         {readAloud && <BarBtn icon={speaking ? 'stop' : 'speaker'} label={speaking ? S.answer.stop : S.answer.read} a11y={speaking ? S.answer.stopA11y : S.answer.readA11y} on={speaking} onPress={speak} />}
       </View>
+      {canShare && <ShareSheet q={q} visible={shareOpen} onClose={() => setShareOpen(false)} />}
     </View>
   );
 }

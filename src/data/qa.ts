@@ -8,6 +8,11 @@ export type QA = {
   not_when: string | null;
   faith: boolean;
   source_kind: string | null;
+  /**
+   * Abuse / violence records. Not in the public data yet (so no record is sensitive); when an approved
+   * flag is added, such records lose sharing and never appear in notifications.
+   */
+  sensitive?: boolean;
 };
 
 function load(): QA[] {
