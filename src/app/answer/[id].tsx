@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Icon, type IconName } from '@/components/icon';
 import { barGlassStyle, BrandHeader, Btn, Glass, Screen, Tag, Txt, frameStyle } from '@/components/ui';
-import { getQA, readingMinutes, type QA } from '@/data/qa';
+import { getQA, readingMinutes, similarBucket, type QA } from '@/data/qa';
 import { TEXT_SCALE_MAX, TEXT_SCALE_MIN, useAppState, useTheme } from '@/state/app-state';
 import { S } from '@/constants/strings';
 
@@ -72,6 +72,7 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
   };
 
   const minutes = readingMinutes(q);
+  const similar = similarBucket(q.id);
 
   return (
     <View style={{ flex: 1 }}>
@@ -92,6 +93,14 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
         <Txt size={12} color={c.ink2} align="center" style={{ marginTop: 8 }}>
           {S.common.readingTime(minutes)}
         </Txt>
+        {similar ? (
+          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 6, marginTop: 10 }}>
+            <Icon name="kids" size={14} color={c.metalIcon} />
+            <Txt w="300" size={13} color={c.ink2}>
+              {S.answer.notAlone[similar]}
+            </Txt>
+          </View>
+        ) : null}
 
         <Glass style={{ marginTop: 18, borderRadius: 20, paddingVertical: 20, paddingHorizontal: 20 }}>
           <Txt w="400" size={16} lh={1.75} scaled color={c.ink3} selectable>

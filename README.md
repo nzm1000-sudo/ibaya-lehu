@@ -25,6 +25,9 @@ python3 scripts/build-data.py
 
 - `assets/data/qa.json` – המאגר המלא. **לא נשמר ב־git** (מופיע ב־`.gitignore`).
 - `assets/data/qa.sample.json` – מדגם קטן שנשמר במאגר לצורכי פיתוח.
+- `assets/data/similar.json` – "לא רק אתם": לכל תשובה רק טווח גס (כמה / עשרות / מאות פעמים) של שאלות כמעט זהות,
+  לפי מספר הקלטות שונות. אין מספרים מדויקים, ואין טווח לפחות משלוש. הספים (Jaccard ‏0.25 ו־TF-IDF ‏0.45)
+  נבדקו על מדגמי זוגות.
 
 **פרטיות:** המאגר המקורי כולל פרטים מזהים. הסקריפט מעתיק רק שדות ציבוריים
 (`id`, `question`, `answer`, `topics`, `applies_when`, `not_when`, `faith`, `source_kind`)

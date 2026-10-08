@@ -88,3 +88,11 @@ export function forYou(savedIds: string[], d = new Date(), n = 2): QA[] {
   }
   return out;
 }
+
+export type SimilarBucket = 'few' | 'tens' | 'hundreds';
+/** "לא רק אתם": how often a question like this was asked, as a coarse bucket only (see build-data.py). */
+const SIMILAR = require('../../assets/data/similar.json') as Record<string, SimilarBucket>;
+
+export function similarBucket(id: string): SimilarBucket | undefined {
+  return SIMILAR[id];
+}
