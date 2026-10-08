@@ -1,0 +1,118 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useColorScheme } from 'react-native';
+
+import { DEFAULT_DARK, DEFAULT_LIGHT, THEME_BY_ID, type Theme, type ThemeId } from '@/theme/themes';
+
+export type ThemeChoice = 'system' | ThemeId;
+
+export type PendingQuestion = { text: string; createdAt: string };
+
+type Persisted = {
+  themeChoice: ThemeChoice;
+  textScale: number;
+  readAloud: boolean;
+  saved: string[];
+  pending: PendingQuestion[];
+};
+
+const KEY = 'ibaya.state.v1';
+const DEFAULTS: Persisted = { themeChoice: 'system', textScale: 1, readAloud: false, saved: [], pending: [] };
+
+export const TEXT_SCALE_MIN = 0.85;
+export const TEXT_SCALE_MAX = 1.45;
+export const TEXT_SCALE_STEP = 0.1;
+
+type Ctx = Persisted & {
+  ready: boolean;
+  theme: Theme;
+  setThemeChoice: (c: ThemeChoice) => void;
+  setTextScale: (s: number) => void;
+  bumpTextScale: (dir: 1 | -1) => void;
+  setReadAloud: (v: boolean) => void;
+  isSaved: (id: string) => boolean;
+  toggleSaved: (id: string) => void;
+  /** Stores an unanswered question locally. */
+  submitQuestion: (text: string) => Promise<void>;
+};
+
+const AppStateContext = createContext<Ctx | null>(null);
+
+const clamp = (n: number) =>
+  Math.round(Math.min(TEXT_SCALE_MAX, Math.max(TEXT_SCALE_MIN, n)) * 100) / 100;
+
+async function readStore(): Promise<Partial<Persisted>> {
+  try {
+    const raw = await AsyncStorage.getItem(KEY);
+    return raw ? (JSON.parse(raw) as Partial<Persisted>) : {};
+  } catch {
+    return {};
+  }
+}
+
+export function AppStateProvider({ children }: { children: ReactNode }) {
+  const scheme = useColorScheme();
+  const [state, setState] = useState<Persisted>(DEFAULTS);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    readStore().then((s) => {
+      if (!alive) return;
+      setState((prev) => ({ ...prev, ...s, textScale: clamp(s.textScale ?? prev.textScale) }));
+      setReady(true);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!ready) return;
+    AsyncStorage.setItem(KEY, JSON.stringify(state)).catch(() => {});
+  }, [state, ready]);
+
+  const update = useCallback((patch: (s: Persisted) => Partial<Persisted>) => {
+    setState((s) => ({ ...s, ...patch(s) }));
+  }, []);
+
+  const value = useMemo<Ctx>(() => {
+    const id: ThemeId =
+      state.themeChoice === 'system'
+        ? scheme === 'dark'
+          ? DEFAULT_DARK
+          : DEFAULT_LIGHT
+        : state.themeChoice;
+    const saved = new Set(state.saved);
+    return {
+      ...state,
+      ready,
+      theme: THEME_BY_ID[id] ?? THEME_BY_ID[DEFAULT_LIGHT],
+      setThemeChoice: (c) => update(() => ({ themeChoice: c })),
+      setTextScale: (n) => update(() => ({ textScale: clamp(n) })),
+      bumpTextScale: (dir) => update((s) => ({ textScale: clamp(s.textScale + dir * TEXT_SCALE_STEP) })),
+      setReadAloud: (v) => update(() => ({ readAloud: v })),
+      isSaved: (qid) => saved.has(qid),
+      toggleSaved: (qid) =>
+        update((s) => ({
+          saved: s.saved.includes(qid) ? s.saved.filter((x) => x !== qid) : [qid, ...s.saved],
+        })),
+      submitQuestion: async (text) => {
+        // TODO(backend): send the question to the review backend once it exists; until then it stays on the device.
+        update((s) => ({ pending: [{ text, createdAt: new Date().toISOString() }, ...s.pending] }));
+      },
+    };
+  }, [state, ready, scheme, update]);
+
+  return <AppStateContext.Provider value={value}>{children}</AppStateContext.Provider>;
+}
+
+export function useAppState() {
+  const ctx = useContext(AppStateContext);
+  if (!ctx) throw new Error('useAppState must be used inside AppStateProvider');
+  return ctx;
+}
+
+export function useTheme() {
+  return useAppState().theme;
+}
