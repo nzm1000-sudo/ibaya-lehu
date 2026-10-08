@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/state/app-state';
 
 import { Icon, type IconName } from './icon';
-import { Btn, glassStyle, Txt } from './ui';
+import { barGlassStyle, Btn, Txt } from './ui';
 
 const TABS: Record<string, { label: string; icon: IconName }> = {
   index: { label: 'בית', icon: 'home' },
@@ -22,7 +22,7 @@ export function TabBar({ state, navigation }: BottomTabBarProps) {
     <View
       accessibilityRole="tablist"
       style={[
-        glassStyle(theme),
+        barGlassStyle(theme),
         {
           position: 'absolute',
           bottom: 20 + insets.bottom,

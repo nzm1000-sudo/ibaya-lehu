@@ -21,7 +21,8 @@ import { rgba, type Theme } from '@/theme/themes';
 import { Icon, type IconName } from './icon';
 
 export const GUTTER = 22;
-export const TAB_BAR_SPACE = 96;
+/** Bottom scroll padding on screens with a floating bar (bar: 20 offset + 52 height, plus breathing room). */
+export const TAB_BAR_SPACE = 116;
 
 /* ---------- text ---------- */
 
@@ -122,6 +123,24 @@ export function glassStyle(theme: Theme): ViewStyle {
     boxShadow: `0 10px 30px ${c.shadow}, inset 0 1px 0 ${c.gInset}`,
     ...(Platform.OS === 'web'
       ? ({ backgroundImage: gradient, backdropFilter: 'blur(24px) saturate(1.2)', WebkitBackdropFilter: 'blur(24px) saturate(1.2)' } as object)
+      : ({ experimental_backgroundImage: gradient } as object)),
+  };
+}
+
+/**
+ * Glass for the floating bottom bars (tabs, answer actions): same look as glassStyle, but tinted with
+ * the theme background at ~0.9 and blurred harder so text scrolling underneath never shows through.
+ */
+export function barGlassStyle(theme: Theme): ViewStyle {
+  const c = theme.colors;
+  const gradient = `linear-gradient(160deg, ${c.gA}, ${c.gB})`;
+  return {
+    borderWidth: 1,
+    borderColor: c.gBorder,
+    backgroundColor: rgba(c.bg, 0.9),
+    boxShadow: `0 10px 30px ${c.shadow}, inset 0 1px 0 ${c.gInset}`,
+    ...(Platform.OS === 'web'
+      ? ({ backgroundImage: gradient, backdropFilter: 'blur(40px) saturate(1.3)', WebkitBackdropFilter: 'blur(40px) saturate(1.3)' } as object)
       : ({ experimental_backgroundImage: gradient } as object)),
   };
 }
