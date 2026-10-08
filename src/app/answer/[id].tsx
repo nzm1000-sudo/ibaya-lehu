@@ -5,12 +5,13 @@ import { Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Icon, type IconName } from '@/components/icon';
-import { FeedbackRow } from '@/components/feedback';
+import { QuestionList } from '@/components/question-list';
 import { ShareSheet } from '@/components/share-sheet';
 import { Sheet } from '@/components/sheet';
 import { barGlassStyle, BrandHeader, Btn, Glass, Screen, Tag, Txt, frameStyle } from '@/components/ui';
 import { segmentGlossary, type GlossaryItem } from '@/data/glossary';
 import { otherSide } from '@/data/other-side';
+import { moreLike } from '@/data/search';
 import { getQA, readingMinutes, similarBucket, type QA } from '@/data/qa';
 import { TEXT_SCALE_MAX, TEXT_SCALE_MIN, useAppState, useTheme } from '@/state/app-state';
 import { S } from '@/constants/strings';
@@ -76,6 +77,8 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
   const minutes = readingMinutes(q);
   const similar = similarBucket(q.id);
   const other = otherSide(q.id, preview);
+  const otherId = other?.q.id;
+  const similarQs = moreLike(q, 4, otherId ? [otherId] : []);
 
   return (
     <View style={{ flex: 1 }}>
@@ -151,7 +154,14 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
           </Btn>
         ) : null}
 
-        <FeedbackRow key={q.id} q={q} notWhen={q.not_when ? <FitBox title={S.answer.notWhen} body={q.not_when} icon="close" /> : null} />
+        {similarQs.length ? (
+          <View style={{ marginTop: 28 }}>
+            <Txt w="500" size={15} ls={0.1} align="center" accessibilityRole="header" style={{ marginBottom: 10 }}>
+              {S.answer.moreLike}
+            </Txt>
+            <QuestionList items={similarQs} showTopic={false} />
+          </View>
+        ) : null}
       </Screen>
 
       {/* action bar in the tab-bar language: save, share, A-, A+, read aloud */}

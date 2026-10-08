@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Platform, useWindowDimensions, View } from 'react-native';
 
 import { Icon, topicIcon, type IconName } from '@/components/icon';
@@ -92,7 +92,9 @@ export default function Home() {
   const day = dayKey(now);
   const season = useMemo(() => activeSeason(editorNow(), preview), [preview, day]); // eslint-disable-line react-hooks/exhaustive-deps
   const seasonQs = useMemo(() => (season ? seasonPicks(season, editorNow()) : []), [season, day]); // eslint-disable-line react-hooks/exhaustive-deps
-  const picks = useMemo(() => forYou(saved), [saved]);
+  // a fresh random set on every launch, so Home is not the same list all day
+  const [seed] = useState(() => Math.floor(Math.random() * 1e9));
+  const picks = useMemo(() => forYou(saved, editorNow(), 10, seed), [saved, seed]);
   const { width } = useWindowDimensions();
   const pillRows = useMemo(() => topicRows(TOPICS.filter((t) => t.name !== 'אחר').slice(0, 6), Math.min(width, 560) - 2 * GUTTER), [width]);
 

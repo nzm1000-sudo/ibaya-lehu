@@ -76,20 +76,27 @@ export function dailyQuestion(d = new Date()): QA {
 }
 
 /** Two picks for the user: biased toward topics of saved answers, stable through the day. */
-export function forYou(savedIds: string[], d = new Date(), n = 2): QA[] {
+/**
+ * "שאלות בשבילכם": n questions, leaning toward the topics of saved answers.
+ * `seed` changes the pick (Home passes a new random seed on every launch); at most two per topic.
+ */
+export function forYou(savedIds: string[], d = new Date(), n = 10, seed = hash('foryou:' + dayKey(d))): QA[] {
   const daily = dailyQuestion(d);
   const savedTopics = new Set(savedIds.flatMap((id) => getQA(id)?.topics ?? []));
   const saved = new Set(savedIds);
-  let pool = ALL.filter((q) => q.id !== daily.id && !saved.has(q.id) && q.question.length < 80);
+  let pool = ALL.filter((q) => q.id !== daily.id && !saved.has(q.id) && !q.sensitive && q.question.length < 80);
   if (savedTopics.size) {
     const near = pool.filter((q) => q.topics.some((t) => savedTopics.has(t)));
-    if (near.length >= n) pool = near;
+    if (near.length >= n * 3) pool = near;
   }
   const out: QA[] = [];
-  const seed = hash('foryou:' + dayKey(d));
+  const perTopic = new Map<string, number>();
   for (let i = 0; out.length < n && i < pool.length; i++) {
     const q = pool[(seed + i * 7919) % pool.length];
-    if (!out.includes(q) && !out.some((o) => o.topics[0] === q.topics[0])) out.push(q);
+    const t = q.topics[0] ?? '';
+    if (out.includes(q) || (perTopic.get(t) ?? 0) >= 2) continue;
+    perTopic.set(t, (perTopic.get(t) ?? 0) + 1);
+    out.push(q);
   }
   return out;
 }

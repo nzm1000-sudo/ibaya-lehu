@@ -2,7 +2,7 @@ import MiniSearch from 'minisearch';
 
 import { normalize, prefixVariants, STOPWORDS, tokenize } from '@/lib/hebrew';
 
-import { ALL, getQA, type QA } from './qa';
+import { ALL, byTopic, getQA, hash, type QA } from './qa';
 
 type Doc = { id: string; question: string; answer: string; topics: string; applies: string };
 
@@ -88,4 +88,23 @@ export function related(q: QA, n = 2): QA[] {
   const topic = q.topics[0];
   const hits = search(q.question, 80).filter((r) => r.id !== q.id && (!topic || r.topics.includes(topic)));
   return hits.slice(0, n);
+}
+
+/** Precomputed by scripts/build-data.py (related_ids): the 4 closest answers by question + answer wording. */
+const RELATED = require('../../assets/data/related.json') as Record<string, string[]>;
+
+/** "שאלות דומות" under an answer: the precomputed neighbours, topped up from the same topic if needed. */
+export function moreLike(q: QA, n = 4, exclude: string[] = []): QA[] {
+  const skip = new Set([q.id, ...exclude]);
+  const out = (RELATED[q.id] ?? [])
+    .map((id) => getQA(id))
+    .filter((r): r is QA => !!r && !skip.has(r.id))
+    .slice(0, n);
+  out.forEach((r) => skip.add(r.id));
+  if (out.length < n && q.topics[0]) {
+    const rest = byTopic(q.topics[0]).filter((r) => !skip.has(r.id));
+    const start = hash(q.id) % Math.max(rest.length, 1);
+    for (let i = 0; out.length < n && i < rest.length; i++) out.push(rest[(start + i) % rest.length]);
+  }
+  return out;
 }

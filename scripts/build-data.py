@@ -6,6 +6,7 @@ Reads  /mnt/project-files/qa-app/prod/edited/*.jsonl  (override with --src)
 Writes assets/data/qa.json         (full public set; git-ignored for now)
        assets/data/qa.sample.json  (first N ready records; committed for development)
        assets/data/similar.json    ("לא רק אתם": coarse bucket per public id, see similar_buckets)
+       assets/data/related.json    ("שאלות דומות": up to 4 public ids per public id, see related_ids)
        assets/data/curated/glossary.candidates.json  (how many public answers use each candidate term)
        assets/data/curated/other-side.candidates.json ("הצד השני": candidate pairs of public ids)
 and checks assets/data/curated/other-side.json: any pair whose two answers come from the same
@@ -175,6 +176,45 @@ def similar_buckets(shipped, raw):
         if b:
             out[pid] = b
     return out, sizes, pairs
+
+
+def related_ids(recs, n=4, topic_bonus=0.05):
+    """recs: (public id, question, answer, topics, recording_id). For each answer, the n closest others by
+    TF-IDF cosine over question (counted twice) + answer words, small bonus for a shared first topic.
+    Never pairs two answers from the same recording (that could tie two parts of one consultation)."""
+    docs = []
+    for _, q, a, _, _ in recs:
+        c = Counter(sim_tokens(q))
+        c.update(c)  # question words count double
+        c.update(sim_tokens(a))
+        docs.append(c)
+    N = len(docs)
+    df = Counter(w for d in docs for w in d)
+    vecs = []
+    for d in docs:
+        v = {w: (1 + math.log(k)) * (math.log((1 + N) / (1 + df[w])) + 1) for w, k in d.items() if df[w] < N * 0.2}
+        norm = math.sqrt(sum(x * x for x in v.values())) or 1.0
+        vecs.append({w: x / norm for w, x in v.items()})
+    inv = defaultdict(list)
+    for j, v in enumerate(vecs):
+        for w, x in v.items():
+            inv[w].append((j, x))
+    out = {}
+    for i, v in enumerate(vecs):
+        dot = Counter()
+        for w, x in v.items():
+            for j, y in inv[w]:
+                dot[j] += x * y
+        t0 = recs[i][3][0] if recs[i][3] else None
+        scored = []
+        for j, cos in dot.items():
+            if j == i or recs[j][4] == recs[i][4]:
+                continue
+            bonus = topic_bonus if t0 and recs[j][3] and recs[j][3][0] == t0 else 0
+            scored.append((cos + bonus, j))
+        scored.sort(reverse=True)
+        out[recs[i][0]] = [recs[j][0] for _, j in scored[:n]]
+    return out
 
 
 # ---------- glossary: frequent Hebrew / Aramaic / professional terms in the answers ----------
@@ -355,6 +395,9 @@ def main():
                   fh, ensure_ascii=False, indent=1)
 
     pairs_in = [(r["id"], r["question"], r["answer"], r["topics"], recording_of[r["id"]]) for r in ready]
+    related = related_ids(pairs_in)
+    with open(os.path.join(out_dir, "related.json"), "w", encoding="utf-8") as fh:
+        json.dump(related, fh, ensure_ascii=False, separators=(",", ":"))
     cands = other_side_candidates(pairs_in)
     with open(os.path.join(out_dir, "curated", "other-side.candidates.json"), "w", encoding="utf-8") as fh:
         json.dump({"_about": "candidate pairs (public ids only, always from different recordings); editors pick into other-side.json",
