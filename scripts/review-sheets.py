@@ -8,6 +8,7 @@ Reads only the public app data (assets/data/qa.json), never the private corpus.
 import argparse
 import json
 import os
+import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CUR = os.path.join(ROOT, "assets", "data", "curated")
@@ -65,6 +66,43 @@ def sheet_hard_now(qa, out):
     write(out, "hard-now.md", lines)
 
 
+NOTIFY_BLOCKED = re.compile("אובדנ|התאבד|פגיע|אלימ|התעלל|הטרד|מכה|מרביץ|הפלה|בגיד|בוגד|מוות|נפטר|סרטן|מחלה|מינית|התמכר")
+
+
+def season_candidates(qa, s):
+    """Mirror of seasonCandidates() in src/data/seasons.ts."""
+    out = []
+    for r in qa.values():
+        if "אבל ומשבר" in r["topics"] or NOTIFY_BLOCKED.search(r["question"]) or len(r["question"]) > 110:
+            continue
+        if not set(r["topics"]) & set(s["topics"]):
+            continue
+        score = sum(1 for k in s["keywords"] if k in r["question"])
+        if score:
+            out.append((-score, len(r["question"]), r))
+    out.sort(key=lambda x: (x[0], x[1]))
+    return [r for _, _, r in out]
+
+
+def sheet_seasons(qa, out):
+    d = load("seasons.json")
+    if not d:
+        return
+    lines = [HEADER.format(title="סקירה: עונות השנה", about=d["_about"], file="seasons.json")]
+    for i, it in enumerate(d["items"], 1):
+        lines.append(f"## {i}. לקראת {it['label']} (`{it['key']}`, {status(it)})\n")
+        lines.append(f"- **חלון:** {it['from'][1]} {it['from'][0]} עד {it['to'][1]} {it['to'][0]}")
+        lines.append(f"- **נושאים:** {', '.join(it['topics'])}")
+        lines.append(f"- **מילות מפתח בשאלה:** {', '.join(it['keywords'])}")
+        lines.append(f"- **למה:** {it['reason']}\n")
+        cands = season_candidates(qa, it)
+        lines.append(f"המסך בוחר 2 ביום מתוך 16 המובילות ({len(cands)} מתאימות בסך הכול). המובילות:\n")
+        for r in cands[:16]:
+            lines.append(f"1. {r['question']} (`{r['id']}`)")
+        lines.append("")
+    write(out, "seasons.md", lines)
+
+
 def write(out, name, lines):
     os.makedirs(out, exist_ok=True)
     with open(os.path.join(out, name), "w", encoding="utf-8") as fh:
@@ -72,7 +110,7 @@ def write(out, name, lines):
     print("wrote", os.path.join(out, name))
 
 
-SHEETS = [sheet_hard_now]
+SHEETS = [sheet_hard_now, sheet_seasons]
 
 
 def main():

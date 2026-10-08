@@ -4,7 +4,10 @@ import { Platform, useWindowDimensions, View } from 'react-native';
 
 import { Icon, topicIcon, type IconName } from '@/components/icon';
 import { BH, Btn, CircleBtn, Glass, GUTTER, Ornament, Screen, SectionHeader, Tag, TextLink, Txt, frameStyle } from '@/components/ui';
-import { dailyQuestion, forYou, readingMinutes, TOPICS, type TopicCount } from '@/data/qa';
+import { QuestionList } from '@/components/question-list';
+import { activeSeason, seasonPicks } from '@/data/seasons';
+import { now as editorNow } from '@/lib/editor';
+import { dayKey, dailyQuestion, forYou, readingMinutes, TOPICS, type TopicCount } from '@/data/qa';
 import { useAppState, useTheme } from '@/state/app-state';
 import { rgba } from '@/theme/themes';
 import { S } from '@/constants/strings';
@@ -83,9 +86,12 @@ function TopicPill({ name, icon, label, onPress }: { name: string; icon: IconNam
 export default function Home() {
   const theme = useTheme();
   const c = theme.colors;
-  const { saved } = useAppState();
-  const now = new Date();
+  const { saved, preview } = useAppState();
+  const now = editorNow();
   const daily = dailyQuestion(now);
+  const day = dayKey(now);
+  const season = useMemo(() => activeSeason(editorNow(), preview), [preview, day]); // eslint-disable-line react-hooks/exhaustive-deps
+  const seasonQs = useMemo(() => (season ? seasonPicks(season, editorNow()) : []), [season, day]); // eslint-disable-line react-hooks/exhaustive-deps
   const picks = useMemo(() => forYou(saved), [saved]);
   const { width } = useWindowDimensions();
   const pillRows = useMemo(() => topicRows(TOPICS.filter((t) => t.name !== 'אחר').slice(0, 6), Math.min(width, 560) - 2 * GUTTER), [width]);
@@ -180,6 +186,18 @@ export default function Home() {
           <TextLink label={S.home.readAnswer} onPress={() => router.push({ pathname: '/answer/[id]', params: { id: daily.id } })} />
         </View>
       </Glass>
+
+      {season && seasonQs.length ? (
+        <>
+          <SectionHeader title={S.home.season(season.label)} />
+          {!season.approved && (
+            <View style={{ alignItems: 'center', marginTop: -6, marginBottom: 8 }}>
+              <Tag label={S.home.draft} />
+            </View>
+          )}
+          <QuestionList items={seasonQs} showTopic />
+        </>
+      ) : null}
 
       <SectionHeader title={S.home.topics} action={{ label: S.home.allTopics, onPress: () => router.navigate('/topics') }} />
       <View style={{ alignItems: 'center', gap: 6 }}>

@@ -36,6 +36,8 @@ export const S = {
     allTopics: 'כל הנושאים',
     more: 'עוד',
     forYou: 'שאלות בשבילכם',
+    season: (label: string) => `לקראת ${label}`,
+    draft: 'טיוטה',
     all: 'הכול',
   },
   search: {
