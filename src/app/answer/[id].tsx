@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Icon, type IconName } from '@/components/icon';
+import { FeedbackRow } from '@/components/feedback';
 import { ShareSheet } from '@/components/share-sheet';
 import { barGlassStyle, BrandHeader, Btn, Glass, Screen, Tag, Txt, frameStyle } from '@/components/ui';
 import { getQA, readingMinutes, similarBucket, type QA } from '@/data/qa';
@@ -106,6 +107,8 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
 
         {q.applies_when ? <FitBox title={S.answer.appliesWhen} body={q.applies_when} icon="check" /> : null}
         {q.not_when ? <FitBox title={S.answer.notWhen} body={q.not_when} icon="close" /> : null}
+
+        <FeedbackRow key={q.id} q={q} notWhen={q.not_when ? <FitBox title={S.answer.notWhen} body={q.not_when} icon="close" /> : null} />
       </Screen>
 
       {/* action bar in the tab-bar language: save, share, A-, A+, read aloud */}

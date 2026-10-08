@@ -82,3 +82,10 @@ export function search(query: string, limit = SEARCH_LIMIT): QA[] {
     .map((r) => getQA(String(r.id)))
     .filter((q): q is QA => !!q);
 }
+
+/** Answers close to this one: same first topic, ranked by MiniSearch similarity of the question. */
+export function related(q: QA, n = 2): QA[] {
+  const topic = q.topics[0];
+  const hits = search(q.question, 80).filter((r) => r.id !== q.id && (!topic || r.topics.includes(topic)));
+  return hits.slice(0, n);
+}

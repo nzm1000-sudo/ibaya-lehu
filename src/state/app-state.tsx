@@ -10,6 +10,10 @@ export type ThemeChoice = 'system' | ThemeId;
 
 export type PendingQuestion = { text: string; createdAt: string };
 
+export type FeedbackReason = 'different' | 'tried' | 'unclear' | 'other';
+/** One verdict per answer, kept on the device only. */
+export type Feedback = { helped: boolean; reason?: FeedbackReason; at: string };
+
 type Persisted = {
   themeChoice: ThemeChoice;
   textScale: number;
@@ -20,10 +24,11 @@ type Persisted = {
   previewDrafts: boolean;
   /** Daily question by topic (local notifications). */
   daily: DailySettings;
+  feedback: Record<string, Feedback>;
 };
 
 const KEY = 'ibaya.state.v1';
-const DEFAULTS: Persisted = { themeChoice: 'system', textScale: 1, readAloud: false, saved: [], pending: [], previewDrafts: false, daily: { enabled: false, topics: [], hour: 20 } };
+const DEFAULTS: Persisted = { themeChoice: 'system', textScale: 1, readAloud: false, saved: [], pending: [], previewDrafts: false, daily: { enabled: false, topics: [], hour: 20 }, feedback: {} };
 
 export const TEXT_SCALE_MIN = 0.85;
 export const TEXT_SCALE_MAX = 1.45;
@@ -40,6 +45,7 @@ type Ctx = Persisted & {
   preview: boolean;
   setPreviewDrafts: (v: boolean) => void;
   setDaily: (patch: Partial<DailySettings>) => void;
+  setFeedback: (id: string, f: Omit<Feedback, 'at'>) => void;
   isSaved: (id: string) => boolean;
   toggleSaved: (id: string) => void;
   /** Stores an unanswered question locally. */
@@ -105,6 +111,10 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       preview: EDITOR_MODE && state.previewDrafts,
       setPreviewDrafts: (v) => update(() => ({ previewDrafts: v })),
       setDaily: (patch) => update((s) => ({ daily: { ...s.daily, ...patch } })),
+      setFeedback: (fid, f) =>
+        // TODO(backend): send anonymous aggregate counts only (answer id + verdict + reason, no device id,
+        // no timestamps finer than a week) once the review backend exists. Until then it stays here.
+        update((s) => ({ feedback: { ...s.feedback, [fid]: { ...f, at: new Date().toISOString() } } })),
       isSaved: (qid) => saved.has(qid),
       toggleSaved: (qid) =>
         update((s) => ({
