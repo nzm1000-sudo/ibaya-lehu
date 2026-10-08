@@ -5,20 +5,21 @@ import { Icon, topicIcon } from '@/components/icon';
 import { Btn, Glass, Screen, ScreenHeader, Txt } from '@/components/ui';
 import { ALL, TOPICS } from '@/data/qa';
 import { useTheme } from '@/state/app-state';
+import { S } from '@/constants/strings';
 
 export default function TopicsScreen() {
   const c = useTheme().colors;
   return (
     <Screen>
-      <ScreenHeader title="נושאים" />
+      <ScreenHeader title={S.topics.title} />
       <Txt size={13} color={c.ink2} align="center" style={{ marginTop: 14, marginBottom: 18 }}>
-        {`${ALL.length.toLocaleString('he-IL')} שאלות ותשובות`}
+        {S.topics.total(ALL.length)}
       </Txt>
       <Glass style={{ borderRadius: 18, paddingHorizontal: 14 }}>
         {TOPICS.map((t, i) => (
           <Btn
             key={t.name}
-            label={`${t.name}, ${t.count} שאלות`}
+            label={S.common.topicCountA11y(t.name, t.count)}
             onPress={() => router.push({ pathname: '/topic/[name]', params: { name: t.name } })}
             style={{ flexDirection: 'row', alignItems: 'center', gap: 12, minHeight: 54, borderTopWidth: i ? 1 : 0, borderTopColor: c.divider }}>
             <Icon name={topicIcon(t.name)} size={18} color={c.metalIcon} />

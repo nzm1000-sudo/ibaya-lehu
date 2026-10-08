@@ -8,6 +8,7 @@ import { Btn, Glass, Screen, ScreenHeader, TextLink, Txt, frameStyle } from '@/c
 import { TOPICS } from '@/data/qa';
 import { search, SEARCH_LIMIT, warmSearch } from '@/data/search';
 import { useAppState, useTheme } from '@/state/app-state';
+import { S } from '@/constants/strings';
 
 export default function SearchScreen() {
   const theme = useTheme();
@@ -26,7 +27,7 @@ export default function SearchScreen() {
 
   return (
     <Screen tabBar={false}>
-      <ScreenHeader title="חיפוש" onBack={() => (router.canGoBack() ? router.back() : router.replace('/'))} />
+      <ScreenHeader title={S.search.title} onBack={() => (router.canGoBack() ? router.back() : router.replace('/'))} />
 
       <Glass style={{ marginTop: 18, minHeight: 46, borderRadius: 23, flexDirection: 'row', alignItems: 'center', gap: 10, paddingStart: 16, paddingEnd: 8 }}>
         <Icon name="search" size={18} color={c.ink2} />
@@ -34,10 +35,10 @@ export default function SearchScreen() {
           value={query}
           onChangeText={setQuery}
           autoFocus
-          placeholder="כתבו או אמרו את השאלה"
+          placeholder={S.search.placeholder}
           placeholderTextColor={c.ink2}
           returnKeyType="search"
-          accessibilityLabel="שאלה לחיפוש"
+          accessibilityLabel={S.search.inputA11y}
           style={{
             flex: 1,
             minHeight: 44,
@@ -50,7 +51,7 @@ export default function SearchScreen() {
           }}
         />
         {query ? (
-          <Btn label="ניקוי החיפוש" onPress={() => setQuery('')} style={{ width: 36, height: 36, alignItems: 'center', justifyContent: 'center' }}>
+          <Btn label={S.search.clear} onPress={() => setQuery('')} style={{ width: 36, height: 36, alignItems: 'center', justifyContent: 'center' }}>
             <Icon name="close" size={16} color={c.ink2} />
           </Btn>
         ) : null}
@@ -59,7 +60,7 @@ export default function SearchScreen() {
       {!trimmed ? (
         <>
           <Txt size={13} color={c.ink2} align="center" style={{ marginTop: 22 }}>
-            אפשר לחפש במילים פשוטות, או לבחור נושא
+            {S.search.hint}
           </Txt>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 8, marginTop: 14 }}>
             {TOPICS.map((t) => (
@@ -76,7 +77,7 @@ export default function SearchScreen() {
       ) : results.length ? (
         <>
           <Txt size={12.5} color={c.ink2} align="center" style={{ marginTop: 18, marginBottom: 10 }} accessibilityRole="text">
-            {results.length >= SEARCH_LIMIT ? 'התשובות הקרובות ביותר' : results.length === 1 ? 'תשובה אחת' : `${results.length} תשובות`}
+            {results.length >= SEARCH_LIMIT ? S.search.closest : S.search.count(results.length)}
           </Txt>
           <QuestionList items={results} excerpt />
         </>
@@ -97,33 +98,33 @@ function NotFound({ query }: { query: string }) {
   return (
     <View style={{ marginTop: 28, alignItems: 'center' }}>
       <Txt w="disp" size={22} lh={1.3} align="center" accessibilityRole="header">
-        לא מצאתם תשובה?
+        {S.search.notFoundTitle}
       </Txt>
       <Txt w="300" size={14} lh={1.55} color={c.ink3} align="center" style={{ marginTop: 6, maxWidth: 300 }}>
-        אפשר לשלוח את השאלה כמו שהיא. נשתדל להוסיף עליה תשובה.
+        {S.search.notFoundBody}
       </Txt>
       <Glass style={{ marginTop: 18, borderRadius: 20, padding: 16, alignSelf: 'stretch' }}>
         {sent ? (
           <View style={{ alignItems: 'center', gap: 8, paddingVertical: 8 }} accessibilityLiveRegion="polite">
             <Icon name="check" size={22} color={c.acc} />
             <Txt w="500" size={15} align="center">
-              השאלה נשמרה
+              {S.search.sentTitle}
             </Txt>
             <Txt w="300" size={13.5} color={c.ink3} align="center">
-              תודה. נעדכן כשתהיה תשובה.
+              {S.search.sentBody}
             </Txt>
           </View>
         ) : (
           <>
             <Txt w="500" size={12} ls={0.4} color={c.acc} align="center">
-              השאלה שלכם
+              {S.search.yourQuestion}
             </Txt>
             <TextInput
               value={text}
               onChangeText={setText}
               multiline
-              accessibilityLabel="נוסח השאלה לשליחה"
-              placeholder="נסחו את השאלה במילים שלכם"
+              accessibilityLabel={S.search.draftA11y}
+              placeholder={S.search.draftPlaceholder}
               placeholderTextColor={c.ink2}
               style={{
                 marginTop: 10,
@@ -143,7 +144,7 @@ function NotFound({ query }: { query: string }) {
             />
             <View style={{ marginTop: 4 }}>
               <TextLink
-                label="שליחת השאלה"
+                label={S.search.send}
                 onPress={async () => {
                   if (!text.trim()) return;
                   await submitQuestion(text.trim());

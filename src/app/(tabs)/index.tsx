@@ -7,12 +7,13 @@ import { BH, Btn, CircleBtn, Glass, GUTTER, Ornament, Screen, SectionHeader, Tag
 import { dailyQuestion, forYou, readingMinutes, TOPICS, type TopicCount } from '@/data/qa';
 import { useAppState, useTheme } from '@/state/app-state';
 import { rgba } from '@/theme/themes';
+import { S } from '@/constants/strings';
 
 function greeting(h: number) {
-  if (h >= 5 && h < 12) return 'בוקר טוב';
-  if (h >= 12 && h < 17) return 'צהריים טובים';
-  if (h >= 17 && h < 22) return 'ערב טוב';
-  return 'לילה טוב';
+  if (h >= 5 && h < 12) return S.home.morning;
+  if (h >= 12 && h < 17) return S.home.noon;
+  if (h >= 17 && h < 22) return S.home.evening;
+  return S.home.night;
 }
 
 /* ---------- topic pills: six pills in two centered rows of three ---------- */
@@ -28,7 +29,7 @@ function pillWidth(name: string) {
 }
 
 function rowWidth(row: PillItem[]) {
-  return row.reduce((w, t) => w + pillWidth(t === MORE ? 'עוד' : t.name), 0) + PILL_GAP * (row.length - 1);
+  return row.reduce((w, t) => w + pillWidth(t === MORE ? S.home.more : t.name), 0) + PILL_GAP * (row.length - 1);
 }
 
 /** Balance the pills over two rows (longest with shortest); if a row still overflows, show five + "עוד". */
@@ -97,10 +98,10 @@ export default function Home() {
       <View style={{ paddingTop: 6, alignItems: 'center' }}>
         <BH />
         <View style={{ position: 'absolute', end: 0, top: -4 }}>
-          <CircleBtn icon="gear" label="הגדרות" onPress={() => router.push('/settings')} />
+          <CircleBtn icon="gear" label={S.home.settings} onPress={() => router.push('/settings')} />
         </View>
         <Txt w="disp" size={27} lh={1.3} ls={theme.wmLetterSpacing} color={c.wmInk} accessibilityRole="header">
-          אִיבַּעְיָא לְהוּ
+          {S.common.appName}
         </Txt>
         <View style={{ marginTop: 2 }}>
           <Ornament />
@@ -112,11 +113,11 @@ export default function Home() {
           {greeting(now.getHours())}
         </Txt>
         <Txt size={21} lh={1.3} ls={-0.2} style={{ marginTop: 2 }} align="center" accessibilityRole="header">
-          מה תרצו לשאול היום?
+          {S.home.prompt}
         </Txt>
       </View>
 
-      <Btn label="חיפוש שאלה" accessibilityHint="פותח את מסך החיפוש" onPress={() => router.push('/search')}>
+      <Btn label={S.home.searchA11y} accessibilityHint={S.home.searchHint} onPress={() => router.push('/search')}>
         <Glass
           style={{
             marginTop: 20,
@@ -130,7 +131,7 @@ export default function Home() {
           }}>
           <Icon name="search" size={18} color={c.ink2} />
           <Txt w="300" size={15} color={c.ink2} style={{ flex: 1 }} numberOfLines={1}>
-            כתבו או אמרו את השאלה
+            {S.home.searchPlaceholder}
           </Txt>
           <View
             style={{
@@ -151,11 +152,11 @@ export default function Home() {
       <Glass style={{ marginTop: 22, borderRadius: 20, paddingTop: 18, paddingHorizontal: 18, paddingBottom: 8, alignItems: 'center' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
           <Txt w="500" size={12} ls={0.4} color={c.acc}>
-            שאלת היום
+            {S.home.daily}
           </Txt>
           <View style={{ width: 3, height: 3, borderRadius: 2, backgroundColor: c.metal }} />
           <Txt size={12} ls={0.4} color={c.ink2}>
-            {readingMinutes(daily) === 1 ? 'דקת קריאה' : `${readingMinutes(daily)} דקות קריאה`}
+            {S.common.readingTime(readingMinutes(daily))}
           </Txt>
         </View>
         <Txt w="500" size={17} lh={1.4} ls={-0.1} align="center" style={{ marginTop: 8 }}>
@@ -165,23 +166,23 @@ export default function Home() {
           {daily.answer}
         </Txt>
         <View style={{ marginTop: 0 }}>
-          <TextLink label="לקריאת התשובה" onPress={() => router.push({ pathname: '/answer/[id]', params: { id: daily.id } })} />
+          <TextLink label={S.home.readAnswer} onPress={() => router.push({ pathname: '/answer/[id]', params: { id: daily.id } })} />
         </View>
       </Glass>
 
-      <SectionHeader title="נושאים" action={{ label: 'כל הנושאים', onPress: () => router.navigate('/topics') }} />
+      <SectionHeader title={S.home.topics} action={{ label: S.home.allTopics, onPress: () => router.navigate('/topics') }} />
       <View style={{ alignItems: 'center', gap: 6 }}>
         {pillRows.map((row, r) => (
           <View key={r} style={{ flexDirection: 'row', justifyContent: 'center', gap: PILL_GAP, maxWidth: '100%' }}>
             {row.map((t) =>
               t === MORE ? (
-                <TopicPill key="more" name="עוד" icon="grid" label="כל הנושאים" onPress={() => router.navigate('/topics')} />
+                <TopicPill key="more" name={S.home.more} icon="grid" label={S.home.allTopics} onPress={() => router.navigate('/topics')} />
               ) : (
                 <TopicPill
                   key={t.name}
                   name={t.name}
                   icon={topicIcon(t.name)}
-                  label={`${t.name}, ${t.count} שאלות`}
+                  label={S.common.topicCountA11y(t.name, t.count)}
                   onPress={() => router.push({ pathname: '/topic/[name]', params: { name: t.name } })}
                 />
               ),
@@ -190,7 +191,7 @@ export default function Home() {
         ))}
       </View>
 
-      <SectionHeader title="שאלות בשבילכם" action={{ label: 'הכול', onPress: () => router.push('/search') }} />
+      <SectionHeader title={S.home.forYou} action={{ label: S.home.all, onPress: () => router.push('/search') }} />
       <Glass style={{ borderRadius: 18, paddingHorizontal: 14 }}>
         {picks.map((q, i) => (
           <Btn

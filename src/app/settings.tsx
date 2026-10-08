@@ -5,6 +5,7 @@ import { Icon } from '@/components/icon';
 import { Btn, Glass, Screen, ScreenHeader, SectionHeader, Txt, frameStyle } from '@/components/ui';
 import { TEXT_SCALE_MAX, TEXT_SCALE_MIN, useAppState, useTheme, type ThemeChoice } from '@/state/app-state';
 import { DEFAULT_DARK, DEFAULT_LIGHT, rgba, THEME_BY_ID, THEMES, type Theme } from '@/theme/themes';
+import { S } from '@/constants/strings';
 
 export default function SettingsScreen() {
   const theme = useTheme();
@@ -13,9 +14,9 @@ export default function SettingsScreen() {
 
   return (
     <Screen tabBar={false}>
-      <ScreenHeader title="הגדרות" onBack={() => (router.canGoBack() ? router.back() : router.replace('/'))} />
+      <ScreenHeader title={S.settings.title} onBack={() => (router.canGoBack() ? router.back() : router.replace('/'))} />
 
-      <SectionHeader title="ערכת עיצוב" />
+      <SectionHeader title={S.settings.theme} />
       <SystemOption selected={themeChoice === 'system'} onPress={() => setThemeChoice('system')} />
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', rowGap: 14, marginTop: 14 }}>
         {THEMES.map((t) => (
@@ -23,37 +24,37 @@ export default function SettingsScreen() {
         ))}
       </View>
 
-      <SectionHeader title="גודל הטקסט" />
+      <SectionHeader title={S.settings.textSize} />
       <Glass style={{ borderRadius: 18, padding: 14 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Btn label="הקטנת הטקסט" disabled={textScale <= TEXT_SCALE_MIN} accessibilityState={{ disabled: textScale <= TEXT_SCALE_MIN }} onPress={() => bumpTextScale(-1)} style={[sizeBtn, { opacity: textScale <= TEXT_SCALE_MIN ? 0.4 : 1 }]}>
+          <Btn label={S.settings.smallerA11y} disabled={textScale <= TEXT_SCALE_MIN} accessibilityState={{ disabled: textScale <= TEXT_SCALE_MIN }} onPress={() => bumpTextScale(-1)} style={[sizeBtn, { opacity: textScale <= TEXT_SCALE_MIN ? 0.4 : 1 }]}>
             <Icon name="textSmaller" size={20} color={c.acc} />
           </Btn>
           <Txt size={13} color={c.ink2} accessibilityRole="text">
             {`${Math.round(textScale * 100)}%`}
           </Txt>
-          <Btn label="הגדלת הטקסט" disabled={textScale >= TEXT_SCALE_MAX} accessibilityState={{ disabled: textScale >= TEXT_SCALE_MAX }} onPress={() => bumpTextScale(1)} style={[sizeBtn, { opacity: textScale >= TEXT_SCALE_MAX ? 0.4 : 1 }]}>
+          <Btn label={S.settings.largerA11y} disabled={textScale >= TEXT_SCALE_MAX} accessibilityState={{ disabled: textScale >= TEXT_SCALE_MAX }} onPress={() => bumpTextScale(1)} style={[sizeBtn, { opacity: textScale >= TEXT_SCALE_MAX ? 0.4 : 1 }]}>
             <Icon name="textLarger" size={20} color={c.acc} />
           </Btn>
         </View>
         <Txt w="300" size={16} lh={1.7} scaled color={c.ink3} align="center" style={{ marginTop: 10 }}>
-          כך ייראו התשובות: טקסט נוח לקריאה, בקצב שלכם.
+          {S.settings.textSample}
         </Txt>
       </Glass>
 
-      <SectionHeader title="הקראה" />
+      <SectionHeader title={S.settings.readAloudSection} />
       <Glass style={{ borderRadius: 18, paddingHorizontal: 16, paddingVertical: 10, flexDirection: 'row', alignItems: 'center', gap: 12 }}>
         <Icon name="speaker" size={19} color={c.metalIcon} />
         <View style={{ flex: 1 }}>
-          <Txt size={15}>הקראת תשובות בקול</Txt>
+          <Txt size={15}>{S.settings.readAloud}</Txt>
           <Txt w="300" size={12.5} lh={1.5} color={c.ink2}>
-            מוסיף כפתור הקראה בדף התשובה
+            {S.settings.readAloudDesc}
           </Txt>
         </View>
         <Switch
           value={readAloud}
           onValueChange={setReadAloud}
-          accessibilityLabel="הקראת תשובות בקול"
+          accessibilityLabel={S.settings.readAloud}
           trackColor={{ false: rgba(c.ink, 0.18), true: c.acc }}
           thumbColor={theme.scheme === 'dark' ? c.ink : '#FFFFFF'}
           {...({ activeThumbColor: theme.scheme === 'dark' ? c.bg : '#FFFFFF' } as object)}
@@ -71,16 +72,16 @@ function SystemOption({ selected, onPress }: { selected: boolean; onPress: () =>
   const light = THEME_BY_ID[DEFAULT_LIGHT];
   const dark = THEME_BY_ID[DEFAULT_DARK];
   return (
-    <Btn label="לפי הגדרת המכשיר (בהיר או כהה)" accessibilityRole="radio" accessibilityState={{ checked: selected }} onPress={onPress}>
+    <Btn label={S.settings.systemA11y} accessibilityRole="radio" accessibilityState={{ checked: selected }} onPress={onPress}>
       <Glass style={[{ borderRadius: 14, paddingHorizontal: 14, minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 12 }, selected && { borderColor: c.acc, borderWidth: 1.5 }]}>
         <View style={{ flexDirection: 'row', width: 40, height: 26, borderRadius: 6, overflow: 'hidden', borderWidth: 1, borderColor: c.divider }}>
           <View style={{ flex: 1, backgroundColor: light.colors.bg }} />
           <View style={{ flex: 1, backgroundColor: dark.colors.bg }} />
         </View>
         <View style={{ flex: 1 }}>
-          <Txt size={14.5}>לפי המכשיר</Txt>
+          <Txt size={14.5}>{S.settings.system}</Txt>
           <Txt w="300" size={12} color={c.ink2}>
-            {`${light.name} ביום, ${dark.name} בלילה`}
+            {S.settings.systemDesc(light.name, dark.name)}
           </Txt>
         </View>
         {selected && <Icon name="check" size={18} color={c.acc} />}
@@ -94,7 +95,7 @@ function Swatch({ t, selected, onPress }: { t: Theme; selected: boolean; onPress
   const cur = useTheme();
   const k = t.colors;
   return (
-    <Btn label={`ערכת ${t.name}`} accessibilityRole="radio" accessibilityState={{ checked: selected }} onPress={onPress} style={{ width: '48%' }}>
+    <Btn label={S.settings.themeA11y(t.name)} accessibilityRole="radio" accessibilityState={{ checked: selected }} onPress={onPress} style={{ width: '48%' }}>
       <View
         style={[
           {
@@ -112,16 +113,16 @@ function Swatch({ t, selected, onPress }: { t: Theme; selected: boolean; onPress
         <View style={{ position: 'absolute', top: -30, start: -30, width: 90, height: 90, borderRadius: 45, backgroundColor: t.blobs[0][0], opacity: 0.7 }} />
         <View style={{ position: 'absolute', bottom: -40, end: -30, width: 100, height: 100, borderRadius: 50, backgroundColor: t.blobs[1][0], opacity: 0.5 }} />
         <View style={[frameStyle(t, 2), { alignSelf: 'flex-start', paddingHorizontal: 3, paddingVertical: 1 }]}>
-          <Text style={{ fontFamily: t.fonts.disp, fontSize: 7, color: k.metalText }}>ב״ה</Text>
+          <Text style={{ fontFamily: t.fonts.disp, fontSize: 7, color: k.metalText }}>{S.common.bh}</Text>
         </View>
-        <Text style={{ fontFamily: t.fonts.disp, fontSize: 17, color: k.wmInk, marginTop: -2 }}>אִיבַּעְיָא</Text>
+        <Text style={{ fontFamily: t.fonts.disp, fontSize: 17, color: k.wmInk, marginTop: -2 }}>{S.settings.swatchWordmark}</Text>
         <View style={{ width: 60, height: 1, backgroundColor: k.orn, marginTop: 3 }} />
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 8 }}>
           <View style={[frameStyle(t, 3), { paddingHorizontal: 6, paddingVertical: 1, backgroundColor: k.pillBg }]}>
-            <Text style={{ fontFamily: t.fonts.body400, fontSize: 9, color: k.ink }}>זוגיות</Text>
+            <Text style={{ fontFamily: t.fonts.body400, fontSize: 9, color: k.ink }}>{S.settings.swatchTopic}</Text>
           </View>
           <View style={{ width: 6, height: 6, borderRadius: 3, backgroundColor: k.acc }} />
-          <Text style={{ fontFamily: t.fonts.body400, fontSize: 9, color: k.ink2 }}>שאלת היום</Text>
+          <Text style={{ fontFamily: t.fonts.body400, fontSize: 9, color: k.ink2 }}>{S.settings.swatchDaily}</Text>
         </View>
         <Text style={{ fontFamily: t.fonts.body500, fontSize: 12, color: k.ink, marginTop: 'auto' }}>{t.name}</Text>
       </View>

@@ -8,6 +8,7 @@ import { Icon, type IconName } from '@/components/icon';
 import { barGlassStyle, BrandHeader, Btn, Glass, Screen, Tag, Txt, frameStyle } from '@/components/ui';
 import { getQA, readingMinutes, type QA } from '@/data/qa';
 import { TEXT_SCALE_MAX, TEXT_SCALE_MIN, useAppState, useTheme } from '@/state/app-state';
+import { S } from '@/constants/strings';
 
 export default function AnswerScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -20,7 +21,7 @@ export default function AnswerScreen() {
       <Screen tabBar={false}>
         <BrandHeader onBack={back} />
         <Txt size={15} color={c.ink3} align="center" style={{ marginTop: 40 }}>
-          התשובה לא נמצאה.
+          {S.answer.notFound}
         </Txt>
       </Screen>
     );
@@ -49,7 +50,7 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
       const voices = await Speech.getAvailableVoicesAsync();
       voice = voices.find((v) => v.language?.toLowerCase().startsWith('he'))?.identifier;
     } catch {}
-    const parts = [q.question, q.answer, q.applies_when && `מתאים לכם אם: ${q.applies_when}`, q.not_when && `פחות מתאים אם: ${q.not_when}`];
+    const parts = [q.question, q.answer, q.applies_when && `${S.answer.appliesWhen}: ${q.applies_when}`, q.not_when && `${S.answer.notWhen}: ${q.not_when}`];
     setSpeaking(true);
     Speech.speak(parts.filter(Boolean).join('. '), {
       language: 'he-IL',
@@ -64,8 +65,8 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
   const share = async () => {
     try {
       await Share.share(
-        { title: 'שלחו בעדינות', message: `${q.question}\n\n${q.answer}\n\nאִיבַּעְיָא לְהוּ` },
-        { dialogTitle: 'שלחו בעדינות', subject: q.question },
+        { title: S.share.title, message: `${q.question}\n\n${q.answer}\n\n${S.common.appName}` },
+        { dialogTitle: S.share.title, subject: q.question },
       );
     } catch {}
   };
@@ -79,7 +80,7 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
 
         <View style={{ flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap', gap: 6, marginTop: 18 }}>
           {q.topics.map((t) => (
-            <Btn key={t} label={`נושא: ${t}`} onPress={() => router.push({ pathname: '/topic/[name]', params: { name: t } })} hitSlop={12}>
+            <Btn key={t} label={S.common.topicA11y(t)} onPress={() => router.push({ pathname: '/topic/[name]', params: { name: t } })} hitSlop={12}>
               <Tag label={t} />
             </Btn>
           ))}
@@ -89,7 +90,7 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
           {q.question}
         </Txt>
         <Txt size={12} color={c.ink2} align="center" style={{ marginTop: 8 }}>
-          {minutes === 1 ? 'דקת קריאה' : `${minutes} דקות קריאה`}
+          {S.common.readingTime(minutes)}
         </Txt>
 
         <Glass style={{ marginTop: 18, borderRadius: 20, paddingVertical: 20, paddingHorizontal: 20 }}>
@@ -98,8 +99,8 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
           </Txt>
         </Glass>
 
-        {q.applies_when ? <FitBox title="מתאים לכם אם" body={q.applies_when} icon="check" /> : null}
-        {q.not_when ? <FitBox title="פחות מתאים אם" body={q.not_when} icon="close" /> : null}
+        {q.applies_when ? <FitBox title={S.answer.appliesWhen} body={q.applies_when} icon="check" /> : null}
+        {q.not_when ? <FitBox title={S.answer.notWhen} body={q.not_when} icon="close" /> : null}
       </Screen>
 
       {/* action bar in the tab-bar language: save, share, A-, A+, read aloud */}
@@ -119,11 +120,11 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
             gap: 2,
           },
         ]}>
-        <BarBtn icon={saved ? 'bookmarkFilled' : 'bookmark'} label={saved ? 'נשמר' : 'שמירה'} a11y={saved ? 'הסרה מהשמורים' : 'שמירת התשובה'} on={saved} onPress={() => toggleSaved(q.id)} />
-        <BarBtn icon="share" label="שליחה" a11y="שלחו בעדינות" onPress={share} />
-        <BarBtn icon="textSmaller" label="הקטנה" a11y="הקטנת הטקסט" disabled={textScale <= TEXT_SCALE_MIN} onPress={() => bumpTextScale(-1)} />
-        <BarBtn icon="textLarger" label="הגדלה" a11y="הגדלת הטקסט" disabled={textScale >= TEXT_SCALE_MAX} onPress={() => bumpTextScale(1)} />
-        {readAloud && <BarBtn icon={speaking ? 'stop' : 'speaker'} label={speaking ? 'עצירה' : 'הקראה'} a11y={speaking ? 'עצירת ההקראה' : 'הקראת התשובה'} on={speaking} onPress={speak} />}
+        <BarBtn icon={saved ? 'bookmarkFilled' : 'bookmark'} label={saved ? S.answer.toolbarSaved : S.answer.toolbarSave} a11y={saved ? S.answer.unsaveA11y : S.answer.saveA11y} on={saved} onPress={() => toggleSaved(q.id)} />
+        <BarBtn icon="share" label={S.answer.share} a11y={S.answer.shareA11y} onPress={share} />
+        <BarBtn icon="textSmaller" label={S.answer.smaller} a11y={S.answer.smallerA11y} disabled={textScale <= TEXT_SCALE_MIN} onPress={() => bumpTextScale(-1)} />
+        <BarBtn icon="textLarger" label={S.answer.larger} a11y={S.answer.largerA11y} disabled={textScale >= TEXT_SCALE_MAX} onPress={() => bumpTextScale(1)} />
+        {readAloud && <BarBtn icon={speaking ? 'stop' : 'speaker'} label={speaking ? S.answer.stop : S.answer.read} a11y={speaking ? S.answer.stopA11y : S.answer.readA11y} on={speaking} onPress={speak} />}
       </View>
     </View>
   );

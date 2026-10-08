@@ -19,6 +19,7 @@ import { useAppState, useTheme } from '@/state/app-state';
 import { rgba, type Theme } from '@/theme/themes';
 
 import { Icon, type IconName } from './icon';
+import { S } from '@/constants/strings';
 
 export const GUTTER = 22;
 /** Bottom scroll padding on screens with a floating bar (bar: 20 offset + 52 height, plus breathing room). */
@@ -205,10 +206,10 @@ export function BH() {
   return (
     <View
       accessible
-      accessibilityLabel="בעזרת השם"
+      accessibilityLabel={S.common.bhA11y}
       style={[frameStyle(theme, 2), { position: 'absolute', start: 0, top: 0, paddingHorizontal: 6, paddingTop: 4, paddingBottom: 3 }]}>
       <Txt w="disp" size={11} color={theme.colors.metalText} lh={1.1}>
-        ב״ה
+        {S.common.bh}
       </Txt>
     </View>
   );
@@ -335,7 +336,7 @@ export function ScreenHeader({ title, onBack, action, ornament = true }: { title
     <View style={{ paddingTop: 30 }}>
       <BH />
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', minHeight: 44 }}>
-        <View style={{ width: 44, alignItems: 'flex-start' }}>{onBack && <CircleBtn icon="chevBack" label="חזרה" onPress={onBack} />}</View>
+        <View style={{ width: 44, alignItems: 'flex-start' }}>{onBack && <CircleBtn icon="chevBack" label={S.common.back} onPress={onBack} />}</View>
         <View style={{ flex: 1, alignItems: 'center' }}>
           {title ? (
             <Txt w="disp" size={24} lh={1.3} accessibilityRole="header" align="center">
@@ -364,10 +365,10 @@ export function BrandHeader({ onBack }: { onBack: () => void }) {
     <View style={{ paddingTop: 6, alignItems: 'center', minHeight: 44 }}>
       <BH />
       <View style={{ position: 'absolute', end: 0, top: -4 }}>
-        <CircleBtn icon="chevBack" label="חזרה" onPress={onBack} />
+        <CircleBtn icon="chevBack" label={S.common.back} onPress={onBack} />
       </View>
       <Txt w="disp" size={18} lh={1.3} ls={theme.wmLetterSpacing} color={theme.colors.wmInk}>
-        אִיבַּעְיָא לְהוּ
+        {S.common.appName}
       </Txt>
       <View style={{ marginTop: 1 }}>
         <Ornament width={130} />

@@ -6,11 +6,12 @@ import { useTheme } from '@/state/app-state';
 
 import { Icon, type IconName } from './icon';
 import { barGlassStyle, Btn, Txt } from './ui';
+import { S } from '@/constants/strings';
 
 const TABS: Record<string, { label: string; icon: IconName }> = {
-  index: { label: 'בית', icon: 'home' },
-  topics: { label: 'נושאים', icon: 'grid' },
-  saved: { label: 'שמורים', icon: 'bookmark' },
+  index: { label: S.tabs.home, icon: 'home' },
+  topics: { label: S.tabs.topics, icon: 'grid' },
+  saved: { label: S.tabs.saved, icon: 'bookmark' },
 };
 
 /** Slim floating glass pill with three tabs (בית / נושאים / שמורים); first tab sits on the right (RTL). */
