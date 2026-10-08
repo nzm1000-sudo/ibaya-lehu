@@ -37,7 +37,7 @@
      "note": "ולסיום, ההכנה הרוחנית לקראת היום עצמו."
     }
    ],
-   "approved": false
+   "approved": true
   },
   {
    "key": "fired",
@@ -75,7 +75,7 @@
      "note": "ומה עם עבודה זמנית, פחות טובה, בינתיים."
     }
    ],
-   "approved": false
+   "approved": true
   },
   {
    "key": "child-drifting",
@@ -109,7 +109,7 @@
      "note": "ובמבט רחב: מה משפיע על ילדים לאורך זמן."
     }
    ],
-   "approved": false
+   "approved": true
   },
   {
    "key": "couple-crisis",
@@ -143,7 +143,7 @@
      "note": "וכשהחרדה נשארת גם אחרי החזרה."
     }
    ],
-   "approved": false
+   "approved": true
   },
   {
    "key": "hard-diagnosis",
@@ -181,7 +181,7 @@
      "note": "והפחד לאבד מישהו אהוב."
     }
    ],
-   "approved": false
+   "approved": true
   }
  ]
 }

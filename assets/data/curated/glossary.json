@@ -4,12 +4,12 @@
   {
    "term": "השתדלות",
    "definition": "הפעולות המעשיות שאדם עושה כדי להשיג מטרה, לצד האמונה שהתוצאה אינה רק בידיו.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "ביטחון",
    "definition": "אמון שה' מנהל את הדברים לטובה, גם כשהאדם אינו רואה זאת.",
-   "approved": false,
+   "approved": true,
    "not_followed_by": [
     "עצמי",
     "כלכלי",
@@ -25,167 +25,167 @@
   {
    "term": "שלום בית",
    "definition": "יחסים של כבוד, הבנה והרמוניה בין בני הזוג ובתוך המשפחה.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "טראומה",
    "definition": "פגיעה נפשית בעקבות אירוע קשה, שהשפעתה יכולה להימשך זמן רב אחריו.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "פוסט טראומה",
    "definition": "מצב שבו תגובות לאירוע קשה, כמו פחד, זיכרונות חוזרים ודריכות, נמשכות זמן רב אחריו.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "יצר הרע",
    "definition": "הדחף הפנימי שמושך אדם לעשות דברים שאינם טובים לו או לאחרים.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "עין הרע",
    "definition": "האמונה שקנאה או מבט צר של אחרים עלולים להזיק.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "זיווג",
    "definition": "בן או בת הזוג המתאימים לאדם. לפי המסורת, הזיווג נקבע משמיים.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "שידוך",
    "definition": "היכרות לקראת נישואים שנעשית בתיווך של שדכן, משפחה או מכרים.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "כיבוד הורים",
    "definition": "המצווה לכבד את ההורים ולדאוג להם, בדיבור ובמעשה.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "מניפולציה",
    "definition": "השפעה על אדם אחר בדרך עקיפה או מטעה, כדי שיעשה משהו שלא היה עושה מרצונו.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "אגו",
    "definition": "תחושת החשיבות העצמית של האדם. בשפת היומיום: הצורך להיות צודק או מוערך.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "אינטואיציה",
    "definition": "הבנה או תחושה שעולה מיד, בלי חשיבה מסודרת.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "מחשבות טורדניות",
    "definition": "מחשבות לא רצויות שחוזרות שוב ושוב וקשה להשתחרר מהן.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "הפרעה טורדנית",
    "definition": "מצב שבו מחשבות טורדניות ופעולות חוזרות מפריעות לשגרת החיים (OCD).",
-   "approved": false
+   "approved": true
   },
   {
    "term": "ריצוי",
    "definition": "נטייה לעשות מה שאחרים רוצים כדי שיהיו מרוצים, גם על חשבון האדם עצמו.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "מנגנוני הגנה",
    "definition": "דרכים לא מודעות שבהן הנפש מגינה על עצמה מפני כאב או חרדה.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "מנגנון הגנה",
    "definition": "דרך לא מודעת שבה הנפש מגינה על עצמה מפני כאב או חרדה.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "דחיית סיפוקים",
    "definition": "היכולת לוותר על הנאה מיידית לטובת תועלת גדולה יותר בהמשך.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "כתובה",
    "definition": "שטר שהבעל נותן לאישה בחתונה, ובו התחייבויותיו כלפיה.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "טהרת המשפחה",
    "definition": "ההלכות שמסדירות את חיי האישות של בני הזוג לפי מחזור האישה.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "מקווה",
    "definition": "בריכת מים שבה טובלים לפי ההלכה לשם טהרה.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "מעשר",
    "definition": "הפרשה של עשירית מההכנסה לצדקה.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "כרת",
    "definition": "עונש רוחני חמור שהתורה מזכירה על עבירות מסוימות.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "עולם הבא",
    "definition": "העולם שאחרי החיים בעולם הזה. לפי האמונה, הנשמה ממשיכה להתקיים בו.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "פסיכוסומטיקה",
    "definition": "הקשר בין מצב נפשי לבין תסמינים גופניים.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "צניעות",
    "definition": "דרך התנהגות ולבוש מאופקת, שאינה מושכת תשומת לב.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "התקף חרדה",
    "definition": "גל פתאומי של פחד עז, לעיתים עם דפיקות לב מהירות, קוצר נשימה או סחרחורת.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "פרדיגמה",
    "definition": "דפוס חשיבה או תפיסת עולם שדרכה אדם מבין את מה שקורה לו.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "יראת שמיים",
    "definition": "יראה וכבוד כלפי ה', שמביאים אדם להיזהר במעשיו.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "לשון הרע",
    "definition": "דיבור על אדם אחר שעלול לפגוע בו, גם כשהדברים נכונים.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "פוסק",
    "definition": "רב שמכריע בשאלות הלכה למעשה.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "גט",
    "definition": "מסמך הגירושים לפי ההלכה, שהבעל נותן לאישה.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "סגולה",
    "definition": "מעשה או תפילה שלפי המסורת מסייעים להשגת דבר טוב.",
-   "approved": false
+   "approved": true
   },
   {
    "term": "חרם",
    "definition": "מצב שבו קבוצה מתעלמת מאדם ומרחיקה אותו, למשל בכיתה.",
-   "approved": false
+   "approved": true
   }
  ]
 }
