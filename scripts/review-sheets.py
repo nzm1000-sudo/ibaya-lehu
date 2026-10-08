@@ -138,6 +138,23 @@ def sheet_paths(qa, out):
     write(out, "paths.md", lines)
 
 
+KINDS = {"wife/husband": "אישה / בעל", "parent/child": "הורה / ילד", "partner/partner": "שותפים"}
+
+
+def sheet_other_side(qa, out):
+    d = load("other-side.json")
+    if not d:
+        return
+    lines = [HEADER.format(title="סקירה: הצד השני של השאלה", about=d["_about"], file="other-side.json")]
+    lines.append("> לבדוק בכל זוג: שהקישור לא מאפשר לזהות זוג אמיתי, ושהשתי התשובות באמת מדברות על אותו מצב.\n")
+    for i, p in enumerate(d["items"], 1):
+        lines.append(f"## {i}. {KINDS.get(p['kind'], p['kind'])} ({status(p)})\n")
+        lines.append(f"- צד א: {q_line(qa, p['a'])} (`{p['a']}`)")
+        lines.append(f"- צד ב: {q_line(qa, p['b'])} (`{p['b']}`)\n")
+        lines.append(f"**למה הזוג הזה:** {p['reason']}\n")
+    write(out, "other-side.md", lines)
+
+
 def write(out, name, lines):
     os.makedirs(out, exist_ok=True)
     with open(os.path.join(out, name), "w", encoding="utf-8") as fh:
@@ -145,7 +162,7 @@ def write(out, name, lines):
     print("wrote", os.path.join(out, name))
 
 
-SHEETS = [sheet_hard_now, sheet_seasons, sheet_glossary, sheet_paths]
+SHEETS = [sheet_hard_now, sheet_seasons, sheet_glossary, sheet_paths, sheet_other_side]
 
 
 def main():

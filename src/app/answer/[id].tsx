@@ -10,6 +10,7 @@ import { ShareSheet } from '@/components/share-sheet';
 import { Sheet } from '@/components/sheet';
 import { barGlassStyle, BrandHeader, Btn, Glass, Screen, Tag, Txt, frameStyle } from '@/components/ui';
 import { segmentGlossary, type GlossaryItem } from '@/data/glossary';
+import { otherSide } from '@/data/other-side';
 import { getQA, readingMinutes, similarBucket, type QA } from '@/data/qa';
 import { TEXT_SCALE_MAX, TEXT_SCALE_MIN, useAppState, useTheme } from '@/state/app-state';
 import { S } from '@/constants/strings';
@@ -74,6 +75,7 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
 
   const minutes = readingMinutes(q);
   const similar = similarBucket(q.id);
+  const other = otherSide(q.id, preview);
 
   return (
     <View style={{ flex: 1 }}>
@@ -124,6 +126,30 @@ function Answer({ q, onBack }: { q: QA; onBack: () => void }) {
 
         {q.applies_when ? <FitBox title={S.answer.appliesWhen} body={q.applies_when} icon="check" /> : null}
         {q.not_when ? <FitBox title={S.answer.notWhen} body={q.not_when} icon="close" /> : null}
+
+        {other ? (
+          <Btn
+            label={S.otherSide.a11y(other.q.question)}
+            accessibilityRole="link"
+            onPress={() => router.push({ pathname: '/answer/[id]', params: { id: other.q.id } })}
+            style={{ marginTop: 22 }}>
+            <Glass style={{ borderRadius: 18, paddingVertical: 14, paddingHorizontal: 16, flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+              <Icon name="swap" size={20} color={c.metalIcon} />
+              <View style={{ flex: 1, minWidth: 0 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                  <Txt w="500" size={13} ls={0.3} color={c.acc}>
+                    {S.otherSide.title}
+                  </Txt>
+                  {!other.approved && <Tag label={S.otherSide.draft} />}
+                </View>
+                <Txt size={14.5} lh={1.45} scaled numberOfLines={2} style={{ marginTop: 4 }}>
+                  {other.q.question}
+                </Txt>
+              </View>
+              <Icon name="chevForward" size={16} color={c.ink2} />
+            </Glass>
+          </Btn>
+        ) : null}
 
         <FeedbackRow key={q.id} q={q} notWhen={q.not_when ? <FitBox title={S.answer.notWhen} body={q.not_when} icon="close" /> : null} />
       </Screen>

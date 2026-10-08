@@ -5,7 +5,7 @@ export type IconName =
   | 'search' | 'mic' | 'home' | 'grid' | 'bookmark' | 'bookmarkFilled' | 'chevBack' | 'chevForward'
   | 'arrow' | 'heart' | 'kids' | 'coin' | 'leaf' | 'fork' | 'star' | 'briefcase' | 'rings' | 'mirror'
   | 'fence' | 'houses' | 'wave' | 'candle' | 'dots' | 'house' | 'share' | 'speaker' | 'stop'
-  | 'gear' | 'check' | 'close' | 'send' | 'textSmaller' | 'textLarger' | 'phone' | 'chat' | 'bell' | 'plus' | 'minus' | 'steps';
+  | 'gear' | 'check' | 'close' | 'send' | 'textSmaller' | 'textLarger' | 'phone' | 'chat' | 'bell' | 'plus' | 'minus' | 'steps' | 'swap';
 
 type Props = { name: IconName; size?: number; color: string; strokeWidth?: number };
 
@@ -97,6 +97,8 @@ function render(name: IconName, p: Record<string, unknown>, color: string) {
       return <Path d="M6 12h12" {...p} />;
     case 'steps':
       return (<><Circle cx={6} cy={18} r={2} {...p} /><Circle cx={12} cy={12} r={2} {...p} /><Circle cx={18} cy={6} r={2} {...p} /><Path d="M7.5 16.5l3-3M13.5 10.5l3-3" {...p} /></>);
+    case 'swap':
+      return <Path d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5" {...p} />;
     case 'textLarger':
       return <Path d="M4 18l4.5-11L13 18M5.6 14h5.8M15.5 12.5h5M18 10v5" {...p} />;
   }

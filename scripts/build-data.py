@@ -6,6 +6,9 @@ Writes assets/data/qa.json         (full public set; git-ignored for now)
        assets/data/qa.sample.json  (first N ready records; committed for development)
        assets/data/similar.json    ("לא רק אתם": coarse bucket per public id, see similar_buckets)
        assets/data/curated/glossary.candidates.json  (how many public answers use each candidate term)
+       assets/data/curated/other-side.candidates.json ("הצד השני": candidate pairs of public ids)
+and checks assets/data/curated/other-side.json: any pair whose two answers come from the same
+recording is removed (never link two records of one consultation; that could identify a couple).
 
 PRIVACY: the source corpus contains client names and recording metadata. Only the
 whitelisted PUBLIC_FIELDS below are ever written. Never add source, source_quotes,
@@ -156,6 +159,76 @@ def glossary_counts(answers):
     return dict(sorted(out.items(), key=lambda kv: -kv[1]))
 
 
+# ---------- "הצד השני של השאלה": the same situation asked from the other side ----------
+
+ROLES = {
+    "wife": r"(?<![א-ת])(?:ו|ש|ל|מ|עם )?(?:בעלי|בן זוגי|בן הזוג שלי)(?![א-ת])",
+    "husband": r"(?<![א-ת])(?:ו|ש|ל|מ|עם )?(?:אשתי|בת זוגי|בת הזוג שלי)(?![א-ת])",
+    "parent": r"(?:הבן שלי|הבת שלי|בני המתבגר|בתי המתבגרת|הבן המתבגר|הבת המתבגרת|ילדיי המתבגרים|הילד שלי|בני הבוגר|בתי הבוגרת)",
+    "child": r"(?<![א-ת])(?:ה?הורים שלי|הוריי|אמא שלי|אבא שלי|אמי|אבי)(?![א-ת])",
+    "partner": r"(?:השותף שלי|השותפה שלי|שותף לעסק|השותף|שותפות)",
+}
+OTHER_SIDE = [("wife", "husband"), ("parent", "child"), ("partner", "partner")]
+ROLE_WORDS = None
+
+
+def other_side_candidates(recs, per_record=3, min_score=0.07):
+    """recs: (public id, question, answer, topics, recording_id) of ready records.
+
+    A record gets a role when its question names exactly one side (wife / husband, parent / child,
+    business partner). Candidates pair opposite roles that share a topic and come from DIFFERENT
+    recordings, ranked by TF-IDF cosine of question (weighted x2) + answer opening, role words removed.
+    Only public ids and a score leave this function; editors pick pairs into other-side.json.
+    """
+    global ROLE_WORDS
+    ROLE_WORDS = stems("בעלי אשתי בן זוגי בת זוגי הזוג שלי הבן הבת שלי מתבגר מתבגרת הורים הוריי אמא אבא אמי אבי שותף שותפה שותפות")
+    by_role = defaultdict(list)
+    for r in recs:
+        roles = [k for k, rx in ROLES.items() if re.search(rx, r[1])]
+        if len(roles) == 1:
+            by_role[roles[0]].append(r)
+    docs = {r[0]: (stems(r[1]) | stems(r[2][:300])) - ROLE_WORDS for rs in by_role.values() for r in rs}
+    n = len(docs) or 1
+    df = Counter(w for t in docs.values() for w in t)
+    vec = {}
+    for pid, t in docs.items():
+        q = stems(next(r[1] for rs in by_role.values() for r in rs if r[0] == pid)) - ROLE_WORDS
+        v = {w: math.log(n / df[w]) * (2 if w in q else 1) for w in t}
+        norm = math.sqrt(sum(x * x for x in v.values())) or 1.0
+        vec[pid] = {w: x / norm for w, x in v.items()}
+    out = []
+    for a, b in OTHER_SIDE:
+        for ra in by_role[a]:
+            scored = []
+            for rb in by_role[b]:
+                if rb[0] == ra[0] or rb[4] == ra[4] or not set(ra[3]) & set(rb[3]):
+                    continue
+                va, vb = vec[ra[0]], vec[rb[0]]
+                sc = sum(x * vb.get(w, 0.0) for w, x in va.items())
+                if sc >= min_score:
+                    scored.append((sc, rb[0]))
+            scored.sort(reverse=True)
+            for sc, bid in scored[:per_record]:
+                out.append({"a": ra[0], "b": bid, "kind": f"{a}/{b}", "score": round(sc, 3)})
+    out.sort(key=lambda x: -x["score"])
+    return out
+
+
+def check_other_side(path, recording_of):
+    """Drops curated pairs whose answers share a recording. Returns how many were dropped."""
+    if not os.path.exists(path):
+        return 0
+    with open(path, encoding="utf-8") as fh:
+        d = json.load(fh)
+    keep = [p for p in d["items"] if recording_of.get(p["a"]) and recording_of.get(p["a"]) != recording_of.get(p["b"])]
+    dropped = len(d["items"]) - len(keep)
+    if dropped:
+        d["items"] = keep
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump(d, fh, ensure_ascii=False, indent=1)
+    return dropped
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", default="/mnt/project-files/qa-app/prod/edited")
@@ -171,6 +244,7 @@ def main():
     dupes = bad = 0
     ready = []
     asked = []  # (public id or None, question, recording_id) for the similarity counts; never written out
+    recording_of = {}  # public id -> recording_id; used only for checks, never written out
     for fn in files:
         with open(fn, encoding="utf-8") as fh:
             for line in fh:
@@ -201,6 +275,7 @@ def main():
                 seen_id.add(r["id"])
                 ready.append(r)
                 asked.append((r["id"], r["question"], rid))
+                recording_of[r["id"]] = rid
 
     out_dir = os.path.join(ROOT, "assets", "data")
     os.makedirs(out_dir, exist_ok=True)
@@ -219,6 +294,13 @@ def main():
         json.dump({"_about": "answers (of the public set) that use each candidate term; see GLOSSARY_SEED", "counts": gloss},
                   fh, ensure_ascii=False, indent=1)
 
+    pairs_in = [(r["id"], r["question"], r["answer"], r["topics"], recording_of[r["id"]]) for r in ready]
+    cands = other_side_candidates(pairs_in)
+    with open(os.path.join(out_dir, "curated", "other-side.candidates.json"), "w", encoding="utf-8") as fh:
+        json.dump({"_about": "candidate pairs (public ids only, always from different recordings); editors pick into other-side.json",
+                   "items": cands[:400]}, fh, ensure_ascii=False, indent=1)
+    dropped = check_other_side(os.path.join(out_dir, "curated", "other-side.json"), recording_of)
+
     topics = Counter(t for r in ready for t in r["topics"])
     print(f"files: {len(files)}")
     print("status: " + ", ".join(f"{k}={v}" for k, v in status.most_common()))
@@ -227,6 +309,7 @@ def main():
     print(f"similar: {len(asked)} asked questions, {pairs} near-duplicate pairs; buckets: "
           + ", ".join(f"{k}={sizes[k]}" for k in ("none", "few", "tens", "hundreds")))
     print("glossary: " + ", ".join(f"{k} {v}" for k, v in list(gloss.items())[:15]))
+    print(f"other side: {len(cands)} candidate pairs; curated pairs dropped (same recording): {dropped}")
     print("topics: " + ", ".join(f"{k} {v}" for k, v in topics.most_common()))
 
 
